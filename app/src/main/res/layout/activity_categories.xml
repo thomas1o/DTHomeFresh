@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/categories_background"
-    tools:context=".CategoriesActivty">
+    tools:context=".CategoriesActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout_1"
@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/menu_button"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginEnd="5dp"
@@ -34,11 +34,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/londrina_solid_regular"
-            android:text="DT Home Fresh"
+            android:text="DT HomeFresh"
             android:textColor="@color/black"
             android:textSize="25dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageButton" />
+            app:layout_constraintTop_toTopOf="@+id/menu_button"
+            android:layout_marginEnd="2dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

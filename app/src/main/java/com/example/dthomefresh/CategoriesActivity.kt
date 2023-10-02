@@ -1,24 +1,21 @@
 package com.example.dthomefresh
 
+import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Vibrator
-import android.widget.Button
+import android.widget.ImageButton
 
-class MainActivity : AppCompatActivity() {
+class CategoriesActivity : AppCompatActivity() {
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        val button = findViewById<Button>(R.id.get_started_button)
+        setContentView(R.layout.activity_categories)
+        val menuButton = findViewById<ImageButton>(R.id.menu_button)
         val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-
-        button.setOnClickListener {
+        menuButton.setOnClickListener{
             vibrator.vibrate(100)
-            val intent = Intent(this, CategoriesActivity::class.java)
-            startActivity(intent)
         }
-
     }
 }

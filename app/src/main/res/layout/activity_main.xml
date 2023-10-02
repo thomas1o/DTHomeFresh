@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:backgroundTint="@color/button_yellow"
-        android:drawableEnd="@drawable/welcome_arrow"
+        android:drawableEnd="@drawable/next_symbol"
         android:fontFamily="@font/londrina_solid_black"
         android:text="Get Started"
         android:textColor="@color/black"
