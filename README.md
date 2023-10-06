@@ -20,8 +20,6 @@ We want to thank our dedicated community of sellers and users who make DT Home F
 
 Happy discovering homemade treasures with DT Home Fresh!
 
-<img src="![image](https://github.com/thomas1o/DTHomeFresh/assets/87260561/3b3cfd3d-92e0-4cdf-baa2-70907b79f114)" alt="Onboarding" width="200" height="200"
-<img src="![image](https://github.com/thomas1o/DTHomeFresh/assets/87260561/bbceab5e-41f0-4568-aa6f-f8ce8f4b3e69)" alt="Categories" width="200" height="200"
 
 
 
