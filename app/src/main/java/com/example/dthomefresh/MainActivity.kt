@@ -11,14 +11,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val button = findViewById<Button>(R.id.get_started_button)
         val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
 
-        button.setOnClickListener {
-            vibrator.vibrate(100)
-            val intent = Intent(this, CategoriesActivity::class.java)
-            startActivity(intent)
-        }
+
 
     }
 }
