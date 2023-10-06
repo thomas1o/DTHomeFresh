@@ -6,5 +6,6 @@
     <!--    <color name="button_gray">#dadada</color>-->
     <color name="button_border_gray">#bcbcbc</color>
     <color name="button_yellow">#F2BA57</color>
+    <color name="green_dark">#0F4B00</color>
 
 </resources>

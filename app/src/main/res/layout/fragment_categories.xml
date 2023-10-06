@@ -19,11 +19,11 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginEnd="5dp"
-            android:padding="5dp"
             android:background="@android:color/transparent"
             android:clickable="true"
             android:contentDescription="Menu Button"
             android:foreground="?attr/selectableItemBackground"
+            android:padding="5dp"
             android:scaleType="fitCenter"
             android:src="@drawable/menu_icon"
             app:layout_constraintStart_toStartOf="parent"
@@ -51,73 +51,47 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/linearLayout_1">
 
-        <ImageView
-            android:id="@+id/food_icon"
+        <Button
+            android:id="@+id/button_food"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/food_icon"
-            android:src="@drawable/food_icon"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/text_food"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:backgroundTint="@color/green_dark"
+            android:drawableTop="@drawable/food_icon"
             android:fontFamily="@font/londrina_solid_regular"
             android:text="@string/food"
             android:textColor="@color/white"
             android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/food_icon" />
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/clothes_icon"
+        <Button
+            android:id="@+id/button_clothes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:contentDescription="@string/clothes_icon"
-            android:src="@drawable/clothes_icon"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_food" />
-
-        <TextView
-            android:id="@+id/text_clothes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:backgroundTint="@color/green_dark"
+            android:drawableTop="@drawable/clothes_icon"
             android:fontFamily="@font/londrina_solid_regular"
             android:text="@string/clothes"
             android:textColor="@color/white"
             android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/clothes_icon" />
+            app:layout_constraintTop_toBottomOf="@id/button_food" />
 
-        <ImageView
-            android:id="@+id/house_icon"
+        <Button
+            android:id="@+id/button_homemade_items"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:contentDescription="@string/home_icon"
-            android:src="@drawable/home_icon"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_clothes" />
-
-        <TextView
-            android:id="@+id/text_home"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:backgroundTint="@color/green_dark"
+            android:drawableTop="@drawable/clothes_icon"
             android:fontFamily="@font/londrina_solid_regular"
             android:text="@string/homemade_items"
             android:textColor="@color/white"
             android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/house_icon" />
+            app:layout_constraintTop_toBottomOf="@id/button_clothes" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
