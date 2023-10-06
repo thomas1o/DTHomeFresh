@@ -13,3 +13,9 @@ DT Home Fresh is a mobile application that serves as a comprehensive database of
 
 - An Android device.
 - Internet connection.
+
+## Acknowledgments
+
+We want to thank our dedicated community of sellers and users who make DT Home Fresh possible. Your creativity and support are greatly appreciated.
+
+Happy discovering homemade treasures with DT Home Fresh!
