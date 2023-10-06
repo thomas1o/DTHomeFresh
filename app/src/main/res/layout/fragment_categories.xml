@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/categories_background">
@@ -14,6 +13,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <!--        <Button-->
+        <!--            android:id="@+id/menu_button_1"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:backgroundTint="@color/green_lighter"-->
+        <!--            android:drawableTop="@drawable/menu_icon"-->
+        <!--            app:layout_constraintStart_toStartOf="@+id/menu_button"-->
+        <!--            app:layout_constraintTop_toTopOf="parent"-->
+        <!--            android:scaleType="fitCenter"/>-->
+
+        <!--        TODO- to make this proper and identify the use of clickable and foreground -->
         <ImageButton
             android:id="@+id/menu_button"
             android:layout_width="48dp"
@@ -21,7 +31,7 @@
             android:layout_marginEnd="5dp"
             android:background="@android:color/transparent"
             android:clickable="true"
-            android:contentDescription="Menu Button"
+            android:contentDescription="@string/menu_button"
             android:foreground="?attr/selectableItemBackground"
             android:padding="5dp"
             android:scaleType="fitCenter"
@@ -49,49 +59,92 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/linearLayout_1">
+        app:layout_constraintTop_toBottomOf="@id/linearLayout_1"
+        app:layout_constraintVertical_bias="0.445">
 
-        <Button
-            android:id="@+id/button_food"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/green_dark"
-            android:drawableTop="@drawable/food_icon"
-            android:fontFamily="@font/londrina_solid_regular"
-            android:text="@string/food"
-            android:textColor="@color/white"
-            android:textSize="30sp"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/green_light"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <Button
-            android:id="@+id/button_clothes"
+            <Button
+                android:id="@+id/button_food"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/green_light"
+                android:drawableTop="@drawable/food_icon"
+                android:fontFamily="@font/londrina_solid_regular"
+                android:text="@string/food"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/green_dark"
-            android:drawableTop="@drawable/clothes_icon"
-            android:fontFamily="@font/londrina_solid_regular"
-            android:text="@string/clothes"
-            android:textColor="@color/white"
-            android:textSize="30sp"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/green_light"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button_food" />
+            app:layout_constraintTop_toBottomOf="@id/cardView_1">
 
-        <Button
-            android:id="@+id/button_homemade_items"
+            <Button
+                android:id="@+id/button_clothes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/green_light"
+                android:drawableTop="@drawable/clothes_icon"
+                android:fontFamily="@font/londrina_solid_regular"
+                android:text="@string/clothes"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/green_dark"
-            android:drawableTop="@drawable/clothes_icon"
-            android:fontFamily="@font/londrina_solid_regular"
-            android:text="@string/homemade_items"
-            android:textColor="@color/white"
-            android:textSize="30sp"
+            android:backgroundTint="@color/green_light"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button_clothes" />
+            app:layout_constraintTop_toBottomOf="@id/cardView_2">
+
+            <Button
+                android:id="@+id/button_homemade_items"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/green_light"
+                android:drawableTop="@drawable/home_icon"
+                android:fontFamily="@font/londrina_solid_regular"
+                android:text="@string/homemade_items"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
