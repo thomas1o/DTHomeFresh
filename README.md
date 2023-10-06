@@ -19,3 +19,7 @@ DT Home Fresh is a mobile application that serves as a comprehensive database of
 We want to thank our dedicated community of sellers and users who make DT Home Fresh possible. Your creativity and support are greatly appreciated.
 
 Happy discovering homemade treasures with DT Home Fresh!
+
+![image](https://github.com/thomas1o/DTHomeFresh/assets/87260561/3b3cfd3d-92e0-4cdf-baa2-70907b79f114)
+![image](https://github.com/thomas1o/DTHomeFresh/assets/87260561/bbceab5e-41f0-4568-aa6f-f8ce8f4b3e69)
+
