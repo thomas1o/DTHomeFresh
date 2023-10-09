@@ -7,6 +7,11 @@ DT Home Fresh is a mobile application that serves as a comprehensive database of
 - Discover a wide variety of homemade products from local sellers.
 - Browse through categories such as crafts, food, art, and more.
 
+## Gallery
+|Onboarding Screen|Catgegories Screen|
+|------|------|
+|<img src="images/onboarding.png" width="250" height="500" />|<img src="images/categories.png" width="250" height="500" />|
+
 ## Documentation
 
 - **Language**: Kotlin
