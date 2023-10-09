@@ -1,11 +1,11 @@
 # DT Home Fresh
 
-DT Home Fresh is a mobile application that serves as a comprehensive database of talented sellers who create unique, homemade items. Whether you're looking for handmade crafts, artisanal food products, or one-of-a-kind creations, our app connects you with local sellers who put their heart and soul into their work.
+DT Home Fresh is a mobile application that serves as a comprehensive database of sellers who create unique, homemade items. Whether you're looking for handmade crafts, artisanal food products, or one-of-a-kind creations, our app connects you with local sellers who put their heart and soul into their work.
 
 ## Features
 
 - Discover a wide variety of homemade products from local sellers.
-- Browse through categories such as crafts, food, art, and more.
+- Browse through crafts, food, art, and more categories.
 
 ## Gallery
 |Onboarding Screen|Catgegories Screen|
