@@ -7,19 +7,10 @@ DT Home Fresh is a mobile application that serves as a comprehensive database of
 - Discover a wide variety of homemade products from local sellers.
 - Browse through categories such as crafts, food, art, and more.
 
-## Getting Started
+## Documentation
 
-### Prerequisites
-
-- An Android device.
-- Internet connection.
-
-## Acknowledgments
-
-We want to thank our dedicated community of sellers and users who make DT Home Fresh possible. Your creativity and support are greatly appreciated.
-
-Happy discovering homemade treasures with DT Home Fresh!
-
-
+- **Language**: Kotlin
+- **Architecture**: Model View ViewModel (MVVM)
+- **Libraries**: LiveData, ViewModel, Navigation Components
 
 
