@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import com.example.dthomefresh.R
@@ -24,19 +25,23 @@ class CategoriesFragment : Fragment() {
 
         val vibrator = activity?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
 
-        binding.cardView1.setOnClickListener{
+        binding.cardView1.setOnClickListener {
             vibrator.vibrate(100)
             Navigation.findNavController(it).navigate(R.id.action_categoriesFragment_to_sellersFragment)
         }
 
-        binding.cardView2.setOnClickListener{
+        binding.cardView2.setOnClickListener {
             vibrator.vibrate(100)
             Navigation.findNavController(it).navigate(R.id.action_categoriesFragment_to_sellersFragment)
         }
 
-        binding.cardView3.setOnClickListener{
+        binding.cardView3.setOnClickListener {
             vibrator.vibrate(100)
             Navigation.findNavController(it).navigate(R.id.action_categoriesFragment_to_sellersFragment)
+        }
+
+        binding.menuButton.setOnClickListener {
+            Toast.makeText(context, "Menu Button Pressed", Toast.LENGTH_SHORT).show();
         }
 
         return binding.root

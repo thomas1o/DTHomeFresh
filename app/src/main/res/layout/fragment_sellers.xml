@@ -2,6 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+        <variable
+            name="sellersViewModel"
+            type="com.example.dthomefresh.sellers.SellersViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -37,63 +43,93 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Layout_1">
+            app:layout_constraintTop_toBottomOf="@+id/Layout_1"
+            app:layout_constraintVertical_bias="0.041">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_navigation_1"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:cardBackgroundColor="#489B6D"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_navigation_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter"
-                    android:text="@string/food"
-                    android:textColor="#FFD53E"
-                    android:textSize="@dimen/seller_navigation_font_size" />
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?selectableItemBackground"
+                    app:cardBackgroundColor="#489B6D"
+                    app:cardCornerRadius="0dp"
+                    app:contentPadding="@dimen/seller_navigation_padding_vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-            </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/seller_navigation_padding_horizontal"
+                        android:fontFamily="@font/inter_bold"
+                        android:text="@string/food"
+                        android:textColor="#FFD53E"
+                        android:textSize="@dimen/seller_navigation_font_size" />
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_navigation_2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/green_lighter"
-                app:layout_constraintStart_toEndOf="@id/card_navigation_1"
-                app:layout_constraintTop_toTopOf="parent">
+                </androidx.cardview.widget.CardView>
 
-                <TextView
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_navigation_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter"
-                    android:text="@string/clothes"
-                    android:textColor="@color/green_dark"
-                    android:textSize="@dimen/seller_navigation_font_size" />
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?selectableItemBackground"
+                    app:cardBackgroundColor="@color/green_lighter"
+                    app:cardCornerRadius="0dp"
+                    app:contentPadding="@dimen/seller_navigation_padding_vertical"
+                    app:layout_constraintStart_toEndOf="@id/card_navigation_1"
+                    app:layout_constraintTop_toTopOf="parent">
 
-            </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/seller_navigation_padding_horizontal"
+                        android:fontFamily="@font/inter_bold"
+                        android:text="@string/clothes"
+                        android:textColor="@color/green_dark"
+                        android:textSize="@dimen/seller_navigation_font_size" />
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_navigation_3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/green_lighter"
-                app:layout_constraintStart_toEndOf="@id/card_navigation_2"
-                app:layout_constraintTop_toTopOf="parent">
+                </androidx.cardview.widget.CardView>
 
-                <TextView
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_navigation_3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter"
-                    android:text="@string/homemade_items"
-                    android:textColor="@color/green_dark"
-                    android:textSize="@dimen/seller_navigation_font_size" />
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?selectableItemBackground"
+                    app:cardBackgroundColor="@color/green_lighter"
+                    app:cardCornerRadius="0dp"
+                    app:contentPadding="@dimen/seller_navigation_padding_vertical"
+                    app:layout_constraintStart_toEndOf="@id/card_navigation_2"
+                    app:layout_constraintTop_toTopOf="parent">
 
-            </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/seller_navigation_padding_horizontal"
+                        android:fontFamily="@font/inter_bold"
+                        android:text="@string/homemade_items"
+                        android:textColor="@color/green_dark"
+                        android:textSize="@dimen/seller_navigation_font_size" />
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -28,6 +28,6 @@
             android:id="@+id/action_sellersFragment_to_categoriesFragment"
             app:destination="@id/categoriesFragment"
             app:popUpTo="@id/categoriesFragment"
-            app:popUpToInclusive="false" />
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>
