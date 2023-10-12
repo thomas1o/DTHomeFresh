@@ -16,4 +16,5 @@
     <string name="dt_homefresh">DT HomeFresh</string>
     <string name="home_icon">Home Icon</string>
     <string name="menu_button">Menu Button</string>
+    <string name="up_button">Up Button</string>
 </resources>
