@@ -15,5 +15,19 @@
     <fragment
         android:id="@+id/categoriesFragment"
         android:name="com.example.dthomefresh.categories.CategoriesFragment"
-        android:label="CategoriesFragment" />
+        android:label="CategoriesFragment" >
+        <action
+            android:id="@+id/action_categoriesFragment_to_sellersFragment"
+            app:destination="@id/sellersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sellersFragment"
+        android:name="com.example.dthomefresh.sellers.SellersFragment"
+        android:label="SellersFragment" >
+        <action
+            android:id="@+id/action_sellersFragment_to_categoriesFragment"
+            app:destination="@id/categoriesFragment"
+            app:popUpTo="@id/categoriesFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
 </navigation>
