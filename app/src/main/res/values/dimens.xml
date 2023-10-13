@@ -3,4 +3,5 @@
     <dimen name="seller_navigation_font_size">12sp</dimen>
     <dimen name="seller_navigation_padding_vertical">12dp</dimen>
     <dimen name="seller_navigation_padding_horizontal">5dp</dimen>
+    <dimen name="navigation_card_elevation">10dp</dimen>
 </resources>
