@@ -16,6 +16,5 @@ class MainActivity : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
     }
 }
