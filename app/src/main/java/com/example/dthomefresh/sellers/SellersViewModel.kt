@@ -4,13 +4,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class SellersViewModel : ViewModel() {
+class SellersViewModel(optionSelected : Int) : ViewModel() {
 
     private val _options = MutableLiveData<MutableMap<Int, Boolean>>()
     val options: LiveData<MutableMap<Int, Boolean>>
             get() = _options
     init {
-        setAllFalse()
+        when(optionSelected) {
+            0 -> onFood()
+            1 -> onClothes()
+            2 -> onHomemadeItems()
+        }
     }
     fun onFood() {
         setAllFalse()
@@ -25,11 +29,11 @@ class SellersViewModel : ViewModel() {
         setTrue(2)
     }
     private fun setAllFalse() {
-        _options.value = mutableMapOf(
-            0 to false,
-            1 to false,
-            2 to false
-        )
+        val currentOptions = _options.value ?: mutableMapOf()
+        for (key in 0..2) {
+            currentOptions[key] = false
+        }
+        _options.value = currentOptions
     }
     private fun setTrue(elNum : Int) {
         val currentOptions = _options.value

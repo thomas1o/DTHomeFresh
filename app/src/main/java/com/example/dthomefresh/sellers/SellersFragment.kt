@@ -15,8 +15,9 @@ import com.example.dthomefresh.databinding.FragmentSellersBinding
 
 class SellersFragment : Fragment() {
 
-    private lateinit var viewModel: SellersViewModel
     private lateinit var binding: FragmentSellersBinding
+    private lateinit var viewModel: SellersViewModel
+    private lateinit var viewModelFactory: SellersViewModelFactory
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,7 +28,8 @@ class SellersFragment : Fragment() {
             inflater, R.layout.fragment_sellers, container, false
         )
 
-        viewModel = ViewModelProvider(this)[SellersViewModel::class.java]
+        viewModelFactory = SellersViewModelFactory(SellersFragmentArgs.fromBundle(requireArguments()).optionSelected)
+        viewModel = ViewModelProvider(this, viewModelFactory)[SellersViewModel::class.java]
         binding.sellerViewModel = viewModel
 
         binding.upButton.setOnClickListener{

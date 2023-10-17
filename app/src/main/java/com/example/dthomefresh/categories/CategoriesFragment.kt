@@ -15,6 +15,7 @@ import com.example.dthomefresh.databinding.FragmentCategoriesBinding
 
 class CategoriesFragment : Fragment() {
 
+    private var optionSelected: Int = -1
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -22,22 +23,24 @@ class CategoriesFragment : Fragment() {
         val binding: FragmentCategoriesBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_categories, container, false
         )
-
         val vibrator = activity?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
 
         binding.cardView1.setOnClickListener {
+            assignOptionValue(0)
             vibrator.vibrate(100)
-            Navigation.findNavController(it).navigate(R.id.action_categoriesFragment_to_sellersFragment)
+            Navigation.findNavController(it).navigate(CategoriesFragmentDirections.actionCategoriesFragmentToSellersFragment(optionSelected))
         }
 
         binding.cardView2.setOnClickListener {
+            assignOptionValue(1)
             vibrator.vibrate(100)
-            Navigation.findNavController(it).navigate(R.id.action_categoriesFragment_to_sellersFragment)
+            Navigation.findNavController(it).navigate(CategoriesFragmentDirections.actionCategoriesFragmentToSellersFragment(optionSelected))
         }
 
         binding.cardView3.setOnClickListener {
+            assignOptionValue(2)
             vibrator.vibrate(100)
-            Navigation.findNavController(it).navigate(R.id.action_categoriesFragment_to_sellersFragment)
+            Navigation.findNavController(it).navigate(CategoriesFragmentDirections.actionCategoriesFragmentToSellersFragment(optionSelected))
         }
 
         binding.menuButton.setOnClickListener {
@@ -45,5 +48,8 @@ class CategoriesFragment : Fragment() {
         }
 
         return binding.root
+    }
+    private fun assignOptionValue(number: Int) {
+        optionSelected = number
     }
 }
