@@ -8,7 +8,19 @@ class SellersViewModel(optionSelected : Int) : ViewModel() {
 
     private val _options = MutableLiveData<MutableMap<Int, Boolean>>()
     val options: LiveData<MutableMap<Int, Boolean>>
-            get() = _options
+        get() = _options
+    private fun setAllFalse() {
+        val currentOptions = _options.value ?: mutableMapOf()
+        for (key in 0..2) {
+            currentOptions[key] = false
+        }
+        _options.value = currentOptions
+    }
+    private fun setTrue(elNum : Int) {
+        val currentOptions = _options.value
+        currentOptions?.set(elNum, true)
+        _options.value = currentOptions!!
+    }
     init {
         when(optionSelected) {
             0 -> onFood()
@@ -27,17 +39,5 @@ class SellersViewModel(optionSelected : Int) : ViewModel() {
     fun onHomemadeItems() {
         setAllFalse()
         setTrue(2)
-    }
-    private fun setAllFalse() {
-        val currentOptions = _options.value ?: mutableMapOf()
-        for (key in 0..2) {
-            currentOptions[key] = false
-        }
-        _options.value = currentOptions
-    }
-    private fun setTrue(elNum : Int) {
-        val currentOptions = _options.value
-        currentOptions?.set(elNum, true)
-        _options.value = currentOptions!!
     }
 }
