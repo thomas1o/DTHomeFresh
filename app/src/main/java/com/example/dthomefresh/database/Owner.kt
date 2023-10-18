@@ -14,7 +14,13 @@ data class Owner(
     var ownerName: String = "",
 
     @ColumnInfo(name = "owner_address")
-    var ownerAddress: String = ""
+    var ownerAddress: String = "",
+
+    @ColumnInfo(name = "owner_contact")
+    var ownerContact: Long = 0L,
+
+    @ColumnInfo(name = "owner_list_of_items_id")
+    var itemIds: List<Long>
 
 )
 

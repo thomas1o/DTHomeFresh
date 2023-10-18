@@ -10,6 +10,12 @@ data class Item(
     @PrimaryKey(autoGenerate = true)
     var itemId: Long = 0L,
 
+    @ColumnInfo(name = "item_name")
+    var itemName: String = "",
+
+    @ColumnInfo(name = "item_category")
+    var itemCategory: String = "",
+
     @ColumnInfo(name = "owner_id")
     var ownerId: Long = 0L
 )
