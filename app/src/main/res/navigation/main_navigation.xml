@@ -33,5 +33,19 @@
             android:name="optionSelected"
             app:argType="integer"
             android:defaultValue="0" />
+        <action
+            android:id="@+id/action_sellersFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_sellersFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.example.dthomefresh.signup.SignUpFragment"
+        android:label="SignUpFragment" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.dthomefresh.login.LoginFragment"
+        android:label="LoginFragment" />
 </navigation>

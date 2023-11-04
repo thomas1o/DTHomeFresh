@@ -36,6 +36,10 @@ class SellersFragment : Fragment() {
             Navigation.findNavController(it).navigate(R.id.action_sellersFragment_to_categoriesFragment)
         }
 
+        binding.profileButton.setOnClickListener{
+            Navigation.findNavController(it).navigate(R.id.action_sellersFragment_to_signUpFragment)
+        }
+
         viewModel.options.observe(viewLifecycleOwner, Observer { newOptions ->
             if(newOptions[0] == true) {
                 setDefaultColor()

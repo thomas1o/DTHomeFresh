@@ -37,6 +37,23 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <ImageButton
+                android:id="@+id/profile_button"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="5dp"
+                android:background="@android:color/transparent"
+                android:clickable="true"
+                android:contentDescription="@string/up_button"
+                android:focusable="true"
+                android:foreground="?selectableItemBackground"
+                android:padding="5dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/up_arrow"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -143,7 +160,21 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/item_list"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_2"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager">
+
+
+        </androidx.recyclerview.widget.RecyclerView>
+
         <androidx.cardview.widget.CardView
+            android:id="@+id/card_view"
             android:layout_width="150dp"
             android:layout_height="180dp"
             android:clickable="true"

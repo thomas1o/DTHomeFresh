@@ -16,8 +16,8 @@ data class Item(
     @ColumnInfo(name = "item_category")
     var itemCategory: String = "",
 
-    @ColumnInfo(name = "owner_id")
-    var ownerId: Long = 0L
+    @ColumnInfo(name = "seller_id")
+    var sellerId: Long = 0L
 )
 
 
