@@ -53,10 +53,10 @@ class SellersFragment : Fragment() {
         }
 
         binding.profileButton.setOnClickListener{
-            if(!loggedIn)
-                Navigation.findNavController(it).navigate(R.id.action_sellersFragment_to_loginFragment)
+            if(loggedIn)
+                Navigation.findNavController(it).navigate(R.id.action_sellersFragment_to_profileFragment)
             else
-                Toast.makeText(requireContext(), "You are already logged in", Toast.LENGTH_SHORT).show()
+                Navigation.findNavController(it).navigate(R.id.action_sellersFragment_to_loginFragment)
         }
 
         viewModel.options.observe(viewLifecycleOwner, Observer { newOptions ->

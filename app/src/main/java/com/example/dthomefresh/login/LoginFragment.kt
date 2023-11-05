@@ -23,7 +23,6 @@ class LoginFragment : Fragment() {
     private lateinit var editTextEmail: TextInputEditText
     private lateinit var editTextPassword: TextInputEditText
 
-    //TODO there is a bug in this onStart, it keeps saying you are already logged in everytime you come here
     public override fun onStart() {
         super.onStart()
         val currentUser = auth.currentUser
@@ -60,18 +59,18 @@ class LoginFragment : Fragment() {
             else if(isEmpty(password)) {
                 Toast.makeText(requireContext(), "Password cannot be empty", Toast.LENGTH_SHORT).show()
             }
-
-            auth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener() { task ->
-                    if (task.isSuccessful) {
-                        Toast.makeText(requireContext(),"Login Successful",Toast.LENGTH_SHORT,).show()
-                        Navigation.findNavController(it).navigate(R.id.action_loginFragment_to_sellersFragment)
+            else{
+                auth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener() { task ->
+                        if (task.isSuccessful) {
+                            Toast.makeText(requireContext(),"Login Successful",Toast.LENGTH_SHORT,).show()
+                            Navigation.findNavController(it).navigate(R.id.action_loginFragment_to_sellersFragment)
+                        }
+                        else {
+                            Toast.makeText(requireContext(),"Please enter the right credentials",Toast.LENGTH_SHORT,).show()
+                        }
                     }
-                    else {
-                        Toast.makeText(requireContext(),"Authentication failed.",Toast.LENGTH_SHORT,).show()
-                    }
-                }
-
+            }
         }
 
         binding.signUpButton.setOnClickListener {

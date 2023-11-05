@@ -24,7 +24,7 @@ class SignUpFragment : Fragment() {
     private lateinit var editTextEmail: TextInputEditText
     private lateinit var editTextPassword: TextInputEditText
 
-    //TODO find the use of onCreate in Fragment, difference when it it initialised in both
+//    TODO find the use of onCreate in Fragment, difference when it it initialised in both
 //    override fun onCreate(savedInstanceState: Bundle?) {
 //        super.onCreate(savedInstanceState)
 //        arguments?.let {
@@ -63,16 +63,20 @@ class SignUpFragment : Fragment() {
             else if(isEmpty(password)) {
                 Toast.makeText(requireContext(), "Password cannot be empty", Toast.LENGTH_SHORT).show()
             }
-
-            auth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener() { task ->
-                    if (task.isSuccessful) {
-                        Toast.makeText(requireContext(),"Sign Up successful. Please continue to login",Toast.LENGTH_SHORT).show()
-                        Navigation.findNavController(it).navigate(R.id.action_signUpFragment_to_loginFragment)
-                    } else {
-                        Toast.makeText(requireContext(),"Authentication failed.",Toast.LENGTH_SHORT).show()
+            else {
+                auth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener() { task ->
+                        if (task.isSuccessful) {
+                            Toast.makeText(requireContext(),"Sign Up successful. Please continue to login",Toast.LENGTH_SHORT).show()
+                            Firebase.auth.signOut()
+                            Navigation.findNavController(it).navigate(R.id.action_signUpFragment_to_loginFragment)
+                        } else {
+                            Toast.makeText(requireContext(),"Authentication failed.",Toast.LENGTH_SHORT).show()
+                        }
                     }
-                }
+            }
+
+
 
         }
 
