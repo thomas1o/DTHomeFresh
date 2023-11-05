@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -44,12 +45,12 @@
                 android:layout_marginEnd="5dp"
                 android:background="@android:color/transparent"
                 android:clickable="true"
-                android:contentDescription="@string/up_button"
+                android:contentDescription="@string/profile_button"
                 android:focusable="true"
                 android:foreground="?selectableItemBackground"
                 android:padding="5dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/up_arrow"
+                android:src="@drawable/profile_icon"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -83,7 +84,7 @@
                     android:focusable="true"
                     android:foreground="?selectableItemBackground"
                     android:onClick="@{() -> sellerViewModel.onFood()}"
-                    app:cardBackgroundColor="@color/green_lighter"
+                    app:cardBackgroundColor="@color/green_4"
                     app:cardCornerRadius="0dp"
                     app:cardElevation="@dimen/navigation_card_elevation"
                     app:contentPadding="@dimen/seller_navigation_padding_vertical"
@@ -97,7 +98,7 @@
                         android:layout_marginHorizontal="@dimen/seller_navigation_padding_horizontal"
                         android:fontFamily="@font/inter_bold"
                         android:text="@string/food"
-                        android:textColor="@color/green_dark"
+                        android:textColor="@color/green_1"
                         android:textSize="@dimen/seller_navigation_font_size" />
 
                 </androidx.cardview.widget.CardView>
@@ -110,7 +111,7 @@
                     android:focusable="true"
                     android:foreground="?selectableItemBackground"
                     android:onClick="@{() -> sellerViewModel.onClothes()}"
-                    app:cardBackgroundColor="@color/green_lighter"
+                    app:cardBackgroundColor="@color/green_4"
                     app:cardCornerRadius="0dp"
                     app:cardElevation="@dimen/navigation_card_elevation"
                     app:contentPadding="@dimen/seller_navigation_padding_vertical"
@@ -124,7 +125,7 @@
                         android:layout_marginHorizontal="@dimen/seller_navigation_padding_horizontal"
                         android:fontFamily="@font/inter_bold"
                         android:text="@string/clothes"
-                        android:textColor="@color/green_dark"
+                        android:textColor="@color/green_1"
                         android:textSize="@dimen/seller_navigation_font_size" />
 
                 </androidx.cardview.widget.CardView>
@@ -137,7 +138,7 @@
                     android:focusable="true"
                     android:foreground="?selectableItemBackground"
                     android:onClick="@{() -> sellerViewModel.onHomemadeItems()}"
-                    app:cardBackgroundColor="@color/green_lighter"
+                    app:cardBackgroundColor="@color/green_4"
                     app:cardCornerRadius="0dp"
                     app:cardElevation="@dimen/navigation_card_elevation"
                     app:contentPadding="@dimen/seller_navigation_padding_vertical"
@@ -151,7 +152,7 @@
                         android:layout_marginHorizontal="@dimen/seller_navigation_padding_horizontal"
                         android:fontFamily="@font/inter_bold"
                         android:text="@string/homemade_items"
-                        android:textColor="@color/green_dark"
+                        android:textColor="@color/green_1"
                         android:textSize="@dimen/seller_navigation_font_size" />
 
                 </androidx.cardview.widget.CardView>
@@ -160,91 +161,118 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--        <androidx.recyclerview.widget.RecyclerView-->
-<!--            android:id="@+id/item_list"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="0dp"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/layout_2"-->
-<!--            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager">-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ti_search_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="10dp"
+            app:boxBackgroundColor="@color/yellow_3"
+            app:boxStrokeColor="@color/yellow_2"
+            app:errorEnabled="true"
+            app:hintTextColor="@color/yellow_2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_2">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_search_bar"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:drawableStart="@drawable/search_icon"
+                android:drawablePadding="10dp"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!--        <androidx.recyclerview.widget.RecyclerView-->
+        <!--            android:id="@+id/item_list"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="0dp"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/layout_2"-->
+        <!--            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager">-->
 
 
-<!--        </androidx.recyclerview.widget.RecyclerView>-->
+        <!--        </androidx.recyclerview.widget.RecyclerView>-->
 
-<!--        <androidx.cardview.widget.CardView-->
-<!--            android:id="@+id/card_view"-->
-<!--            android:layout_width="150dp"-->
-<!--            android:layout_height="180dp"-->
-<!--            android:clickable="true"-->
-<!--            android:focusable="true"-->
-<!--            android:foreground="?selectableItemBackground"-->
-<!--            app:cardBackgroundColor="#A2CE86"-->
-<!--            app:cardCornerRadius="10dp"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/layout_2">-->
+        <!--        <androidx.cardview.widget.CardView-->
+        <!--            android:id="@+id/card_view"-->
+        <!--            android:layout_width="150dp"-->
+        <!--            android:layout_height="180dp"-->
+        <!--            android:clickable="true"-->
+        <!--            android:focusable="true"-->
+        <!--            android:foreground="?selectableItemBackground"-->
+        <!--            app:cardBackgroundColor="#A2CE86"-->
+        <!--            app:cardCornerRadius="10dp"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/layout_2">-->
 
-<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent">-->
+        <!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="match_parent">-->
 
-<!--                <TextView-->
-<!--                    android:id="@+id/name"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginLeft="5dp"-->
-<!--                    android:fontFamily="@font/londrina_solid_regular"-->
-<!--                    android:text="Barts Shop"-->
-<!--                    android:textColor="@color/black"-->
-<!--                    android:textSize="20sp"-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="parent"-->
-<!--                    app:layout_constraintVertical_bias="0.6" />-->
+        <!--                <TextView-->
+        <!--                    android:id="@+id/name"-->
+        <!--                    android:layout_width="wrap_content"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:layout_marginLeft="5dp"-->
+        <!--                    android:fontFamily="@font/londrina_solid_regular"-->
+        <!--                    android:text="Barts Shop"-->
+        <!--                    android:textColor="@color/black"-->
+        <!--                    android:textSize="20sp"-->
+        <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--                    app:layout_constraintStart_toStartOf="parent"-->
+        <!--                    app:layout_constraintTop_toTopOf="parent"-->
+        <!--                    app:layout_constraintVertical_bias="0.6" />-->
 
-<!--                <TextView-->
-<!--                    android:id="@+id/address"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginLeft="5dp"-->
-<!--                    android:fontFamily="@font/londrina_solid_light"-->
-<!--                    android:text=" 23, Lily street, Fort Kochi, 545466"-->
-<!--                    android:textColor="@color/black"-->
-<!--                    android:textSize="10sp"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@id/name">-->
+        <!--                <TextView-->
+        <!--                    android:id="@+id/address"-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:layout_marginLeft="5dp"-->
+        <!--                    android:fontFamily="@font/londrina_solid_light"-->
+        <!--                    android:text=" 23, Lily street, Fort Kochi, 545466"-->
+        <!--                    android:textColor="@color/black"-->
+        <!--                    android:textSize="10sp"-->
+        <!--                    app:layout_constraintStart_toStartOf="parent"-->
+        <!--                    app:layout_constraintTop_toBottomOf="@id/name">-->
 
-<!--                </TextView>-->
+        <!--                </TextView>-->
 
-<!--                <androidx.cardview.widget.CardView-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginHorizontal="5dp"-->
-<!--                    android:layout_marginVertical="5dp"-->
-<!--                    android:padding="0.5dp"-->
-<!--                    app:cardBackgroundColor="#F1EAAB"-->
-<!--                    app:cardCornerRadius="5dp"-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@id/address">-->
+        <!--                <androidx.cardview.widget.CardView-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:layout_marginHorizontal="5dp"-->
+        <!--                    android:layout_marginVertical="5dp"-->
+        <!--                    android:padding="0.5dp"-->
+        <!--                    app:cardBackgroundColor="#F1EAAB"-->
+        <!--                    app:cardCornerRadius="5dp"-->
+        <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--                    app:layout_constraintStart_toStartOf="parent"-->
+        <!--                    app:layout_constraintTop_toBottomOf="@id/address">-->
 
-<!--                    <TextView-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:fontFamily="@font/londrina_solid_light"-->
-<!--                        android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry.-->
-<!--Lorem Ipsum has been the industry's standard dummy text ."-->
-<!--                        android:textColor="@color/black"-->
-<!--                        android:textSize="10sp" />-->
+        <!--                    <TextView-->
+        <!--                        android:layout_width="match_parent"-->
+        <!--                        android:layout_height="match_parent"-->
+        <!--                        android:fontFamily="@font/londrina_solid_light"-->
+        <!--                        android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry.-->
+        <!--Lorem Ipsum has been the industry's standard dummy text ."-->
+        <!--                        android:textColor="@color/black"-->
+        <!--                        android:textSize="10sp" />-->
 
-<!--                </androidx.cardview.widget.CardView>-->
+        <!--                </androidx.cardview.widget.CardView>-->
 
-<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+        <!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
 
-<!--        </androidx.cardview.widget.CardView>-->
+        <!--        </androidx.cardview.widget.CardView>-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

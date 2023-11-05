@@ -5,34 +5,38 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/sign_up_bg">
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:fontFamily="@font/londrina_solid_regular"
             android:text="Sign Up"
             android:textAlignment="center"
-            android:textColor="@color/green_light"
+            android:textColor="@color/black"
             android:textSize="40sp"
-            android:fontFamily="@font/inter_bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.175" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/ti_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
-            android:hint="Username"
+            android:hint="User Email ID"
+            app:hintTextColor="@color/yellow_2"
             app:errorEnabled="true"
+            app:boxStrokeColor="@color/yellow_2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.45">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_username"
@@ -50,7 +54,9 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
             android:hint="Password"
+            app:hintTextColor="@color/yellow_2"
             app:errorEnabled="true"
+            app:boxStrokeColor="@color/yellow_2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -72,12 +78,53 @@
             android:id="@+id/bt_sign_up"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/yellow_2"
+            android:fontFamily="@font/londrina_solid_regular"
             android:text="Sign Up"
+            android:textColor="@color/black"
             android:textSize="28sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ti_password"/>
+            app:layout_constraintTop_toBottomOf="@+id/ti_password"
+            app:layout_constraintVertical_bias="0.186" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bt_sign_up"
+            app:layout_constraintVertical_bias="0.575">
+
+            <TextView
+                android:id="@+id/no_account_yet"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:fontFamily="@font/londrina_solid_regular"
+                android:text="Already have an account?"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@id/sign_up_button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent" />
+
+            <Button
+                android:id="@+id/login_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="0dp"
+                android:background="@android:color/transparent"
+                android:fontFamily="@font/londrina_solid_regular"
+                android:padding="0dp"
+                android:text="Login"
+                android:textColor="@color/yellow_2"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/no_account_yet"
+                app:layout_constraintTop_toBottomOf="parent" />
+
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

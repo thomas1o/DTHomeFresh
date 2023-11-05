@@ -71,13 +71,14 @@ class SignUpFragment : Fragment() {
                             Firebase.auth.signOut()
                             Navigation.findNavController(it).navigate(R.id.action_signUpFragment_to_loginFragment)
                         } else {
-                            Toast.makeText(requireContext(),"Authentication failed.",Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(),"Account creation failed",Toast.LENGTH_SHORT).show()
                         }
                     }
             }
+        }
 
-
-
+        binding.loginButton.setOnClickListener {
+            Navigation.findNavController(it).navigate(R.id.action_signUpFragment_to_loginFragment)
         }
 
         return binding.root
