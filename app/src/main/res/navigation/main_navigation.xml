@@ -59,8 +59,8 @@
         <action
             android:id="@+id/action_signUpFragment_to_loginFragment"
             app:destination="@id/loginFragment"
-            app:popUpTo="@id/sellersFragment"
-            app:popUpToInclusive="false" />
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -69,7 +69,8 @@
         <action
             android:id="@+id/action_loginFragment_to_signUpFragment"
             app:destination="@id/signUpFragment"
-            app:popUpTo="@id/sellersFragment" />
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="false" />
         <action
             android:id="@+id/action_loginFragment_to_sellersFragment"
             app:destination="@id/sellersFragment"
