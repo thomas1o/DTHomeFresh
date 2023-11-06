@@ -10,7 +10,7 @@
         android:background="@drawable/sign_up_bg">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/Login_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/londrina_solid_regular"
@@ -66,7 +66,7 @@
             app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/password"
+                android:id="@+id/et_password"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="textPassword"
@@ -100,19 +100,19 @@
             app:layout_constraintVertical_bias="0.575">
 
             <TextView
-                android:id="@+id/no_account_yet"
+                android:id="@+id/no_account_yet_text"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:fontFamily="@font/londrina_solid_regular"
                 android:text="No account yet?"
                 android:textColor="@color/white"
                 android:textSize="18sp"
-                app:layout_constraintEnd_toStartOf="@id/sign_up_button"
+                app:layout_constraintEnd_toStartOf="@id/bt_sign_up"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="parent" />
 
             <Button
-                android:id="@+id/sign_up_button"
+                android:id="@+id/bt_sign_up"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="0dp"

@@ -1,11 +1,11 @@
 package com.example.dthomefresh.sellers
 
 //import androidx.recyclerview.widget.RecyclerView
-//import com.example.dthomefresh.database.Item
+//import com.example.dthomefresh.database.Items
 //import org.w3c.dom.Text
 //
 //class ItemListAdapter: RecyclerView.Adapter<Text> () {
-//    val data = listOf<Item>()
+//    val data = listOf<Items>()
 //
 //    override fun getItemCount() = data.size
 //

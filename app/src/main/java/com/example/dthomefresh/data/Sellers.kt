@@ -1,4 +1,4 @@
-package com.example.dthomefresh.database
+package com.example.dthomefresh.data
 
 //TODO complete these databases
 data class Sellers(

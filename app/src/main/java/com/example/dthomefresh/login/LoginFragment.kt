@@ -11,7 +11,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import com.example.dthomefresh.R
 import com.example.dthomefresh.databinding.FragmentLoginBinding
-import com.example.dthomefresh.databinding.FragmentSellersBinding
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
@@ -27,10 +26,8 @@ class LoginFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var editTextEmail: TextInputEditText
     private lateinit var editTextPassword: TextInputEditText
-    private lateinit var email: String
-    private lateinit var password: String
-    private var viewModelJob = Job()
-    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+    private var fragmentJob = Job()
+    private val uiScope = CoroutineScope(Dispatchers.Main + fragmentJob)
     public override fun onStart() {
         super.onStart()
         val currentUser = auth.currentUser
@@ -51,7 +48,9 @@ class LoginFragment : Fragment() {
         auth = Firebase.auth
 
         editTextEmail = binding.etUsername
-        editTextPassword = binding.password
+        editTextPassword = binding.etPassword
+        var email: String
+        var password: String
 
 
         binding.btLogin.setOnClickListener {
@@ -72,7 +71,7 @@ class LoginFragment : Fragment() {
             }
         }
 
-        binding.signUpButton.setOnClickListener {
+        binding.btSignUp.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.action_loginFragment_to_signUpFragment)
         }
 
