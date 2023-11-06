@@ -13,7 +13,7 @@
             android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:backgroundTint="@color/button_yellow"
+            android:backgroundTint="@color/yellow_1"
             android:drawableEnd="@drawable/next_symbol"
             android:fontFamily="@font/londrina_solid_black"
             android:text="@string/get_started"

@@ -12,10 +12,23 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import com.example.dthomefresh.R
 import com.example.dthomefresh.databinding.FragmentCategoriesBinding
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
 
 class CategoriesFragment : Fragment() {
 
     private var optionSelected: Int = -1
+    private lateinit var auth: FirebaseAuth
+    private var loggedIn: Boolean = false
+
+    public override fun onStart() {
+        super.onStart()
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            loggedIn = true
+        }
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -23,6 +36,9 @@ class CategoriesFragment : Fragment() {
         val binding: FragmentCategoriesBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_categories, container, false
         )
+
+        auth = Firebase.auth
+
         val vibrator = activity?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
 
         binding.cardView1.setOnClickListener {
@@ -45,6 +61,13 @@ class CategoriesFragment : Fragment() {
 
         binding.menuButton.setOnClickListener {
             Toast.makeText(context, "Menu Button Pressed", Toast.LENGTH_SHORT).show();
+        }
+
+        binding.profileButton.setOnClickListener {
+            if(loggedIn)
+                Navigation.findNavController(requireView()).navigate(R.id.action_categoriesFragment_to_profileFragment)
+            else
+                Navigation.findNavController(requireView()).navigate(R.id.action_categoriesFragment_to_loginFragment)
         }
 
         return binding.root

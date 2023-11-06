@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
     app:startDestination="@id/onboardingFragment">
+
+<!--    TODO- fix a bug navigation from the home page and pop behavior-->
 
     <fragment
         android:id="@+id/onboardingFragment"
@@ -10,7 +13,9 @@
         android:label="OnboardingFragment" >
         <action
             android:id="@+id/action_onboardingFragment_to_categoriesFragment"
-            app:destination="@id/categoriesFragment" />
+            app:destination="@id/categoriesFragment"
+            app:popUpTo="@id/onboardingFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/categoriesFragment"
@@ -19,6 +24,13 @@
         <action
             android:id="@+id/action_categoriesFragment_to_sellersFragment"
             app:destination="@id/sellersFragment" />
+        <action
+            android:id="@+id/action_categoriesFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/categoriesFragment" />
+        <action
+            android:id="@+id/action_categoriesFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/sellersFragment"
@@ -33,5 +45,47 @@
             android:name="optionSelected"
             app:argType="integer"
             android:defaultValue="0" />
+        <action
+            android:id="@+id/action_sellersFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_sellersFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.example.dthomefresh.signup.SignUpFragment"
+        android:label="SignUpFragment" >
+        <action
+            android:id="@+id/action_signUpFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.dthomefresh.login.LoginFragment"
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_loginFragment_to_categoriesFragment"
+            app:destination="@id/categoriesFragment"
+            app:popUpTo="@id/categoriesFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.dthomefresh.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_categoriesFragment"
+            app:destination="@id/categoriesFragment"
+            app:popUpTo="@id/categoriesFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

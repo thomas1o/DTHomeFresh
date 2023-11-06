@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1002985949261",
+    "project_id": "dt-homefresh",
+    "storage_bucket": "dt-homefresh.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1002985949261:android:62eaec9d093388c4ff7404",
+        "android_client_info": {
+          "package_name": "com.example.dthomefresh"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCF6iizL7GMwHBvAZhEnxuPEDSsQBNafrQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
