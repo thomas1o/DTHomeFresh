@@ -16,13 +16,21 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class LoginFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var editTextEmail: TextInputEditText
     private lateinit var editTextPassword: TextInputEditText
-
+    private lateinit var email: String
+    private lateinit var password: String
+    private var viewModelJob = Job()
+    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     public override fun onStart() {
         super.onStart()
         val currentUser = auth.currentUser
@@ -31,6 +39,7 @@ class LoginFragment : Fragment() {
 //            Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_sellersFragment)
         }
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,8 +52,7 @@ class LoginFragment : Fragment() {
 
         editTextEmail = binding.etUsername
         editTextPassword = binding.password
-        var email: String
-        var password: String
+
 
         binding.btLogin.setOnClickListener {
             email = editTextEmail.text.toString()
@@ -60,16 +68,7 @@ class LoginFragment : Fragment() {
                 Toast.makeText(requireContext(), "Password cannot be empty", Toast.LENGTH_SHORT).show()
             }
             else{
-                auth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener() { task ->
-                        if (task.isSuccessful) {
-                            Toast.makeText(requireContext(),"Login Successful",Toast.LENGTH_SHORT,).show()
-                            Navigation.findNavController(it).navigate(R.id.action_loginFragment_to_sellersFragment)
-                        }
-                        else {
-                            Toast.makeText(requireContext(),"Please enter the right credentials",Toast.LENGTH_SHORT,).show()
-                        }
-                    }
+                signIn(email, password)
             }
         }
 
@@ -82,6 +81,27 @@ class LoginFragment : Fragment() {
 
     private fun isEmpty(string: String): Boolean {
         return TextUtils.isEmpty(string)
+    }
+
+    private fun signIn(email: String, password: String) {
+        uiScope.launch {
+            signInFromFirebase(email, password)
+        }
+    }
+
+    private suspend fun signInFromFirebase(email: String, password: String) {
+        withContext(Dispatchers.IO) {
+            auth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener() { task ->
+                    if (task.isSuccessful) {
+                        Toast.makeText(requireContext(),"Login Successful",Toast.LENGTH_SHORT,).show()
+                        Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_categoriesFragment)
+                    }
+                    else {
+                        Toast.makeText(requireContext(),"Please enter the right credentials",Toast.LENGTH_SHORT,).show()
+                    }
+                }
+        }
     }
 
 }

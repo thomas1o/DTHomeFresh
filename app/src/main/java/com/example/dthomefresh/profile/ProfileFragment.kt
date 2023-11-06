@@ -46,7 +46,7 @@ class ProfileFragment : Fragment() {
         binding.signOutButton.setOnClickListener{
             Firebase.auth.signOut()
             Toast.makeText(requireContext(), "Sign out successful", Toast.LENGTH_SHORT).show()
-            Navigation.findNavController(requireView()).navigate(R.id.action_profileFragment_to_sellersFragment)
+            Navigation.findNavController(requireView()).navigate(R.id.action_profileFragment_to_categoriesFragment)
         }
 
         return binding.root

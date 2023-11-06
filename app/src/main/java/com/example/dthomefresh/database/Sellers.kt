@@ -5,6 +5,4 @@ data class Sellers(
 
     var name: String, var address: String, var contact: Long
 
-
-
 )

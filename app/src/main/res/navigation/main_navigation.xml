@@ -72,9 +72,9 @@
             app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="false" />
         <action
-            android:id="@+id/action_loginFragment_to_sellersFragment"
-            app:destination="@id/sellersFragment"
-            app:popUpTo="@id/sellersFragment"
+            android:id="@+id/action_loginFragment_to_categoriesFragment"
+            app:destination="@id/categoriesFragment"
+            app:popUpTo="@id/categoriesFragment"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
@@ -83,9 +83,9 @@
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" >
         <action
-            android:id="@+id/action_profileFragment_to_sellersFragment"
-            app:destination="@id/sellersFragment"
-            app:popUpTo="@id/sellersFragment"
+            android:id="@+id/action_profileFragment_to_categoriesFragment"
+            app:destination="@id/categoriesFragment"
+            app:popUpTo="@id/categoriesFragment"
             app:popUpToInclusive="true" />
     </fragment>
 </navigation>
