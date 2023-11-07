@@ -9,21 +9,22 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import com.example.dthomefresh.R
+import com.example.dthomefresh.data.Seller
 import com.example.dthomefresh.databinding.FragmentLoginBinding
 import com.example.dthomefresh.databinding.FragmentProfileBinding
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.database
 
 class ProfileFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth
-    private val database = Firebase.database
+    private val database = FirebaseDatabase.getInstance()
     private val myRef = database.getReference("Sellers")
 
-    private lateinit var name: String
-    private lateinit var contact: String
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,14 +33,18 @@ class ProfileFragment : Fragment() {
             inflater, R.layout.fragment_profile, container, false
         )
 
+        var name: String
+        var phoneNumber: String
+
         auth = Firebase.auth
 
         binding.saveButton.setOnClickListener {
             Toast.makeText(requireContext(), "Saved", Toast.LENGTH_SHORT).show()
 
-            name = binding.etName.toString()
-            contact = binding.tiPhoneNumber.toString()
+            name = binding.etName.text.toString()
+            phoneNumber = binding.etPhoneNumber.text.toString()
 
+            writeNewUser(name, phoneNumber)
 
         }
 
@@ -50,6 +55,12 @@ class ProfileFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    private fun writeNewUser(name: String, phoneNumber: String) {
+        val seller = Seller(name, phoneNumber)
+
+        database.reference.child("Sellers").child(name).setValue(seller)
     }
 
 }

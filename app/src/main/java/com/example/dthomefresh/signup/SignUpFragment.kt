@@ -46,7 +46,7 @@ class SignUpFragment : Fragment() {
         auth = Firebase.auth
 
         editTextEmail = binding.etUsername
-        editTextPassword = binding.password
+        editTextPassword = binding.etPassword
         var email: String
         var password: String
 
