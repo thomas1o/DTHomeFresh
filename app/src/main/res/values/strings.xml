@@ -1,22 +1,24 @@
 <resources>
+
     <string name="app_name">DT Home Fresh</string>
     <string name="title_activity_categories">CategoriesActivity</string>
+
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="get_started">Get Started</string>
-    <string name="food_icon">Food Icon</string>
-    <string name="food">Food</string>
-    <string name="clothes_icon">Clothes Icon</string>
-    <string name="clothes">Clothes</string>
-    <string name="homemade_items">Homemade Items</string>
-    <string name="dt_homefresh">DT HomeFresh</string>
-    <string name="home_icon">Home Icon</string>
-    <string name="menu_button">Menu Button</string>
-    <string name="up_button">Up Button</string>
+    <string name="first_fragment_label_string">First Fragment</string>
+    <string name="second_fragment_label_string">Second Fragment</string>
+    <string name="next_string">Next</string>
+    <string name="previous_string">Previous</string>
+    <string name="get_started_string">Get Started</string>
+    <string name="food_icon_string">Food Icon</string>
+    <string name="food_string">Food</string>
+    <string name="clothes_icon_string">Clothes Icon</string>
+    <string name="clothes_string">Clothes</string>
+    <string name="homemade_items_string">Homemade Items</string>
+    <string name="dt_homefresh_string">DT HomeFresh</string>
+    <string name="home_icon_string">Home Icon</string>
+    <string name="menu_button_string">Menu Button</string>
+    <string name="up_button_string">Up Button</string>
+
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
@@ -27,4 +29,12 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="profile_button">Profile Button</string>
+    <string name="login_string">Login</string>
+    <string name="new_user_string">New User?</string>
+    <string name="sign_up_string">Sign Up</string>
+    <string name="password_string">Password</string>
+    <string name="user_email_id_string">User Email ID</string>
+    <string name="have_an_account_string">Have an account?</string>
+    <string name="skip_for_now_string">Skip for now</string>
+
 </resources>

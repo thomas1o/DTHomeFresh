@@ -8,7 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import com.airbnb.lottie.LottieAnimationView
 import com.example.dthomefresh.R
 import com.example.dthomefresh.databinding.FragmentLoginBinding
 import com.google.android.material.textfield.TextInputEditText
@@ -23,11 +26,13 @@ import kotlinx.coroutines.withContext
 
 class LoginFragment : Fragment() {
 
+    private lateinit var viewModel: LoginViewModel
     private lateinit var auth: FirebaseAuth
     private lateinit var editTextEmail: TextInputEditText
     private lateinit var editTextPassword: TextInputEditText
     private var fragmentJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + fragmentJob)
+
     public override fun onStart() {
         super.onStart()
         val currentUser = auth.currentUser
@@ -41,9 +46,12 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var binding: FragmentLoginBinding = DataBindingUtil.inflate(
+
+        val binding: FragmentLoginBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_login, container, false
         )
+
+        viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
 
         auth = Firebase.auth
 
@@ -52,6 +60,7 @@ class LoginFragment : Fragment() {
         var email: String
         var password: String
 
+        binding.lifecycleOwner = this
 
         binding.btLogin.setOnClickListener {
             email = editTextEmail.text.toString()
@@ -67,9 +76,18 @@ class LoginFragment : Fragment() {
                 Toast.makeText(requireContext(), "Password cannot be empty", Toast.LENGTH_SHORT).show()
             }
             else{
-                signIn(email, password)
+                viewModel.setEmail(email)
+                viewModel.setPassword(password)
+                viewModel.startSignIn()
             }
         }
+
+        viewModel.signInSuccess.observe(viewLifecycleOwner, Observer { newSignInSuccess ->
+            if(newSignInSuccess == true) {
+                Toast.makeText(requireContext(),"Login Successful", Toast.LENGTH_SHORT,).show()
+                Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_categoriesFragment)
+            }
+        })
 
         binding.btSignUp.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.action_loginFragment_to_signUpFragment)
@@ -82,25 +100,6 @@ class LoginFragment : Fragment() {
         return TextUtils.isEmpty(string)
     }
 
-    private fun signIn(email: String, password: String) {
-        uiScope.launch {
-            signInFromFirebase(email, password)
-        }
-    }
 
-    private suspend fun signInFromFirebase(email: String, password: String) {
-        withContext(Dispatchers.IO) {
-            auth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener() { task ->
-                    if (task.isSuccessful) {
-                        Toast.makeText(requireContext(),"Login Successful",Toast.LENGTH_SHORT,).show()
-                        Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_categoriesFragment)
-                    }
-                    else {
-                        Toast.makeText(requireContext(),"Please enter the right credentials",Toast.LENGTH_SHORT,).show()
-                    }
-                }
-        }
-    }
 
 }

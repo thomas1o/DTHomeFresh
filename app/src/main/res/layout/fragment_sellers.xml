@@ -29,7 +29,7 @@
                 android:layout_marginEnd="5dp"
                 android:background="@android:color/transparent"
                 android:clickable="true"
-                android:contentDescription="@string/up_button"
+                android:contentDescription="@string/up_button_string"
                 android:focusable="true"
                 android:foreground="?selectableItemBackground"
                 android:padding="5dp"
@@ -97,7 +97,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/seller_navigation_padding_horizontal"
                         android:fontFamily="@font/inter_bold"
-                        android:text="@string/food"
+                        android:text="@string/food_string"
                         android:textColor="@color/green_1"
                         android:textSize="@dimen/seller_navigation_font_size" />
 
@@ -124,7 +124,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/seller_navigation_padding_horizontal"
                         android:fontFamily="@font/inter_bold"
-                        android:text="@string/clothes"
+                        android:text="@string/clothes_string"
                         android:textColor="@color/green_1"
                         android:textSize="@dimen/seller_navigation_font_size" />
 
@@ -151,7 +151,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/seller_navigation_padding_horizontal"
                         android:fontFamily="@font/inter_bold"
-                        android:text="@string/homemade_items"
+                        android:text="@string/homemade_items_string"
                         android:textColor="@color/green_1"
                         android:textSize="@dimen/seller_navigation_font_size" />
 

@@ -1,7 +1,9 @@
 package com.example.dthomefresh.signup
 
 import android.os.Bundle
+import android.text.SpannableString
 import android.text.TextUtils
+import android.text.style.UnderlineSpan
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -23,6 +25,7 @@ class SignUpFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var editTextEmail: TextInputEditText
     private lateinit var editTextPassword: TextInputEditText
+    private lateinit var editTextRePassword: TextInputEditText
 
 //    TODO find the use of onCreate in Fragment, difference when it it initialised in both
 //    override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,12 +50,23 @@ class SignUpFragment : Fragment() {
 
         editTextEmail = binding.etUsername
         editTextPassword = binding.etPassword
+        editTextRePassword = binding.etRePassword
+
         var email: String
         var password: String
+        var rePassword: String
+
+        //For styling the Skip for now button
+        val skipForNowButton = binding.btSkipForNow
+        val content = SpannableString("Skip for now")
+        content.setSpan(UnderlineSpan(), 0, content.length, 0)
+        skipForNowButton.text = content
 
         binding.btSignUp.setOnClickListener {
             email = editTextEmail.text.toString()
             password = editTextPassword.text.toString()
+            rePassword = editTextRePassword.text.toString()
+
 
             if(isEmpty(email) && isEmpty(password)) {
                 Toast.makeText(requireContext(), "Email and password cannot be empty", Toast.LENGTH_SHORT).show()
@@ -62,6 +76,9 @@ class SignUpFragment : Fragment() {
             }
             else if(isEmpty(password)) {
                 Toast.makeText(requireContext(), "Password cannot be empty", Toast.LENGTH_SHORT).show()
+            }
+            else if(password != rePassword) {
+                Toast.makeText(requireContext(), "Passwords do not match", Toast.LENGTH_SHORT).show()
             }
             else {
                 auth.createUserWithEmailAndPassword(email, password)
@@ -75,6 +92,10 @@ class SignUpFragment : Fragment() {
                         }
                     }
             }
+        }
+
+        binding.btSkipForNow.setOnClickListener {
+            Navigation.findNavController(it).navigate(R.id.action_signUpFragment_to_categoriesFragment)
         }
 
         binding.loginButton.setOnClickListener {

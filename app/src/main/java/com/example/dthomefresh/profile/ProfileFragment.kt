@@ -35,6 +35,7 @@ class ProfileFragment : Fragment() {
 
         var name: String
         var phoneNumber: String
+        var address: String
 
         auth = Firebase.auth
 
@@ -43,8 +44,9 @@ class ProfileFragment : Fragment() {
 
             name = binding.etName.text.toString()
             phoneNumber = binding.etPhoneNumber.text.toString()
+            address = binding.etAddress.text.toString()
 
-            writeNewUser(name, phoneNumber)
+            writeNewUser(name, phoneNumber, address)
 
         }
 
@@ -57,10 +59,29 @@ class ProfileFragment : Fragment() {
         return binding.root
     }
 
-    private fun writeNewUser(name: String, phoneNumber: String) {
-        val seller = Seller(name, phoneNumber)
 
-        database.reference.child("Sellers").child(name).setValue(seller)
+    private fun writeNewUser(name: String, phoneNumber: String, address: String) {
+        val seller = Seller(name, phoneNumber, address)
+        val firebaseAuth = FirebaseAuth.getInstance()
+        val currentUser = firebaseAuth.currentUser
+
+        currentUser?.let { firebaseUser ->
+            val userEmail = firebaseUser.email // Retrieve the user's email
+
+            // Check if the user's email is not null
+            userEmail?.let { email ->
+                // Encode the email to replace characters like "." and "#" which are invalid in Firebase keys
+                val encodedEmail = email.replace(".", "_").replace("#", "_")
+
+                // Write user data to the Firebase Realtime Database with the email as the key
+                database.reference.child("Sellers").child(encodedEmail).setValue(seller)
+            }
+        }
     }
+
+
+//        TODO- complete the get user function
+
+
 
 }
