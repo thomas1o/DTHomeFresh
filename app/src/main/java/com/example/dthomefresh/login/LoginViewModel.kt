@@ -28,15 +28,19 @@ class LoginViewModel: ViewModel() {
     private val password = MutableLiveData<String?>()
 
     private val _signInSuccess = MutableLiveData<Boolean>()
+    private val _loginAnimation = MutableLiveData<Boolean>()
 
     init {
         _signInSuccess.value = false
+        _loginAnimation.value = false
         setEmail("")
         setPassword("")
     }
 
     val signInSuccess: LiveData<Boolean>
         get() = _signInSuccess
+    val loginAnimation: LiveData<Boolean>
+        get() = _loginAnimation
 
     private fun signIn(email: String, password: String) {
         uiScope.launch {
@@ -61,7 +65,12 @@ class LoginViewModel: ViewModel() {
             }
         }
     }
-
+    fun startLoginAnimation() {
+        _loginAnimation.value = true
+    }
+    fun stopLoginAnimation() {
+        _loginAnimation.value = false
+    }
     fun setEmail(emailInput: String?) {
         email.value = emailInput
     }

@@ -51,6 +51,8 @@ class LoginFragment : Fragment() {
             inflater, R.layout.fragment_login, container, false
         )
 
+        val animationView: LottieAnimationView = binding.lottieAnimationView
+
         viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
 
         auth = Firebase.auth
@@ -79,13 +81,26 @@ class LoginFragment : Fragment() {
                 viewModel.setEmail(email)
                 viewModel.setPassword(password)
                 viewModel.startSignIn()
+                viewModel.startLoginAnimation()
             }
         }
 
         viewModel.signInSuccess.observe(viewLifecycleOwner, Observer { newSignInSuccess ->
             if(newSignInSuccess == true) {
                 Toast.makeText(requireContext(),"Login Successful", Toast.LENGTH_SHORT,).show()
+                viewModel.startLoginAnimation()
                 Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_categoriesFragment)
+            }
+        })
+
+        viewModel.loginAnimation.observe(viewLifecycleOwner, Observer { shouldAnimate ->
+            if (shouldAnimate) {
+                animationView.setAnimation(R.raw.processing_circle)
+                animationView.playAnimation()
+                animationView.visibility = View.VISIBLE
+            } else {
+                animationView.cancelAnimation()
+                animationView.visibility = View.GONE
             }
         })
 
