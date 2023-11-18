@@ -1,4 +1,4 @@
-package com.example.dthomefresh.login
+package com.example.dthomefresh.signup
 
 import android.util.Log
 import android.widget.Toast
@@ -17,7 +17,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class LoginViewModel: ViewModel() {
+class SignUpViewModel: ViewModel() {
 
     private var auth: FirebaseAuth = Firebase.auth
     private var viewModelJob = Job()
@@ -26,58 +26,58 @@ class LoginViewModel: ViewModel() {
     private val email = MutableLiveData<String?>()
     private val password = MutableLiveData<String?>()
 
-    private val _signInSuccess = MutableLiveData<Boolean>()
-    val signInSuccess: LiveData<Boolean>
-        get() = _signInSuccess
-
-    private val _loginAnimation = MutableLiveData<Boolean>()
-    val loginAnimation: LiveData<Boolean>
-        get() = _loginAnimation
+    private val _signUpSuccess = MutableLiveData<Boolean>()
+    val signUpSuccess: LiveData<Boolean>
+        get() = _signUpSuccess
+    private val _signUpAnimation = MutableLiveData<Boolean>()
+    val signUpAnimation: LiveData<Boolean>
+        get() = _signUpAnimation
 
     init {
-        _signInSuccess.value = false
-        _loginAnimation.value = false
+        _signUpAnimation.value = false
+        _signUpSuccess.value = false
         setEmail("")
         setPassword("")
     }
 
-    private fun signIn(email: String, password: String) {
+    private fun signUp(email: String, password: String) {
         uiScope.launch {
-            signInWithFirebase(email, password)
+            signUpWithFirebase(email, password)
         }
     }
 
-    private suspend fun signInWithFirebase(email: String, password: String) {
+    private suspend fun signUpWithFirebase(email: String, password: String) {
         withContext(Dispatchers.IO) {
             email?.let { nonNullEmail ->
                 password?.let { nonNullPassword ->
-                    auth.signInWithEmailAndPassword(nonNullEmail, nonNullPassword)
-                        .addOnCompleteListener { task ->
+                    auth.createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener() { task ->
                             if (task.isSuccessful) {
-                                _signInSuccess.value = true
-                                Log.i("LoginViewModel", "Login successful")
+                                _signUpSuccess.value = true
+                                Log.i("SignUpViewModel", "SignUp successful")
+                                Firebase.auth.signOut()
                             } else {
-                                Log.i("LoginViewModel", "Login Failed")
+                                Log.i("SignUpViewModel", "SignUp failed")
                             }
                         }
                 }
             }
         }
     }
-    fun startLoginAnimation() {
-        _loginAnimation.value = true
-    }
-    fun stopLoginAnimation() {
-        _loginAnimation.value = false
-    }
+
     fun setEmail(emailInput: String?) {
         email.value = emailInput
     }
     fun setPassword(passwordInput: String?) {
         password.value = passwordInput
     }
-    fun startSignIn() {
-        signIn(email.value ?: "", password.value ?: "")
+    fun startLoginAnimation() {
+        _signUpAnimation.value = true
     }
-
+    fun stopLoginAnimation() {
+        _signUpAnimation.value = false
+    }
+    fun startSignUp() {
+        signUp(this.email.value ?: "", this.password.value ?: "")
+    }
 }
