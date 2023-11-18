@@ -8,12 +8,25 @@
         android:layout_height="match_parent"
         android:background="@drawable/sign_up_bg">
 
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottieAnimationView"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="false"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/processing_circle" />
+
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/londrina_solid_regular"
-            android:text="Sign Up"
+            android:text="@string/sign_up_string"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="40sp"
@@ -28,15 +41,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
-            android:hint="User Email ID"
-            app:hintTextColor="@color/yellow_2"
-            app:errorEnabled="true"
+            android:hint="@string/user_email_id_string"
             app:boxStrokeColor="@color/yellow_2"
+            app:errorEnabled="true"
+            app:hintTextColor="@color/yellow_2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.45">
+            app:layout_constraintVertical_bias="0.4">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_username"
@@ -53,19 +66,40 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
-            android:hint="Password"
-            app:hintTextColor="@color/yellow_2"
-            app:errorEnabled="true"
+            android:hint="@string/password_string"
             app:boxStrokeColor="@color/yellow_2"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:errorEnabled="true"
+            app:hintTextColor="@color/yellow_2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ti_username"
-            app:layout_constraintVertical_bias="0.0"
             app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_password"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:textSize="20sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ti_re_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:hint="Re-enter Password"
+            app:boxStrokeColor="@color/yellow_2"
+            app:errorEnabled="true"
+            app:hintTextColor="@color/yellow_2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ti_password">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_re_password"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="textPassword"
@@ -80,14 +114,31 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/yellow_2"
             android:fontFamily="@font/londrina_solid_regular"
-            android:text="Sign Up"
+            android:text="@string/sign_up_string"
             android:textColor="@color/black"
             android:textSize="28sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ti_password"
-            app:layout_constraintVertical_bias="0.186" />
+            app:layout_constraintTop_toBottomOf="@+id/ti_re_password"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/bt_skip_for_now"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:backgroundTint="@android:color/transparent"
+            android:fontFamily="@font/londrina_solid_regular"
+            android:text="@string/skip_for_now_string"
+            android:textColor="@color/yellow_2"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bt_sign_up"
+            app:layout_constraintVertical_bias="0" />
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -102,7 +153,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:fontFamily="@font/londrina_solid_regular"
-                android:text="Already have an account?"
+                android:text="@string/have_an_account_string"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toStartOf="@id/bt_sign_up"
@@ -111,13 +162,13 @@
 
             <Button
                 android:id="@+id/login_button"
-                android:layout_width="wrap_content"
+                android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="0dp"
                 android:background="@android:color/transparent"
                 android:fontFamily="@font/londrina_solid_regular"
                 android:padding="0dp"
-                android:text="Login"
+                android:text="@string/login_string"
                 android:textColor="@color/yellow_2"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -24,9 +24,9 @@ class CategoriesFragment : Fragment() {
 
     public override fun onStart() {
         super.onStart()
-        val currentUser = auth.currentUser
-        if (currentUser != null) {
-            loggedIn = true
+        loggedInCheck()
+        if(!loggedIn) {
+//            Navigation.findNavController(it).navigate(R.id.action_loginFragment_to_signUpFragment)
         }
     }
     override fun onCreateView(
@@ -40,6 +40,8 @@ class CategoriesFragment : Fragment() {
         auth = Firebase.auth
 
         val vibrator = activity?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+
+
 
         binding.cardView1.setOnClickListener {
             assignOptionValue(0)
@@ -74,5 +76,12 @@ class CategoriesFragment : Fragment() {
     }
     private fun assignOptionValue(number: Int) {
         optionSelected = number
+    }
+
+    private fun loggedInCheck() {
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            loggedIn = true
+        }
     }
 }
