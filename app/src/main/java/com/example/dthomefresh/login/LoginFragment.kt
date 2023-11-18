@@ -88,7 +88,7 @@ class LoginFragment : Fragment() {
         viewModel.signInSuccess.observe(viewLifecycleOwner, Observer { newSignInSuccess ->
             if(newSignInSuccess == true) {
                 Toast.makeText(requireContext(),"Login Successful", Toast.LENGTH_SHORT,).show()
-                viewModel.startLoginAnimation()
+                viewModel.stopLoginAnimation()
                 Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_categoriesFragment)
             }
         })
