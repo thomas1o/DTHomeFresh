@@ -34,8 +34,6 @@ class SignUpViewModel: ViewModel() {
         get() = _signUpAnimation
 
     init {
-        _signUpAnimation.value = false
-        _signUpSuccess.value = false
         setEmail("")
         setPassword("")
     }
@@ -57,6 +55,7 @@ class SignUpViewModel: ViewModel() {
                                 Log.i("SignUpViewModel", "SignUp successful")
                                 Firebase.auth.signOut()
                             } else {
+                                _signUpSuccess.value = false
                                 Log.i("SignUpViewModel", "SignUp failed")
                             }
                         }

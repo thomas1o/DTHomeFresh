@@ -35,8 +35,6 @@ class LoginViewModel: ViewModel() {
         get() = _loginAnimation
 
     init {
-        _signInSuccess.value = false
-        _loginAnimation.value = false
         setEmail("")
         setPassword("")
     }
@@ -57,6 +55,7 @@ class LoginViewModel: ViewModel() {
                                 _signInSuccess.value = true
                                 Log.i("LoginViewModel", "Login successful")
                             } else {
+                                _signInSuccess.value = false
                                 Log.i("LoginViewModel", "Login Failed")
                             }
                         }

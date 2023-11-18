@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.text.SpannableString
 import android.text.TextUtils
 import android.text.style.UnderlineSpan
+import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +18,7 @@ import com.airbnb.lottie.LottieAnimationView
 import com.example.dthomefresh.R
 import com.example.dthomefresh.databinding.FragmentSignUpBinding
 import com.google.android.material.textfield.TextInputEditText
-import com.google.firebase.auth.FirebaseAuth
+import com.google.android.material.textfield.TextInputLayout
 
 class SignUpFragment : Fragment() {
 
@@ -25,6 +26,9 @@ class SignUpFragment : Fragment() {
     private lateinit var editTextEmail: TextInputEditText
     private lateinit var editTextPassword: TextInputEditText
     private lateinit var editTextRePassword: TextInputEditText
+    private lateinit var textInputLayoutEmail: TextInputLayout
+    private lateinit var textInputLayoutPassword: TextInputLayout
+    private lateinit var textInputLayoutRePassword: TextInputLayout
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,6 +46,9 @@ class SignUpFragment : Fragment() {
         editTextEmail = binding.etUsername
         editTextPassword = binding.etPassword
         editTextRePassword = binding.etRePassword
+        textInputLayoutEmail = binding.tiUsername
+        textInputLayoutPassword = binding.tiPassword
+        textInputLayoutRePassword = binding.tiRePassword
 
         var email: String
         var password: String
@@ -58,20 +65,30 @@ class SignUpFragment : Fragment() {
             password = editTextPassword.text.toString()
             rePassword = editTextRePassword.text.toString()
 
-
             if(isEmpty(email) && isEmpty(password)) {
-                Toast.makeText(requireContext(), "Email and password cannot be empty", Toast.LENGTH_SHORT).show()
+                textInputLayoutEmail.error = "Email cannot be empty"
+                textInputLayoutPassword.error = "Password cannot be empty"
             }
             else if(isEmpty(email)) {
-                Toast.makeText(requireContext(), "Email cannot be empty", Toast.LENGTH_SHORT).show()
+                textInputLayoutPassword.error = null
+                textInputLayoutEmail.error = "Email cannot be empty"
             }
-            else if(isEmpty(password)) {
-                Toast.makeText(requireContext(), "Password should be at least 6 characters", Toast.LENGTH_SHORT).show()
+            else if(!isValidPassword(password)) {
+                textInputLayoutEmail.error = null
+                textInputLayoutPassword.error = "Cannot be less than 6 character"
+            }
+            else if(!isValidEmail(email)) {
+                textInputLayoutEmail.error = "Invalid email address"
             }
             else if(password != rePassword) {
-                Toast.makeText(requireContext(), "Passwords do not match", Toast.LENGTH_SHORT).show()
+                textInputLayoutEmail.error = null
+                textInputLayoutPassword.error = null
+                textInputLayoutRePassword.error = "Passwords do not match"
             }
             else {
+                textInputLayoutEmail.error = null
+                textInputLayoutPassword.error = null
+                textInputLayoutRePassword.error = null
                 viewModel.setEmail(email)
                 viewModel.setPassword(password)
                 viewModel.startSignUp()
@@ -84,6 +101,10 @@ class SignUpFragment : Fragment() {
                 Toast.makeText(requireContext(),"Sign up successful, please continue to login", Toast.LENGTH_SHORT,).show()
                 viewModel.stopLoginAnimation()
                 Navigation.findNavController(requireView()).navigate(R.id.action_signUpFragment_to_loginFragment)
+            }
+            else {
+                Toast.makeText(requireContext(),"Sign Up Failed, please try again", Toast.LENGTH_SHORT).show()
+                viewModel.stopLoginAnimation()
             }
         })
 
@@ -113,4 +134,11 @@ class SignUpFragment : Fragment() {
         return TextUtils.isEmpty(string)
     }
 
+    private fun isValidPassword(password: String): Boolean {
+        return password.length >=6
+    }
+
+    private fun isValidEmail(email: String): Boolean {
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    }
 }
