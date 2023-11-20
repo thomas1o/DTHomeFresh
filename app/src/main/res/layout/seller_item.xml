@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-<!--    <data>-->
-<!--        <variable-->
-<!--            name="seller"-->
-<!--            type="com.example.dthomefresh.sellers.SellersListAdapter" />-->
-<!--    </data>-->
+    <data>
+        <variable
+            name="seller"
+            type="com.example.dthomefresh.data.Seller" />
+    </data>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view"
@@ -17,7 +17,8 @@
         android:focusable="true"
         android:foreground="?selectableItemBackground"
         app:cardBackgroundColor="#A2CE86"
-        app:cardCornerRadius="10dp"
+        app:cardCornerRadius="15dp"
+        android:layout_marginVertical="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,16 +32,16 @@
                 android:id="@+id/mars_image"
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
-                android:adjustViewBounds="true"
-                android:contentDescription="Seller Image"
-                android:padding="2dp"
                 android:layout_margin="2dp"
+                android:layout_marginTop="4dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/seller_image_string"
+                android:padding="2dp"
                 android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:src="@tools:sample/backgrounds/scenic"
-                />
+                tools:src="@tools:sample/backgrounds/scenic" />
 
             <TextView
                 android:id="@+id/name"
@@ -48,7 +49,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:fontFamily="@font/londrina_solid_regular"
-                android:text="Barts Shop"
+                android:text="@{seller.name}"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -62,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:fontFamily="@font/londrina_solid_light"
-                android:text=" 23, Lily street, Fort Kochi, 545466"
+                android:text="@{seller.address}"
                 android:textColor="@color/black"
                 android:textSize="10sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -72,7 +73,7 @@
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:layout_marginHorizontal="5dp"
                 android:layout_marginVertical="5dp"
                 android:padding="0.5dp"
@@ -83,13 +84,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/address">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/londrina_solid_light"
-                    android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
-                    android:textColor="@color/black"
-                    android:textSize="10sp" />
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:fontFamily="@font/londrina_solid_light"-->
+<!--                    android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="10sp" />-->
 
             </androidx.cardview.widget.CardView>
 

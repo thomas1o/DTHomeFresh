@@ -79,9 +79,6 @@ class ProfileFragment : Fragment() {
         }
     }
 
-
 //        TODO- complete the get user function
-
-
 
 }

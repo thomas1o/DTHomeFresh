@@ -10,12 +10,17 @@ class SellersViewModel(optionSelected : Int) : ViewModel() {
     val options: LiveData<MutableMap<Int, Boolean>>
         get() = _options
 
+    private val _loadingAnimation = MutableLiveData<Boolean>()
+    val loadingAnimation: LiveData<Boolean>
+        get() = _loadingAnimation
+
     init {
         when(optionSelected) {
             0 -> onFood()
             1 -> onClothes()
             2 -> onHomemadeItems()
         }
+        startLoadingAnimation()
     }
 
     private fun setAllFalse() {
@@ -42,5 +47,11 @@ class SellersViewModel(optionSelected : Int) : ViewModel() {
     fun onHomemadeItems() {
         setAllFalse()
         setTrue(2)
+    }
+    fun startLoadingAnimation() {
+        _loadingAnimation.value = true
+    }
+    fun stopLoadingAnimation() {
+        _loadingAnimation.value = false
     }
 }

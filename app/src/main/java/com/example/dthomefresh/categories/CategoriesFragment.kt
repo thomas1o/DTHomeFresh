@@ -41,8 +41,6 @@ class CategoriesFragment : Fragment() {
 
         val vibrator = activity?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
 
-
-
         binding.cardView1.setOnClickListener {
             assignOptionValue(0)
             vibrator.vibrate(100)

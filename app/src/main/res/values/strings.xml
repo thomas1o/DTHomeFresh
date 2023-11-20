@@ -36,5 +36,6 @@
     <string name="user_email_id_string">User Email ID</string>
     <string name="have_an_account_string">Have an account?</string>
     <string name="skip_for_now_string">Skip for now</string>
+    <string name="seller_image_string">Seller Image</string>
 
 </resources>

@@ -1,40 +1,41 @@
 package com.example.dthomefresh.sellers
-//
-//import android.view.LayoutInflater
-//import android.view.ViewGroup
-//import androidx.recyclerview.widget.RecyclerView
-//import androidx.recyclerview.widget.RecyclerView.ViewHolder
-//import com.example.dthomefresh.R
-//import com.example.dthomefresh.data.Seller
-//import com.example.dthomefresh.databinding.SellerItemBinding
-//
-//
-//class SellersListAdapter(private val sellers: Seller): RecyclerView.Adapter<SellersListAdapter.SellersViewHolder> () {
-//    val data = listOf<Seller>()
-//
-//    class SellersViewHolder(private var binding: SellerItemBinding):
-//        ViewHolder(binding.root) {
-//        fun bind() {
-////            binding.name = name
-//            // This is important, because it forces the data binding to execute immediately,
-//            // which allows the RecyclerView to make the correct view size measurements
-//            binding.executePendingBindings()
-//        }
-//    }
-//
-//    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): SellersViewHolder {
-//        // Create a new view, which defines the UI of the list item
-//        val view = LayoutInflater.from(viewGroup.context)
-//            .inflate(R.layout.seller_item, viewGroup, false)
-//
-//        return ViewHolder(view)
-//    }
-//
-//    override fun getItemCount(): Int = 4
-//
-//    override fun onBindViewHolder(holder: SellersViewHolder, position: Int) {
-//        TODO("Not yet implemented")
-//    }
-//
-////    override fun getItemCount() = data.size
-//}
+
+import android.annotation.SuppressLint
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.RecyclerView
+import com.example.dthomefresh.R
+import com.example.dthomefresh.data.Seller
+import com.example.dthomefresh.databinding.SellerItemBinding
+
+
+class SellersListAdapter(private val sellersList: List<Seller>) : RecyclerView.Adapter<SellersListAdapter.ViewHolder>() {
+
+    private lateinit var binding: SellerItemBinding
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        binding = DataBindingUtil.inflate(inflater, R.layout.seller_item, parent, false)
+        return ViewHolder(binding)
+    }
+
+    @SuppressLint("ResourceType")
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val seller = sellersList[position]
+        holder.imageView.setImageResource(R.raw.image_1)
+        holder.bind(seller)
+    }
+
+    override fun getItemCount(): Int {
+        return sellersList.size
+    }
+
+    inner class ViewHolder(binding: SellerItemBinding) : RecyclerView.ViewHolder(binding.root) {
+        val imageView: ImageView = itemView.findViewById(R.id.mars_image)
+        fun bind(seller: Seller) {
+            binding.seller = seller
+            binding.executePendingBindings()
+        }
+    }
+}
