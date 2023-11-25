@@ -3,11 +3,18 @@ package com.example.dthomefresh.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.dthomefresh.data.Seller
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
+import kotlin.coroutines.suspendCoroutine
 
 class SellersViewModel(optionSelected : Int) : ViewModel() {
 
@@ -51,27 +58,42 @@ class SellersViewModel(optionSelected : Int) : ViewModel() {
         _options.value = currentOptions!!
     }
 
+    private suspend fun fetchSellersFromFirebase() : List<Seller> {
+        return withContext(Dispatchers.IO) {
+            suspendCoroutine {continuation ->
+
+                val database = FirebaseDatabase.getInstance()
+                database.reference.child("Sellers").addListenerForSingleValueEvent(object :
+                    ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        val sellersList = mutableListOf<Seller>()
+
+                        for (sellerSnapshot in dataSnapshot.children) {
+                            val seller = sellerSnapshot.getValue(Seller::class.java)
+                            seller?.let { sellersList.add(it) }
+                        }
+
+                        continuation.resume(sellersList)  //returns the seller list
+
+                    }
+
+                    override fun onCancelled(databaseError: DatabaseError) {
+                        // TODO- Handle error
+                        continuation.resumeWithException(databaseError.toException())
+                    }
+                })
+
+            }
+        }
+    }
+
     fun readAllSellers() {
-        val database = FirebaseDatabase.getInstance()
-        database.reference.child("Sellers").addListenerForSingleValueEvent(object :
-            ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val sellersList = mutableListOf<Seller>()
-
-                for (sellerSnapshot in dataSnapshot.children) {
-                    val seller = sellerSnapshot.getValue(Seller::class.java)
-                    seller?.let { sellersList.add(it) }
-                }
-                _sellersList.value = sellersList
-                _setUpRecyclerView.value = true
-                stopLoadingAnimation()
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                // TODO- Handle error
-            }
-        })
-
+        viewModelScope.launch {
+            val sellerList = fetchSellersFromFirebase()
+            _sellersList.postValue(sellerList)              //postValue ensures that operation happens in bg thread
+            _setUpRecyclerView.postValue(true)        //postValue ensures that operation happens in bg thread
+            stopLoadingAnimation()
+        }
     }
 
     fun onFood() {
@@ -86,10 +108,10 @@ class SellersViewModel(optionSelected : Int) : ViewModel() {
         setAllFalse()
         setTrue(2)
     }
-    fun startLoadingAnimation() {
+    private fun startLoadingAnimation() {
         _loadingAnimation.value = true
     }
-    fun stopLoadingAnimation() {
+    private fun stopLoadingAnimation() {
         _loadingAnimation.value = false
     }
 }

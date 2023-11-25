@@ -14,18 +14,14 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import com.example.dthomefresh.R
-import com.example.dthomefresh.data.Seller
 import com.example.dthomefresh.adapter.SellersListAdapter
+import com.example.dthomefresh.data.Seller
 import com.example.dthomefresh.databinding.FragmentSellersBinding
-import com.example.dthomefresh.viewmodelfactory.SellersViewModelFactory
 import com.example.dthomefresh.viewmodel.SellersViewModel
+import com.example.dthomefresh.viewmodelfactory.SellersViewModelFactory
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 
 class SellersFragment : Fragment() {
 
