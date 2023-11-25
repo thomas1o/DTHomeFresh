@@ -7,17 +7,63 @@
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".profile.ProfileFragment">
+        android:background="@drawable/categories_page_bg"
+        tools:context=".ui.ProfileFragment">
+
+        <TextView
+            android:id="@+id/heading_please_fill_the_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/londrina_solid_regular"
+            android:text="@string/please_fill_the_details_string"
+            android:textColor="@color/white"
+            android:textSize="35dp"
+            app:layout_constraintBottom_toBottomOf="@+id/sign_out_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.038" />
+
+        <TextView
+            android:id="@+id/text_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="25dp"
+            android:fontFamily="@font/londrina_solid_regular"
+            android:text="Email:"
+            android:textColor="@color/white"
+            android:textSize="25dp"
+            app:layout_constraintBottom_toBottomOf="@+id/sign_out_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.17" />
+
+        <TextView
+            android:id="@+id/user_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:fontFamily="@font/londrina_solid_thin"
+            android:textColor="@color/white"
+            android:textSize="21dp"
+            app:flow_horizontalBias="0.0"
+            app:layout_constraintBottom_toBottomOf="@+id/sign_out_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.073"
+            app:layout_constraintStart_toEndOf="@id/text_email"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.176" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/ti_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
-            android:hint="Full Name"
-            app:hintTextColor="@color/yellow_2"
-            app:errorEnabled="true"
+            android:hint="@string/full_name_string"
             app:boxStrokeColor="@color/yellow_2"
+            app:errorEnabled="true"
+            app:hintTextColor="@color/yellow_2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -39,10 +85,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
-            android:hint="Phone Number"
-            app:hintTextColor="@color/yellow_2"
-            app:errorEnabled="true"
+            android:hint="@string/phone_number_string"
             app:boxStrokeColor="@color/yellow_2"
+            app:errorEnabled="true"
+            app:hintTextColor="@color/yellow_2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -53,9 +99,9 @@
                 android:id="@+id/et_phone_number"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:inputType="number"
                 android:maxLines="1"
-                android:textSize="20sp"
-                android:inputType="number"/>
+                android:textSize="20sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -64,46 +110,69 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
-            android:hint="Address"
-            app:hintTextColor="@color/yellow_2"
-            app:errorEnabled="true"
+            android:hint="@string/address_string"
             app:boxStrokeColor="@color/yellow_2"
+            app:errorEnabled="true"
+            app:hintTextColor="@color/yellow_2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ti_phone_number">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_address"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="text"
-            android:maxLines="1"
-            android:textSize="20sp"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="-104dp" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_address"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textSize="20sp"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="-104dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/save_button"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Save"
+            android:backgroundTint="@color/yellow_2"
+            android:fontFamily="@font/londrina_solid_regular"
+            android:text="@string/save_string"
+            android:textColor="@color/black"
             android:textSize="28sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ti_phone_number" />
 
+        <!--        <Button-->
+        <!--            android:id="@+id/bt_image_upload"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:backgroundTint="@color/yellow_2"-->
+        <!--            android:fontFamily="@font/londrina_solid_regular"-->
+        <!--            android:text="Upload"-->
+        <!--            android:textColor="@color/black"-->
+        <!--            android:textSize="28sp"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintHorizontal_bias="0.887"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/ti_phone_number" />-->
+
         <Button
             android:id="@+id/sign_out_button"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sign Out"
+            android:backgroundTint="@android:color/holo_red_light"
+            android:fontFamily="@font/londrina_solid_regular"
+            android:text="@string/sign_out_string"
+            android:textColor="@color/black"
             android:textSize="28sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/save_button"
+            app:layout_constraintVertical_bias="0.542" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

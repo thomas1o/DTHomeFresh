@@ -1,4 +1,4 @@
-package com.example.dthomefresh.login
+package com.example.dthomefresh.viewmodels
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -10,6 +10,7 @@ import com.google.firebase.auth.auth
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -73,6 +74,11 @@ class LoginViewModel: ViewModel() {
     }
     fun startSignIn() {
         signIn(email.value ?: "", password.value ?: "")
+    }
+
+    override fun onCleared() {
+        uiScope.cancel()
+        super.onCleared()
     }
 
 }

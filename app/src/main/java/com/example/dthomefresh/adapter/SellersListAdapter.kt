@@ -1,4 +1,4 @@
-package com.example.dthomefresh.sellers
+package com.example.dthomefresh.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater

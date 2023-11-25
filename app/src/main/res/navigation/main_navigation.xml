@@ -9,7 +9,7 @@
 
     <fragment
         android:id="@+id/onboardingFragment"
-        android:name="com.example.dthomefresh.onboarding.OnboardingFragment"
+        android:name="com.example.dthomefresh.ui.OnboardingFragment"
         android:label="OnboardingFragment" >
         <action
             android:id="@+id/action_onboardingFragment_to_categoriesFragment"
@@ -21,7 +21,7 @@
     </fragment>
     <fragment
         android:id="@+id/categoriesFragment"
-        android:name="com.example.dthomefresh.categories.CategoriesFragment"
+        android:name="com.example.dthomefresh.ui.CategoriesFragment"
         android:label="CategoriesFragment" >
         <action
             android:id="@+id/action_categoriesFragment_to_sellersFragment"
@@ -48,7 +48,7 @@
     </fragment>
     <fragment
         android:id="@+id/sellersFragment"
-        android:name="com.example.dthomefresh.sellers.SellersFragment"
+        android:name="com.example.dthomefresh.ui.SellersFragment"
         android:label="SellersFragment" >
         <action
             android:id="@+id/action_sellersFragment_to_categoriesFragment"
@@ -74,7 +74,7 @@
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.example.dthomefresh.signup.SignUpFragment"
+        android:name="com.example.dthomefresh.ui.SignUpFragment"
         android:label="SignUpFragment" >
         <action
             android:id="@+id/action_signUpFragment_to_loginFragment"
@@ -93,7 +93,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.dthomefresh.login.LoginFragment"
+        android:name="com.example.dthomefresh.ui.LoginFragment"
         android:label="LoginFragment" >
         <action
             android:id="@+id/action_loginFragment_to_signUpFragment"
@@ -113,7 +113,7 @@
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.dthomefresh.profile.ProfileFragment"
+        android:name="com.example.dthomefresh.ui.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" >
         <action

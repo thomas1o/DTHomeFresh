@@ -1,22 +1,20 @@
-package com.example.dthomefresh.profile
+package com.example.dthomefresh.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.example.dthomefresh.R
 import com.example.dthomefresh.data.Seller
-import com.example.dthomefresh.databinding.FragmentLoginBinding
 import com.example.dthomefresh.databinding.FragmentProfileBinding
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.database
 
 class ProfileFragment : Fragment() {
 
@@ -50,6 +48,15 @@ class ProfileFragment : Fragment() {
 
         }
 
+        val firebaseAuth = FirebaseAuth.getInstance()
+        val currentUser = firebaseAuth.currentUser
+        val userEmail = currentUser?.email
+        binding.userEmail.text = userEmail.toString()
+
+//        binding.btImageUpload.setOnClickListener {
+//            Toast.makeText(requireContext(), "Upload button pressed", Toast.LENGTH_SHORT).show()
+//        }
+
         binding.signOutButton.setOnClickListener{
             Firebase.auth.signOut()
             Toast.makeText(requireContext(), "Sign out successful", Toast.LENGTH_SHORT).show()
@@ -78,7 +85,5 @@ class ProfileFragment : Fragment() {
             }
         }
     }
-
-//        TODO- complete the get user function
 
 }

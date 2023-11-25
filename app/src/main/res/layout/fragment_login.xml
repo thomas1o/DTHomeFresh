@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.dthomefresh.login.LoginViewModel" />
+            type="com.example.dthomefresh.viewmodels.LoginViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

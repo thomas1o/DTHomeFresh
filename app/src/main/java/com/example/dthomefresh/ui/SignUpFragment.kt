@@ -1,4 +1,4 @@
-package com.example.dthomefresh.signup
+package com.example.dthomefresh.ui
 
 import android.os.Bundle
 import android.text.SpannableString
@@ -17,6 +17,7 @@ import androidx.navigation.Navigation
 import com.airbnb.lottie.LottieAnimationView
 import com.example.dthomefresh.R
 import com.example.dthomefresh.databinding.FragmentSignUpBinding
+import com.example.dthomefresh.viewmodels.SignUpViewModel
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 

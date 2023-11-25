@@ -1,4 +1,4 @@
-package com.example.dthomefresh.categories
+package com.example.dthomefresh.ui
 
 import android.content.Context
 import android.os.Bundle

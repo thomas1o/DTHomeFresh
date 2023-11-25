@@ -1,15 +1,12 @@
-package com.example.dthomefresh.login
+package com.example.dthomefresh.ui
 
-import android.content.Context
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -18,6 +15,7 @@ import androidx.navigation.Navigation
 import com.airbnb.lottie.LottieAnimationView
 import com.example.dthomefresh.R
 import com.example.dthomefresh.databinding.FragmentLoginBinding
+import com.example.dthomefresh.viewmodels.LoginViewModel
 import com.example.dthomefresh.utils.KeyboardUtils
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout

@@ -1,4 +1,4 @@
-package com.example.dthomefresh.utils // Change the package name accordingly
+package com.example.dthomefresh.utils
 
 import android.app.Activity
 import android.content.Context
