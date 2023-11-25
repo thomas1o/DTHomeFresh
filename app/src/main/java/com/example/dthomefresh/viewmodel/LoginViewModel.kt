@@ -1,19 +1,16 @@
-package com.example.dthomefresh.login
+package com.example.dthomefresh.viewmodels
 
 import android.util.Log
-import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.navigation.Navigation
-import com.example.dthomefresh.R
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -35,8 +32,6 @@ class LoginViewModel: ViewModel() {
         get() = _loginAnimation
 
     init {
-        _signInSuccess.value = false
-        _loginAnimation.value = false
         setEmail("")
         setPassword("")
     }
@@ -57,6 +52,7 @@ class LoginViewModel: ViewModel() {
                                 _signInSuccess.value = true
                                 Log.i("LoginViewModel", "Login successful")
                             } else {
+                                _signInSuccess.value = false
                                 Log.i("LoginViewModel", "Login Failed")
                             }
                         }
@@ -78,6 +74,11 @@ class LoginViewModel: ViewModel() {
     }
     fun startSignIn() {
         signIn(email.value ?: "", password.value ?: "")
+    }
+
+    override fun onCleared() {
+        uiScope.cancel()
+        super.onCleared()
     }
 
 }

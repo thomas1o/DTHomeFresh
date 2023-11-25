@@ -61,14 +61,14 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView_1"
-                android:layout_width="150dp"
+                android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:layout_marginBottom="10dp"
                 android:backgroundTint="@color/green_1"
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?selectableItemBackground"
-                app:cardCornerRadius="10dp"
+                app:cardCornerRadius="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -115,14 +115,14 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView_2"
-                android:layout_width="150dp"
+                android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:layout_marginBottom="10dp"
                 android:backgroundTint="@color/green_1"
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?selectableItemBackground"
-                app:cardCornerRadius="10dp"
+                app:cardCornerRadius="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cardView_1">
@@ -169,14 +169,14 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView_3"
-                android:layout_width="200dp"
+                android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:layout_marginBottom="10dp"
                 android:backgroundTint="@color/green_1"
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?selectableItemBackground"
-                app:cardCornerRadius="10dp"
+                app:cardCornerRadius="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cardView_2">

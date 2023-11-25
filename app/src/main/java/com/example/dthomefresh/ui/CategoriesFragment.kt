@@ -1,4 +1,4 @@
-package com.example.dthomefresh.categories
+package com.example.dthomefresh.ui
 
 import android.content.Context
 import android.os.Bundle
@@ -40,8 +40,6 @@ class CategoriesFragment : Fragment() {
         auth = Firebase.auth
 
         val vibrator = activity?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-
-
 
         binding.cardView1.setOnClickListener {
             assignOptionValue(0)

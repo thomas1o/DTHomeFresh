@@ -1,4 +1,4 @@
-package com.example.dthomefresh.onboarding
+package com.example.dthomefresh.ui
 
 import android.content.Context
 import android.os.Bundle

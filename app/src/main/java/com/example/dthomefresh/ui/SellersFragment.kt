@@ -1,4 +1,4 @@
-package com.example.dthomefresh.sellers
+package com.example.dthomefresh.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,13 +10,24 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.lottie.LottieAnimationView
 import com.example.dthomefresh.R
+import com.example.dthomefresh.adapter.SellersListAdapter
+import com.example.dthomefresh.data.Seller
 import com.example.dthomefresh.databinding.FragmentSellersBinding
+import com.example.dthomefresh.viewmodel.SellersViewModel
+import com.example.dthomefresh.viewmodelfactory.SellersViewModelFactory
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 
 class SellersFragment : Fragment() {
+
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: SellersListAdapter
+
 
     private lateinit var binding: FragmentSellersBinding
     private lateinit var viewModel: SellersViewModel
@@ -47,6 +58,10 @@ class SellersFragment : Fragment() {
 
         auth = Firebase.auth
 
+        viewModel.readAllSellers()
+
+        val animationView: LottieAnimationView = binding.lottieAnimationView
+
         binding.upButton.setOnClickListener{
             Navigation.findNavController(it).navigate(R.id.action_sellersFragment_to_categoriesFragment)
         }
@@ -76,8 +91,28 @@ class SellersFragment : Fragment() {
             }
         })
 
+        viewModel.setUpRecyclerView.observe(viewLifecycleOwner, Observer { startSetUpRecyclerView ->
+            if (startSetUpRecyclerView) {
+                viewModel.sellersList.observe(viewLifecycleOwner, Observer { sellersList ->
+                    setupRecyclerView(sellersList)
+                })
+            }
+        })
+
+
+        viewModel.loadingAnimation.observe(viewLifecycleOwner, Observer { shouldAnimate ->
+            if (shouldAnimate) {
+                animationView.playAnimation()
+                animationView.visibility = View.VISIBLE
+            } else {
+                animationView.cancelAnimation()
+                animationView.visibility = View.GONE
+            }
+        })
+
         return binding.root
     }
+
     private fun setDefaultColor() {
         binding.navigationText1.setTextColor(ContextCompat.getColor(requireContext(), R.color.green_1))
         binding.cardNavigation1.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.green_4))
@@ -86,4 +121,12 @@ class SellersFragment : Fragment() {
         binding.navigationText3.setTextColor(ContextCompat.getColor(requireContext(), R.color.green_1))
         binding.cardNavigation3.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.green_4))
     }
+
+    private fun setupRecyclerView(sellersList: List<Seller>) {
+        recyclerView = binding.sellersList
+        adapter = SellersListAdapter(sellersList)
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+        recyclerView.adapter = adapter
+    }
+
 }
