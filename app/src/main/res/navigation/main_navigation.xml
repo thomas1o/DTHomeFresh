@@ -45,6 +45,9 @@
             android:id="@+id/action_categoriesFragment_to_signUpFragment"
             app:destination="@id/signUpFragment"
             app:enterAnim="@anim/slide_in_top" />
+        <action
+            android:id="@+id/action_categoriesFragment_to_contactUsFragment"
+            app:destination="@id/contactUsFragment" />
     </fragment>
     <fragment
         android:id="@+id/sellersFragment"
@@ -121,5 +124,13 @@
             app:destination="@id/categoriesFragment"
             app:popUpTo="@id/categoriesFragment"
             app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/contactUsFragment"
+        android:name="com.example.dthomefresh.ui.ContactUsFragment"
+        android:label="ContactUsFragment" >
+        <action
+            android:id="@+id/action_contactUsFragment_to_categoriesFragment"
+            app:destination="@id/categoriesFragment" />
     </fragment>
 </navigation>

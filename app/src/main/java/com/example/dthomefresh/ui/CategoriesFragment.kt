@@ -10,8 +10,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
+import com.example.dthomefresh.MainActivity
 import com.example.dthomefresh.R
 import com.example.dthomefresh.databinding.FragmentCategoriesBinding
+import com.example.dthomefresh.utils.FragmentHandler
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
@@ -37,6 +39,9 @@ class CategoriesFragment : Fragment() {
             inflater, R.layout.fragment_categories, container, false
         )
 
+        val fragmentHandler = FragmentHandler(requireActivity() as MainActivity)
+        binding.fragmentHandler = fragmentHandler
+
         auth = Firebase.auth
 
         val vibrator = activity?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
@@ -59,9 +64,6 @@ class CategoriesFragment : Fragment() {
             Navigation.findNavController(it).navigate(CategoriesFragmentDirections.actionCategoriesFragmentToSellersFragment(optionSelected))
         }
 
-        binding.menuButton.setOnClickListener {
-            Toast.makeText(context, "Menu Button Pressed", Toast.LENGTH_SHORT).show();
-        }
 
         binding.profileButton.setOnClickListener {
             if(loggedIn)
@@ -83,3 +85,4 @@ class CategoriesFragment : Fragment() {
         }
     }
 }
+

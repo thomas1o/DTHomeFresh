@@ -2,6 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+        <variable
+            name="fragmentHandler"
+            type="com.example.dthomefresh.utils.FragmentHandler" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,7 +21,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <!--        TODO- to make this proper and identify the use of clickable and foreground -->
             <ImageButton
                 android:id="@+id/menu_button"
                 android:layout_width="48dp"
@@ -30,7 +35,8 @@
                 android:scaleType="fitCenter"
                 android:src="@drawable/menu_icon"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:onClick="@{() -> fragmentHandler.openDrawer()}"/>
 
             <ImageButton
                 android:id="@+id/profile_button"
