@@ -18,9 +18,14 @@ DT Home Fresh is a mobile application that serves as a comprehensive database of
 
 
 ## Documentation
-
 - **Language**: Kotlin
 - **Architecture**: Model View ViewModel (MVVM)
 - **Libraries**: LiveData, ViewModel, Navigation Components, Data Binding, Lottie Animation, Firebase
+
+## Maintainer
+- [Thomas Biju](https://github.com/thomas1o)
+
+## Design
+- Neha John
 
 
