@@ -16,7 +16,7 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
-class SellersViewModel(optionSelected : Int) : ViewModel() {
+class SellerListViewModel(optionSelected : Int) : ViewModel() {
 
     private val _options = MutableLiveData<MutableMap<Int, Boolean>>()
     val options: LiveData<MutableMap<Int, Boolean>>

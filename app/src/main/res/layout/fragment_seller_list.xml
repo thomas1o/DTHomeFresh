@@ -4,10 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
-            name="sellerViewModel"
-            type="com.example.dthomefresh.viewmodel.SellersViewModel" />
+            name="sellerListViewModel"
+            type="com.example.dthomefresh.viewmodel.SellerListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -97,7 +96,7 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?selectableItemBackground"
-                    android:onClick="@{() -> sellerViewModel.onFood()}"
+                    android:onClick="@{() -> sellerListViewModel.onFood()}"
                     app:cardBackgroundColor="@color/green_4"
                     app:cardCornerRadius="0dp"
                     app:cardElevation="@dimen/navigation_card_elevation"
@@ -124,7 +123,7 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?selectableItemBackground"
-                    android:onClick="@{() -> sellerViewModel.onClothes()}"
+                    android:onClick="@{() -> sellerListViewModel.onClothes()}"
                     app:cardBackgroundColor="@color/green_4"
                     app:cardCornerRadius="0dp"
                     app:cardElevation="@dimen/navigation_card_elevation"
@@ -151,7 +150,7 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?selectableItemBackground"
-                    android:onClick="@{() -> sellerViewModel.onHomemadeItems()}"
+                    android:onClick="@{() -> sellerListViewModel.onHomemadeItems()}"
                     app:cardBackgroundColor="@color/green_4"
                     app:cardCornerRadius="0dp"
                     app:cardElevation="@dimen/navigation_card_elevation"
@@ -209,14 +208,14 @@
             android:layout_marginHorizontal="20dp"
             android:background="@drawable/search_bar_bg"
             android:drawableStart="@drawable/search_icon"
+            app:iconifiedByDefault="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.65"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/layout_2"
             app:layout_constraintVertical_bias="0.037"
-            app:queryHint="Search..."
-            app:iconifiedByDefault="false"/>
+            app:queryHint="Search..." />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/sellers_list"

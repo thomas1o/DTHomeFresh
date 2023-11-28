@@ -49,19 +49,19 @@ class CategoriesFragment : Fragment() {
         binding.cardView1.setOnClickListener {
             assignOptionValue(0)
             vibrator.vibrate(100)
-            Navigation.findNavController(it).navigate(CategoriesFragmentDirections.actionCategoriesFragmentToSellersFragment(optionSelected))
+            Navigation.findNavController(it).navigate(CategoriesFragmentDirections.actionCategoriesFragmentToSellerListFragment(optionSelected))
         }
 
         binding.cardView2.setOnClickListener {
             assignOptionValue(1)
             vibrator.vibrate(100)
-            Navigation.findNavController(it).navigate(CategoriesFragmentDirections.actionCategoriesFragmentToSellersFragment(optionSelected))
+            Navigation.findNavController(it).navigate(CategoriesFragmentDirections.actionCategoriesFragmentToSellerListFragment(optionSelected))
         }
 
         binding.cardView3.setOnClickListener {
             assignOptionValue(2)
             vibrator.vibrate(100)
-            Navigation.findNavController(it).navigate(CategoriesFragmentDirections.actionCategoriesFragmentToSellersFragment(optionSelected))
+            Navigation.findNavController(it).navigate(CategoriesFragmentDirections.actionCategoriesFragmentToSellerListFragment(optionSelected))
         }
 
 

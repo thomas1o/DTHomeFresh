@@ -16,22 +16,22 @@ import com.airbnb.lottie.LottieAnimationView
 import com.example.dthomefresh.R
 import com.example.dthomefresh.adapter.SellersListAdapter
 import com.example.dthomefresh.data.Seller
-import com.example.dthomefresh.databinding.FragmentSellersBinding
-import com.example.dthomefresh.viewmodel.SellersViewModel
-import com.example.dthomefresh.viewmodelfactory.SellersViewModelFactory
+import com.example.dthomefresh.databinding.FragmentSellerListBinding
+import com.example.dthomefresh.viewmodel.SellerListViewModel
+import com.example.dthomefresh.viewmodelfactory.SellerListViewModelFactory
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 
-class SellersFragment : Fragment() {
+class SellerListFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: SellersListAdapter
 
 
-    private lateinit var binding: FragmentSellersBinding
-    private lateinit var viewModel: SellersViewModel
-    private lateinit var viewModelFactory: SellersViewModelFactory
+    private lateinit var binding: FragmentSellerListBinding
+    private lateinit var viewModel: SellerListViewModel
+    private lateinit var viewModelFactory: SellerListViewModelFactory
     private lateinit var auth: FirebaseAuth
     private var loggedIn: Boolean = false
 
@@ -49,12 +49,12 @@ class SellersFragment : Fragment() {
     ): View {
 
         binding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_sellers, container, false
+            inflater, R.layout.fragment_seller_list, container, false
         )
 
-        viewModelFactory = SellersViewModelFactory(SellersFragmentArgs.fromBundle(requireArguments()).optionSelected)
-        viewModel = ViewModelProvider(this, viewModelFactory)[SellersViewModel::class.java]
-        binding.sellerViewModel = viewModel
+        viewModelFactory = SellerListViewModelFactory(SellerListFragmentArgs.fromBundle(requireArguments()).optionSelected)
+        viewModel = ViewModelProvider(this, viewModelFactory)[SellerListViewModel::class.java]
+        binding.sellerListViewModel = viewModel
 
         auth = Firebase.auth
 
@@ -63,15 +63,21 @@ class SellersFragment : Fragment() {
         val animationView: LottieAnimationView = binding.lottieAnimationView
 
         binding.upButton.setOnClickListener{
-            Navigation.findNavController(it).navigate(R.id.action_sellersFragment_to_categoriesFragment)
+            Navigation.findNavController(it).navigate(R.id.action_sellerListFragment_to_categoriesFragment)
         }
 
         binding.profileButton.setOnClickListener{
             if(loggedIn)
-                Navigation.findNavController(it).navigate(R.id.action_sellersFragment_to_profileFragment)
+                Navigation.findNavController(it).navigate(R.id.action_sellerListFragment_to_profileFragment)
             else
-                Navigation.findNavController(it).navigate(R.id.action_sellersFragment_to_loginFragment)
+                Navigation.findNavController(it).navigate(R.id.action_sellerListFragment_to_loginFragment)
         }
+
+
+        //TODO- navigate to sellerDetailsFragment
+//        binding.sellersList.setOnClickListener {
+//            Navigation.findNavController(it).navigate(R.id.action_sellerListFragment_to_sellerDetailsFragment)
+//        }
 
         viewModel.options.observe(viewLifecycleOwner, Observer { newOptions ->
             if(newOptions[0] == true) {
@@ -98,7 +104,6 @@ class SellersFragment : Fragment() {
                 })
             }
         })
-
 
         viewModel.loadingAnimation.observe(viewLifecycleOwner, Observer { shouldAnimate ->
             if (shouldAnimate) {
