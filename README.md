@@ -8,9 +8,14 @@ DT Home Fresh is a mobile application that serves as a comprehensive database of
 - Browse through crafts, food, art, and more categories.
 
 ## Gallery
-|Onboarding Screen|Categories Screen|Sign Up Screen|
-|------|------|------|
-|<img src="images/onboarding.png" width="250" height="500" />|<img src="images/categories.png" width="250" height="500" />|<img src="images/signup.png" width="250" height="500" />|
+| Onboarding Screen                                              | Categories Screen                                              | Sign Up Screen                                             |
+|----------------------------------------------------------------|----------------------------------------------------------------|------------------------------------------------------------|
+| <img src="images/onboarding.png" width="250" height="500" />   | <img src="images/categories.png" width="250" height="500" />   | <img src="images/signup.png" width="250" height="500" />   |
+
+| Seller List Screen                                             |
+|----------------------------------------------------------------|
+| <img src="images/seller_list.png" width="250" height="500" />  |
+
 
 ## Documentation
 
