@@ -9,7 +9,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.fragment.findNavController
 import com.example.dthomefresh.databinding.ActivityMainBinding
-import com.example.dthomefresh.ui.CategoriesFragment
 
 class MainActivity : AppCompatActivity() {
 

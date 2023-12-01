@@ -12,6 +12,7 @@ import com.google.firebase.database.ValueEventListener
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.Locale
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
@@ -90,11 +91,28 @@ class SellerListViewModel(optionSelected : Int) : ViewModel() {
         }
     }
 
+    //FIXME(Bug)- it doesn't update when we click backspace
+    fun filterSellerByNameAndAddress(searchText: String?) {
+        viewModelScope.launch {
+            val originalSellers = _sellersList.value.orEmpty()
+            val filteredSellers = if (!searchText.isNullOrBlank()) {
+                originalSellers.filter { seller ->
+                    seller.name?.lowercase(Locale.ROOT)?.contains(searchText.lowercase(Locale.ROOT)) == true ||
+                            seller.address?.lowercase(Locale.ROOT)?.contains(searchText.lowercase(Locale.ROOT)) == true
+                }
+            } else {
+                originalSellers
+            }
+            _sellersList.postValue(filteredSellers)
+        }
+    }
+
+
     fun readAllSellers() {
         viewModelScope.launch {
             val sellerList = fetchSellersFromFirebase()
-            _sellersList.postValue(sellerList)              //postValue ensures that operation happens in bg thread
-            _setUpRecyclerView.postValue(true)        //postValue ensures that operation happens in bg thread
+            _sellersList.postValue(sellerList)              //NOTE: postValue ensures that operation happens in bg thread
+            _setUpRecyclerView.postValue(true)        //NOTE: postValue ensures that operation happens in bg thread
             stopLoadingAnimation()
             stopRefreshingAnimation()
         }
