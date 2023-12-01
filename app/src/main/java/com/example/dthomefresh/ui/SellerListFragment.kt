@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -28,14 +29,13 @@ class SellerListFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: SellersListAdapter
 
-
     private lateinit var binding: FragmentSellerListBinding
     private lateinit var viewModel: SellerListViewModel
     private lateinit var viewModelFactory: SellerListViewModelFactory
     private lateinit var auth: FirebaseAuth
     private var loggedIn: Boolean = false
 
-    public override fun onStart() {
+    override fun onStart() {
         super.onStart()
         val currentUser = auth.currentUser
         if (currentUser != null) {
@@ -61,6 +61,7 @@ class SellerListFragment : Fragment() {
         viewModel.readAllSellers()
 
         val animationView: LottieAnimationView = binding.lottieAnimationView
+        val searchBar: SearchView = binding.searchBar
 
         binding.upButton.setOnClickListener{
             Navigation.findNavController(it).navigate(R.id.action_sellerListFragment_to_categoriesFragment)
@@ -82,11 +83,24 @@ class SellerListFragment : Fragment() {
             })
         }
 
+        //FIXME(Bug)- it doesn't update when we click backspace
+        searchBar.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(searchText: String?): Boolean {
+                if (!searchText.isNullOrBlank()) {
+                    viewModel.filterSellerByNameAndAddress(searchText)
+                } else {
+                    viewModel.readAllSellers()
+                }
+                return true
+            }
+
+        })
 
         //TODO- navigate to sellerDetailsFragment
-//        binding.sellersList.setOnClickListener {
-//            Navigation.findNavController(it).navigate(R.id.action_sellerListFragment_to_sellerDetailsFragment)
-//        }
 
         viewModel.options.observe(viewLifecycleOwner, Observer { newOptions ->
             if(newOptions[0] == true) {

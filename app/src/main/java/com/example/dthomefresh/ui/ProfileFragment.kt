@@ -75,12 +75,12 @@ class ProfileFragment : Fragment() {
         currentUser?.let { firebaseUser ->
             val userEmail = firebaseUser.email // Retrieve the user's email
 
-            // Check if the user's email is not null
+            // Note: Check if the user's email is not null
             userEmail?.let { email ->
-                // Encode the email to replace characters like "." and "#" which are invalid in Firebase keys
+                // Note: Encode the email to replace characters like "." and "#" which are invalid in Firebase keys
                 val encodedEmail = email.replace(".", "_").replace("#", "_")
 
-                // Write user data to the Firebase Realtime Database with the email as the key
+                // Note: Write user data to the Firebase Realtime Database with the email as the key
                 database.reference.child("Sellers").child(encodedEmail).setValue(seller)
             }
         }
