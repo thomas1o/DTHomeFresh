@@ -26,6 +26,10 @@ class SellerListViewModel(optionSelected : Int) : ViewModel() {
     val loadingAnimation: LiveData<Boolean>
         get() = _loadingAnimation
 
+    private val _refreshingAnimation = MutableLiveData<Boolean>()
+    val refreshingAnimation: LiveData<Boolean>
+        get() = _refreshingAnimation
+
     private val _setUpRecyclerView = MutableLiveData<Boolean>()
     val setUpRecyclerView: LiveData<Boolean>
         get() = _setUpRecyclerView
@@ -40,7 +44,6 @@ class SellerListViewModel(optionSelected : Int) : ViewModel() {
             1 -> onClothes()
             2 -> onHomemadeItems()
         }
-
         startLoadingAnimation()
     }
 
@@ -93,6 +96,7 @@ class SellerListViewModel(optionSelected : Int) : ViewModel() {
             _sellersList.postValue(sellerList)              //postValue ensures that operation happens in bg thread
             _setUpRecyclerView.postValue(true)        //postValue ensures that operation happens in bg thread
             stopLoadingAnimation()
+            stopRefreshingAnimation()
         }
     }
 
@@ -113,5 +117,8 @@ class SellerListViewModel(optionSelected : Int) : ViewModel() {
     }
     private fun stopLoadingAnimation() {
         _loadingAnimation.value = false
+    }
+    private fun stopRefreshingAnimation() {
+        _refreshingAnimation.value = false
     }
 }

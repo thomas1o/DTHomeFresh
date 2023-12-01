@@ -73,6 +73,15 @@ class SellerListFragment : Fragment() {
                 Navigation.findNavController(it).navigate(R.id.action_sellerListFragment_to_loginFragment)
         }
 
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            binding.swipeRefreshLayout.isRefreshing = true
+            viewModel.readAllSellers()
+            viewModel.refreshingAnimation.observe(viewLifecycleOwner, Observer { refreshAnimate ->
+                if(!refreshAnimate)
+                    binding.swipeRefreshLayout.isRefreshing = false
+            })
+        }
+
 
         //TODO- navigate to sellerDetailsFragment
 //        binding.sellersList.setOnClickListener {
