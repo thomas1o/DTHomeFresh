@@ -27,9 +27,9 @@
             android:id="@+id/action_categoriesFragment_to_sellerListFragment"
             app:destination="@id/sellerListFragment"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@android:anim/slide_in_left"
-            app:popExitAnim="@android:anim/slide_out_right" />
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_categoriesFragment_to_loginFragment"
             app:destination="@id/loginFragment"
@@ -56,8 +56,8 @@
         <action
             android:id="@+id/action_sellerListFragment_to_categoriesFragment"
             app:destination="@id/categoriesFragment"
-            app:enterAnim="@anim/slide_in_left"
-            app:exitAnim="@android:anim/fade_out"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/slide_out_right"
             app:popUpTo="@id/categoriesFragment"
             app:popUpToInclusive="true" />
         <argument

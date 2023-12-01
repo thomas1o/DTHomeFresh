@@ -24,13 +24,14 @@ class CategoriesFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private var loggedIn: Boolean = false
 
-    public override fun onStart() {
+    override fun onStart() {
         super.onStart()
         loggedInCheck()
         if(!loggedIn) {
 //            Navigation.findNavController(it).navigate(R.id.action_loginFragment_to_signUpFragment)
         }
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
