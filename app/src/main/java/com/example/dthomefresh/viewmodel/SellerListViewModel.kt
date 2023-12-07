@@ -14,7 +14,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.Locale
 import kotlin.coroutines.resume
-import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
 class SellerListViewModel(optionSelected : Int) : ViewModel() {
@@ -38,6 +37,10 @@ class SellerListViewModel(optionSelected : Int) : ViewModel() {
     private val _sellersList = MutableLiveData<List<Seller>>()
     val sellersList: LiveData<List<Seller>>
         get() = _sellersList
+
+    private val _errorToast = MutableLiveData<String>()
+    val errorToast: LiveData<String>
+        get() = _errorToast
 
     init {
         when(optionSelected) {
@@ -63,30 +66,39 @@ class SellerListViewModel(optionSelected : Int) : ViewModel() {
     }
 
     private suspend fun fetchSellersFromFirebase() : List<Seller> {
+        startLoadingAnimation()
         return withContext(Dispatchers.IO) {
-            suspendCoroutine {continuation ->
+            try {
+                suspendCoroutine { continuation ->
+                    val database = FirebaseDatabase.getInstance()
+                    database.reference.child("Sellers").addListenerForSingleValueEvent(object :
+                        ValueEventListener {
+                        override fun onDataChange(dataSnapshot: DataSnapshot) {
+                            val sellersList = mutableListOf<Seller>()
 
-                val database = FirebaseDatabase.getInstance()
-                database.reference.child("Sellers").addListenerForSingleValueEvent(object :
-                    ValueEventListener {
-                    override fun onDataChange(dataSnapshot: DataSnapshot) {
-                        val sellersList = mutableListOf<Seller>()
+                            for (sellerSnapshot in dataSnapshot.children) {
+                                val seller = sellerSnapshot.getValue(Seller::class.java)
+                                seller?.let { sellersList.add(it) }
+                            }
 
-                        for (sellerSnapshot in dataSnapshot.children) {
-                            val seller = sellerSnapshot.getValue(Seller::class.java)
-                            seller?.let { sellersList.add(it) }
+                            continuation.resume(sellersList)  //returns the seller list
+                            stopLoadingAnimation()
                         }
 
-                        continuation.resume(sellersList)  //returns the seller list
-
-                    }
-
-                    override fun onCancelled(databaseError: DatabaseError) {
-                        // TODO- Handle error
-                        continuation.resumeWithException(databaseError.toException())
-                    }
-                })
-
+                        override fun onCancelled(databaseError: DatabaseError) {
+                            val errorMessage = "Database Error: ${databaseError.message}"
+                            _errorToast.postValue(errorMessage) // Post error message to LiveData
+                            stopLoadingAnimation()
+                            continuation.resume(emptyList())
+                        }
+                    })
+                }
+            } catch (e: Exception) {
+                stopLoadingAnimation()
+                val errorMessage = "An error occurred: ${e.message}"
+                _errorToast.postValue(errorMessage)
+                _errorToast.postValue("")
+                emptyList() // or any default value
             }
         }
     }

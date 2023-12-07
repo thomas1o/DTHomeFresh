@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
@@ -60,10 +61,10 @@ class SellerListFragment : Fragment() {
 
         viewModel.readAllSellers()
 
-        val animationView: LottieAnimationView = binding.lottieAnimationView
+        val animationView: LottieAnimationView = binding.animLoading
         val searchBar: SearchView = binding.searchBar
 
-        binding.upButton.setOnClickListener{
+        binding.btUp.setOnClickListener{
             Navigation.findNavController(it).navigate(R.id.action_sellerListFragment_to_categoriesFragment)
         }
 
@@ -138,7 +139,17 @@ class SellerListFragment : Fragment() {
             }
         })
 
+        viewModel.errorToast.observe(viewLifecycleOwner, Observer { errorMessage ->
+            errorMessage?.let {
+                showToast(it)
+            }
+        })
+
         return binding.root
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
     private fun setDefaultColor() {
@@ -152,7 +163,10 @@ class SellerListFragment : Fragment() {
 
     private fun setupRecyclerView(sellersList: List<Seller>) {
         recyclerView = binding.sellersList
-        adapter = SellersListAdapter(sellersList)
+        adapter = SellersListAdapter(sellersList) { seller ->
+            Toast.makeText(context, "Pressed ${seller.name}", Toast.LENGTH_SHORT).show()
+            Navigation.findNavController(requireView()).navigate(R.id.action_sellerListFragment_to_sellerDetailsFragment)
+        }
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
         recyclerView.adapter = adapter
     }

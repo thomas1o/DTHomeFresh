@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="sellerListViewModel"
             type="com.example.dthomefresh.viewmodel.SellerListViewModel" />
@@ -14,7 +15,7 @@
         android:background="@drawable/sellers_page_bg">
 
         <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/lottieAnimationView"
+            android:id="@+id/anim_loading"
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:visibility="gone"
@@ -34,8 +35,36 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:id="@+id/bt_up"-->
+<!--                android:layout_width="48dp"-->
+<!--                android:layout_height="48dp"-->
+<!--                android:backgroundTint="@android:color/transparent"-->
+<!--                android:elevation="10dp"-->
+<!--                android:foreground="?selectableItemBackground"-->
+<!--                android:shadowColor="@android:color/transparent"-->
+<!--                app:cardCornerRadius="10dp"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                <com.airbnb.lottie.LottieAnimationView-->
+<!--                    android:id="@+id/anim_back_button"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:visibility="visible"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    app:lottie_autoPlay="true"-->
+<!--                    app:lottie_loop="true"-->
+<!--                    app:lottie_rawRes="@raw/back_button"-->
+<!--                    />-->
+
+<!--            </androidx.cardview.widget.CardView>-->
+
             <ImageButton
-                android:id="@+id/up_button"
+                android:id="@+id/bt_up"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_marginEnd="5dp"
@@ -215,8 +244,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/layout_2"
             app:layout_constraintVertical_bias="0.037"
-            app:queryHint="Search..."
-            app:queryBackground="@android:color/transparent"/>
+            app:queryBackground="@android:color/transparent"
+            app:queryHint="Search..." />
 
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

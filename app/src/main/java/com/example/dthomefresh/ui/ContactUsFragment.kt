@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import com.example.dthomefresh.R
 import com.example.dthomefresh.databinding.FragmentContactUsBinding
 import com.example.dthomefresh.utils.openDialPad
@@ -20,6 +21,10 @@ class ContactUsFragment : Fragment() {
         val binding: FragmentContactUsBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_contact_us, container, false
         )
+
+        binding.btUp.setOnClickListener {
+            Navigation.findNavController(requireView()).navigate(R.id.action_contactUsFragment_to_categoriesFragment)
+        }
 
         binding.btCall.setOnClickListener {
             onCallButtonClicked(requireView())
@@ -38,6 +43,5 @@ class ContactUsFragment : Fragment() {
     private fun onWhatsAppButtonClicked(view: View) {
         openWhatsapp(requireContext(),"+919961539011")
     }
-
 
 }

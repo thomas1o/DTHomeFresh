@@ -14,8 +14,8 @@
         <action
             android:id="@+id/action_onboardingFragment_to_categoriesFragment"
             app:destination="@id/categoriesFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
             app:popUpTo="@id/onboardingFragment"
             app:popUpToInclusive="true" />
     </fragment>
@@ -28,26 +28,32 @@
             app:destination="@id/sellerListFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@android:anim/fade_out"
-            app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_categoriesFragment_to_loginFragment"
             app:destination="@id/loginFragment"
             app:enterAnim="@anim/slide_in_top"
             app:exitAnim="@android:anim/fade_out"
-            app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@anim/slide_out_top"
             app:popUpTo="@id/categoriesFragment" />
         <action
             android:id="@+id/action_categoriesFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
+            app:destination="@id/profileFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_categoriesFragment_to_signUpFragment"
             app:destination="@id/signUpFragment"
             app:enterAnim="@anim/slide_in_top" />
         <action
             android:id="@+id/action_categoriesFragment_to_contactUsFragment"
-            app:destination="@id/contactUsFragment" />
+            app:destination="@id/contactUsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/sellerListFragment"
@@ -58,6 +64,7 @@
             app:destination="@id/categoriesFragment"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/slide_out_right"
+            app:launchSingleTop="false"
             app:popUpTo="@id/categoriesFragment"
             app:popUpToInclusive="true" />
         <argument
@@ -69,14 +76,17 @@
             app:destination="@id/loginFragment"
             app:enterAnim="@anim/slide_in_top"
             app:exitAnim="@android:anim/fade_out"
-            app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@anim/slide_out_top" />
         <action
             android:id="@+id/action_sellerListFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
         <action
             android:id="@+id/action_sellerListFragment_to_sellerDetailsFragment"
-            app:destination="@id/sellerDetailsFragment" />
+            app:destination="@id/sellerDetailsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -85,7 +95,7 @@
         <action
             android:id="@+id/action_signUpFragment_to_loginFragment"
             app:destination="@id/loginFragment"
-            app:enterAnim="@anim/slide_in_left"
+            app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@anim/slide_out_right"
             app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="true" />
@@ -105,8 +115,7 @@
             android:id="@+id/action_loginFragment_to_signUpFragment"
             app:destination="@id/signUpFragment"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
+            app:exitAnim="@android:anim/fade_out"
             app:popExitAnim="@anim/slide_out_right"
             app:popUpToInclusive="false" />
         <action
@@ -134,7 +143,11 @@
         android:label="ContactUsFragment" >
         <action
             android:id="@+id/action_contactUsFragment_to_categoriesFragment"
-            app:destination="@id/categoriesFragment" />
+            app:destination="@id/categoriesFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/sellerDetailsFragment"

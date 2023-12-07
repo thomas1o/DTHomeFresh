@@ -1,11 +1,14 @@
-package com.example.dthomefresh.viewmodels
+package com.example.dthomefresh.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.Firebase
+import com.google.firebase.FirebaseException
+import com.google.firebase.FirebaseNetworkException
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.auth
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -31,6 +34,10 @@ class LoginViewModel: ViewModel() {
     val loginAnimation: LiveData<Boolean>
         get() = _loginAnimation
 
+    private val _errorMessage = MutableLiveData<String>()
+    val errorMessage: LiveData<String>
+        get() = _errorMessage
+
     init {
         setEmail("")
         setPassword("")
@@ -46,20 +53,39 @@ class LoginViewModel: ViewModel() {
         withContext(Dispatchers.IO) {
             email?.let { nonNullEmail ->
                 password?.let { nonNullPassword ->
-                    auth.signInWithEmailAndPassword(nonNullEmail, nonNullPassword)
-                        .addOnCompleteListener { task ->
-                            if (task.isSuccessful) {
-                                _signInSuccess.value = true
-                                Log.i("LoginViewModel", "Login successful")
-                            } else {
-                                _signInSuccess.value = false
-                                Log.i("LoginViewModel", "Login Failed")
+                    try {
+                        auth.signInWithEmailAndPassword(nonNullEmail, nonNullPassword)
+                            .addOnCompleteListener { task ->
+                                if (task.isSuccessful) {
+                                    _signInSuccess.value = true
+                                    Log.i("LoginViewModel", "Login successful")
+                                } else {
+                                    _signInSuccess.value = false
+                                    val errorMessage = "Login Failed, please check your credentials"
+                                    handleException(null)
+                                    Log.i("LoginViewModel", errorMessage)
+                                }
                             }
-                        }
+                    } catch (e: Exception) {
+                        handleException(e)
+                    }
                 }
             }
         }
     }
+
+    private fun handleException(exception: Exception?) {
+        val errorMessage = when (exception) {
+            is FirebaseAuthException -> "FirebaseAuthException: ${exception.message}"
+            is FirebaseNetworkException -> "FirebaseNetworkException: ${exception.message}"
+            is FirebaseException -> "FirebaseException: ${exception.message}"
+            else -> "Exception: ${exception?.message}"
+        }
+        _errorMessage.value = errorMessage
+        Log.e("LoginViewModel", errorMessage)
+        _signInSuccess.value = false
+    }
+
     fun startLoginAnimation() {
         _loginAnimation.value = true
     }
