@@ -8,7 +8,13 @@ import com.example.dthomefresh.R
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.Firebase
+import com.google.firebase.FirebaseException
+import com.google.firebase.FirebaseNetworkException
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthException
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.FirebaseAuthUserCollisionException
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import com.google.firebase.auth.auth
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -35,6 +41,9 @@ class SignUpViewModel: ViewModel() {
     private val _signUpAnimation = MutableLiveData<Boolean>()
     val signUpAnimation: LiveData<Boolean>
         get() = _signUpAnimation
+    private val _errorMessage = MutableLiveData<String>()
+    val errorMessage: LiveData<String>
+        get() = _errorMessage
 
     init {
         setEmail("")
@@ -51,20 +60,38 @@ class SignUpViewModel: ViewModel() {
         withContext(Dispatchers.IO) {
             email?.let { nonNullEmail ->
                 password?.let { nonNullPassword ->
-                    auth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener() { task ->
-                            if (task.isSuccessful) {
-                                _signUpSuccess.value = true
-                                Log.i(TAG, "SignUp successful")
-                                Firebase.auth.signOut()
-                            } else {
-                                _signUpSuccess.value = false
-                                Log.i(TAG, "SignUp failed")
+                    try{
+                        auth.createUserWithEmailAndPassword(nonNullEmail, nonNullPassword)
+                            .addOnCompleteListener() { task ->
+                                if (task.isSuccessful) {
+                                    _signUpSuccess.value = true
+                                    Log.i(TAG, "SignUp successful")
+                                    Firebase.auth.signOut()
+                                } else {
+                                    _signUpSuccess.value = false
+                                    val exception = task.exception
+                                    handleException(exception)
+                                    Log.i(TAG, "SignUp failed")
+                                }
                             }
-                        }
+                    } catch (e: Exception) {
+                        handleException(e)
+                    }
                 }
             }
         }
+    }
+
+    fun handleException(exception: Exception?) {
+        val errorMessage = when (exception) {
+            is FirebaseAuthUserCollisionException -> "Account already exists. Please log in."
+            is FirebaseAuthWeakPasswordException -> "Weak password. Please use a stronger password."
+            is FirebaseAuthInvalidCredentialsException -> "Invalid email format. Please enter a valid email."
+            else -> "Something went wrong. Please Try Again."
+        }
+        _errorMessage.value = errorMessage
+        Log.e("SignUpViewModel", errorMessage)
+        _signUpSuccess.value = false
     }
 
 

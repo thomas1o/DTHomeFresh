@@ -1,6 +1,8 @@
 package com.example.dthomefresh.ui
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +13,7 @@ import androidx.navigation.Navigation
 import com.example.dthomefresh.R
 import com.example.dthomefresh.data.Seller
 import com.example.dthomefresh.databinding.FragmentProfileBinding
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
@@ -30,6 +33,8 @@ class ProfileFragment : Fragment() {
         var binding: FragmentProfileBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_profile, container, false
         )
+
+        val signOutAnimation = binding.animSignOut
 
         var name: String
         var phoneNumber: String
@@ -53,14 +58,16 @@ class ProfileFragment : Fragment() {
         val userEmail = currentUser?.email
         binding.userEmail.text = userEmail.toString()
 
-//        binding.btImageUpload.setOnClickListener {
-//            Toast.makeText(requireContext(), "Upload button pressed", Toast.LENGTH_SHORT).show()
-//        }
-
-        binding.signOutButton.setOnClickListener{
+        binding.signOutButton.setOnClickListener {
+            signOutAnimation.playAnimation()
+            signOutAnimation.visibility = View.VISIBLE
             Firebase.auth.signOut()
-            Toast.makeText(requireContext(), "Sign out successful", Toast.LENGTH_SHORT).show()
-            Navigation.findNavController(requireView()).navigate(R.id.action_profileFragment_to_categoriesFragment)
+            Handler(Looper.getMainLooper()).postDelayed({
+                Navigation.findNavController(requireView())
+                    .navigate(R.id.action_profileFragment_to_categoriesFragment)
+                signOutAnimation.cancelAnimation()
+                Snackbar.make(binding.root, "Signed out successfully", Snackbar.LENGTH_SHORT).show()
+            }, 1000)
         }
 
         return binding.root

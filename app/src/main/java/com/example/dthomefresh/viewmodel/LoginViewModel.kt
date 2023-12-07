@@ -1,5 +1,6 @@
 package com.example.dthomefresh.viewmodel
 
+import android.accounts.NetworkErrorException
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -16,6 +17,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.concurrent.TimeoutException
 
 class LoginViewModel: ViewModel() {
 
@@ -61,9 +63,8 @@ class LoginViewModel: ViewModel() {
                                     Log.i("LoginViewModel", "Login successful")
                                 } else {
                                     _signInSuccess.value = false
-                                    val errorMessage = "Login Failed, please check your credentials"
-                                    handleException(null)
-                                    Log.i("LoginViewModel", errorMessage)
+                                    val exception = task.exception
+                                    handleException(exception)
                                 }
                             }
                     } catch (e: Exception) {
@@ -74,12 +75,13 @@ class LoginViewModel: ViewModel() {
         }
     }
 
-    private fun handleException(exception: Exception?) {
+    fun handleException(exception: Exception?) {
         val errorMessage = when (exception) {
-            is FirebaseAuthException -> "FirebaseAuthException: ${exception.message}"
-            is FirebaseNetworkException -> "FirebaseNetworkException: ${exception.message}"
-            is FirebaseException -> "FirebaseException: ${exception.message}"
-            else -> "Exception: ${exception?.message}"
+            is FirebaseAuthException -> "Oops! There was an issue with your authentication."
+            is FirebaseNetworkException -> "Please check your network."
+            is NetworkErrorException -> "Please check your network."
+            is TimeoutException -> "Taking too long to load. Please try again later."
+            else -> "Something went wrong. Please try again."
         }
         _errorMessage.value = errorMessage
         Log.e("LoginViewModel", errorMessage)

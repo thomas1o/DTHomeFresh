@@ -117,12 +117,11 @@ class SignUpFragment : Fragment() {
 
         viewModel.signUpSuccess.observe(viewLifecycleOwner, Observer { newSignUpSuccess ->
             if(newSignUpSuccess == true) {
-                Toast.makeText(requireContext(),"Sign up successful, please continue to login", Toast.LENGTH_SHORT,).show()
+                Snackbar.make(binding.root, "Sign up successful, please continue to login", Snackbar.LENGTH_SHORT).show()
                 viewModel.stopLoginAnimation()
                 Navigation.findNavController(requireView()).navigate(R.id.action_signUpFragment_to_loginFragment)
             }
             else {
-                Toast.makeText(requireContext(),"Sign Up Failed, please try again", Toast.LENGTH_SHORT).show()
                 viewModel.stopLoginAnimation()
             }
         })
@@ -135,6 +134,12 @@ class SignUpFragment : Fragment() {
             } else {
                 animationView.cancelAnimation()
                 animationView.visibility = View.GONE
+            }
+        })
+
+        viewModel.errorMessage.observe(viewLifecycleOwner, Observer { errorMessage ->
+            if (!errorMessage.isNullOrEmpty()) {
+                Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_SHORT).show()
             }
         })
 
@@ -159,14 +164,13 @@ class SignUpFragment : Fragment() {
                 val idToken = account?.idToken
 
                 if (idToken != null) {
-                    // Sign in to Firebase with Google credentials
                     val credential = GoogleAuthProvider.getCredential(idToken, null)
                     FirebaseAuth.getInstance().signInWithCredential(credential)
                         .addOnCompleteListener { signInTask ->
                             if (signInTask.isSuccessful) {
                                 // Firebase authentication successful, user is signed in
                                 val firebaseUser = FirebaseAuth.getInstance().currentUser
-                                Snackbar.make(binding.root, "Login Successful", Snackbar.LENGTH_SHORT).show()
+                                Snackbar.make(binding.root, "Logged in with ${firebaseUser?.email}", Snackbar.LENGTH_SHORT).show()
                                 Navigation.findNavController(requireView()).navigate(R.id.action_signUpFragment_to_categoriesFragment)
                                 viewModel.stopLoginAnimation()
                             } else {
@@ -180,6 +184,8 @@ class SignUpFragment : Fragment() {
                 }
             } catch (e: ApiException) {
                 Log.w(TAG, "Google sign-in failed: ${e.statusCode}")
+                viewModel.handleException(e)
+                viewModel.stopLoginAnimation()
             }
         }
     }

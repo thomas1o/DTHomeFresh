@@ -134,6 +134,8 @@
         <action
             android:id="@+id/action_profileFragment_to_categoriesFragment"
             app:destination="@id/categoriesFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@anim/slide_out_top"
             app:popUpTo="@id/categoriesFragment"
             app:popUpToInclusive="true" />
     </fragment>

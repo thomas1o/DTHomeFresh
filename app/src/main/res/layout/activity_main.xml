@@ -58,7 +58,7 @@
                         android:layout_height="50dp"
                         android:layout_marginHorizontal="10dp"
                         android:layout_marginVertical="10dp"
-                        android:src="@drawable/profile_icon" />
+                        android:src="@drawable/icon_profile" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -96,7 +96,7 @@
                         android:layout_height="50dp"
                         android:layout_marginHorizontal="10dp"
                         android:layout_marginVertical="10dp"
-                        android:src="@drawable/profile_icon" />
+                        android:src="@drawable/icon_profile" />
 
                     <TextView
                         android:layout_width="wrap_content"

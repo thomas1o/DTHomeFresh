@@ -13,7 +13,7 @@
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/sign_up_bg">
+        android:background="@drawable/bg_sign_up_page">
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/anim_login"

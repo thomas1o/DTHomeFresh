@@ -102,7 +102,6 @@ class LoginFragment : Fragment() {
                 Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_categoriesFragment)
             }
             else {
-                Toast.makeText(requireContext(),"Login Failed, please check your credentials", Toast.LENGTH_SHORT).show()
                 viewModel.stopLoginAnimation()
             }
         })
@@ -119,7 +118,7 @@ class LoginFragment : Fragment() {
 
         viewModel.errorMessage.observe(viewLifecycleOwner, Observer { errorMessage ->
             if (!errorMessage.isNullOrEmpty()) {
-                Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+                Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_SHORT).show()
             }
         })
 
@@ -152,7 +151,7 @@ class LoginFragment : Fragment() {
                             if (signInTask.isSuccessful) {
                                 // Firebase authentication successful, user is signed in
                                 val firebaseUser = FirebaseAuth.getInstance().currentUser
-                                Snackbar.make(binding.root, "Login Successful", Snackbar.LENGTH_SHORT).show()
+                                Snackbar.make(binding.root, "Logged in with ${firebaseUser?.email}", Snackbar.LENGTH_SHORT).show()
                                 Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_categoriesFragment)
                                 viewModel.stopLoginAnimation()
                             } else {
@@ -166,6 +165,8 @@ class LoginFragment : Fragment() {
                 }
             } catch (e: ApiException) {
                 Log.w(TAG, "Google sign-in failed: ${e.statusCode}")
+                viewModel.handleException(e)
+                viewModel.stopLoginAnimation()
             }
         }
     }

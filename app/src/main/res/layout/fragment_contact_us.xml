@@ -9,7 +9,7 @@
         android:gravity="center_vertical"
         android:orientation="vertical"
         tools:context=".ui.ContactUsFragment"
-        android:background="@drawable/categories_page_bg">
+        android:background="@drawable/bg_categories_page">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/linearLayout_1"
@@ -31,7 +31,7 @@
                 android:foreground="?selectableItemBackground"
                 android:padding="5dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/up_arrow"
+                android:src="@drawable/icon_arrow"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

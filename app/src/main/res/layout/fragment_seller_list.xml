@@ -12,7 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/sellers_page_bg">
+        android:background="@drawable/bg_sellers_page">
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/anim_loading"
@@ -75,7 +75,7 @@
                 android:foreground="?selectableItemBackground"
                 android:padding="5dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/up_arrow"
+                android:src="@drawable/icon_arrow"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -91,7 +91,7 @@
                 android:foreground="?selectableItemBackground"
                 android:padding="5dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/profile_icon"
+                android:src="@drawable/icon_profile"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -235,8 +235,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
-            android:background="@drawable/search_bar_bg"
-            android:drawableStart="@drawable/search_icon"
+            android:background="@drawable/bg_search_bar"
+            android:drawableStart="@drawable/icon_search"
             app:iconifiedByDefault="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
