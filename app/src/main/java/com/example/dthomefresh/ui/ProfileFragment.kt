@@ -25,11 +25,10 @@ class ProfileFragment : Fragment() {
     private val database = FirebaseDatabase.getInstance()
     private val myRef = database.getReference("Sellers")
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         var binding: FragmentProfileBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_profile, container, false
         )

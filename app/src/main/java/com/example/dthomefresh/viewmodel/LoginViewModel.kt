@@ -53,8 +53,8 @@ class LoginViewModel: ViewModel() {
 
     private suspend fun signInWithFirebase(email: String, password: String) {
         withContext(Dispatchers.IO) {
-            email?.let { nonNullEmail ->
-                password?.let { nonNullPassword ->
+            email.let { nonNullEmail ->
+                password.let { nonNullPassword ->
                     try {
                         auth.signInWithEmailAndPassword(nonNullEmail, nonNullPassword)
                             .addOnCompleteListener { task ->

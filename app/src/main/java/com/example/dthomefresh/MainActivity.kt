@@ -9,9 +9,15 @@ import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.fragment.findNavController
 import com.example.dthomefresh.databinding.ActivityMainBinding
+import com.example.dthomefresh.utils.loggedInCheck
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var auth: FirebaseAuth
     private lateinit var binding: ActivityMainBinding
     private lateinit var drawerLayout: DrawerLayout
 
@@ -23,6 +29,8 @@ class MainActivity : AppCompatActivity() {
         val navController = supportFragmentManager.findFragmentById(R.id.navHostFragment)?.findNavController()
         drawerLayout = binding.drawerLayout
 
+        auth = Firebase.auth
+
         binding.profileItem.setOnClickListener {
             closeDrawer()
 
@@ -33,6 +41,16 @@ class MainActivity : AppCompatActivity() {
         binding.contactUsItem.setOnClickListener {
             closeDrawer()
             navController?.navigate(R.id.action_categoriesFragment_to_contactUsFragment)
+        }
+
+        binding.signOutItem.setOnClickListener {
+            closeDrawer()
+            if(loggedInCheck()) {
+                Firebase.auth.signOut()
+                Snackbar.make(binding.root, "Signed out successfully", Snackbar.LENGTH_SHORT).show()
+            }
+            else
+                Snackbar.make(binding.root, "Not logged in", Snackbar.LENGTH_SHORT).show()
         }
 
     }

@@ -19,6 +19,7 @@ import com.example.dthomefresh.R
 import com.example.dthomefresh.adapter.SellersListAdapter
 import com.example.dthomefresh.data.Seller
 import com.example.dthomefresh.databinding.FragmentSellerListBinding
+import com.example.dthomefresh.utils.loggedInCheck
 import com.example.dthomefresh.viewmodel.SellerListViewModel
 import com.example.dthomefresh.viewmodelfactory.SellerListViewModelFactory
 import com.google.firebase.Firebase
@@ -33,16 +34,6 @@ class SellerListFragment : Fragment() {
     private lateinit var binding: FragmentSellerListBinding
     private lateinit var viewModel: SellerListViewModel
     private lateinit var viewModelFactory: SellerListViewModelFactory
-    private lateinit var auth: FirebaseAuth
-    private var loggedIn: Boolean = false
-
-    override fun onStart() {
-        super.onStart()
-        val currentUser = auth.currentUser
-        if (currentUser != null) {
-            loggedIn = true
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,8 +48,6 @@ class SellerListFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory)[SellerListViewModel::class.java]
         binding.sellerListViewModel = viewModel
 
-        auth = Firebase.auth
-
         viewModel.readAllSellers()
 
         val animationView: LottieAnimationView = binding.animLoading
@@ -69,7 +58,7 @@ class SellerListFragment : Fragment() {
         }
 
         binding.profileButton.setOnClickListener{
-            if(loggedIn)
+            if(loggedInCheck())
                 Navigation.findNavController(it).navigate(R.id.action_sellerListFragment_to_profileFragment)
             else
                 Navigation.findNavController(it).navigate(R.id.action_sellerListFragment_to_loginFragment)
@@ -154,11 +143,11 @@ class SellerListFragment : Fragment() {
 
     private fun setDefaultColor() {
         binding.navigationText1.setTextColor(ContextCompat.getColor(requireContext(), R.color.green_1))
-        binding.cardNavigation1.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.green_4))
+        binding.cardNavigation1.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.green_5))
         binding.navigationText2.setTextColor(ContextCompat.getColor(requireContext(), R.color.green_1))
-        binding.cardNavigation2.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.green_4))
+        binding.cardNavigation2.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.green_5))
         binding.navigationText3.setTextColor(ContextCompat.getColor(requireContext(), R.color.green_1))
-        binding.cardNavigation3.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.green_4))
+        binding.cardNavigation3.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.green_5))
     }
 
     private fun setupRecyclerView(sellersList: List<Seller>) {

@@ -26,7 +26,7 @@ class SellersListAdapter(private val sellersList: List<Seller>,
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val seller = sellersList[position]
 
-        holder.imageView.setImageResource(R.raw.sample_image)
+        holder.imageView.setImageResource(R.raw.image_template)
         holder.bind(seller)
         holder.itemView.setOnClickListener {
             clickListener(sellersList[position])

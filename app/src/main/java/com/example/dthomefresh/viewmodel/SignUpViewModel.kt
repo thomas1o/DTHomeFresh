@@ -58,11 +58,11 @@ class SignUpViewModel: ViewModel() {
 
     private suspend fun signUpWithEmailUsingFirebase(email: String, password: String) {
         withContext(Dispatchers.IO) {
-            email?.let { nonNullEmail ->
-                password?.let { nonNullPassword ->
+            email.let { nonNullEmail ->
+                password.let { nonNullPassword ->
                     try{
                         auth.createUserWithEmailAndPassword(nonNullEmail, nonNullPassword)
-                            .addOnCompleteListener() { task ->
+                            .addOnCompleteListener { task ->
                                 if (task.isSuccessful) {
                                     _signUpSuccess.value = true
                                     Log.i(TAG, "SignUp successful")

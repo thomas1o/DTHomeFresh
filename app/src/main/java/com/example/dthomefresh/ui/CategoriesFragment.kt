@@ -13,6 +13,7 @@ import com.example.dthomefresh.MainActivity
 import com.example.dthomefresh.R
 import com.example.dthomefresh.databinding.FragmentCategoriesBinding
 import com.example.dthomefresh.utils.FragmentHandler
+import com.example.dthomefresh.utils.loggedInCheck
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
@@ -20,29 +21,17 @@ import com.google.firebase.auth.auth
 class CategoriesFragment : Fragment() {
 
     private var optionSelected: Int = -1
-    private lateinit var auth: FirebaseAuth
-    private var loggedIn: Boolean = false
-
-    override fun onStart() {
-        super.onStart()
-        loggedInCheck()
-        if(!loggedIn) {
-//            Navigation.findNavController(it).navigate(R.id.action_loginFragment_to_signUpFragment)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val binding: FragmentCategoriesBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_categories, container, false
         )
 
         val fragmentHandler = FragmentHandler(requireActivity() as MainActivity)
         binding.fragmentHandler = fragmentHandler
-
-        auth = Firebase.auth
 
         val vibrator = activity?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
 
@@ -64,9 +53,8 @@ class CategoriesFragment : Fragment() {
             Navigation.findNavController(it).navigate(CategoriesFragmentDirections.actionCategoriesFragmentToSellerListFragment(optionSelected))
         }
 
-
         binding.profileButton.setOnClickListener {
-            if(loggedIn)
+            if(loggedInCheck())
                 Navigation.findNavController(requireView()).navigate(R.id.action_categoriesFragment_to_profileFragment)
             else
                 Navigation.findNavController(requireView()).navigate(R.id.action_categoriesFragment_to_loginFragment)
@@ -78,11 +66,5 @@ class CategoriesFragment : Fragment() {
         optionSelected = number
     }
 
-    private fun loggedInCheck() {
-        val currentUser = auth.currentUser
-        if (currentUser != null) {
-            loggedIn = true
-        }
-    }
 }
 

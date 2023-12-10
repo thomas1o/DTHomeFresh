@@ -21,7 +21,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:lottie_autoPlay="false"
             app:lottie_loop="true"
-            app:lottie_rawRes="@raw/processing_circle" />
+            app:lottie_rawRes="@raw/anim_yellow_processing_circle" />
 
         <TextView
             android:id="@+id/heading_please_fill_the_details"
