@@ -4,19 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
-            type="com.example.dthomefresh.viewmodels.LoginViewModel" />
+            type="com.example.dthomefresh.viewmodel.LoginViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/sign_up_bg">
+        android:background="@drawable/bg_sign_up_page">
 
         <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/lottieAnimationView"
+            android:id="@+id/anim_login"
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:visibility="gone"
@@ -26,7 +27,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:lottie_autoPlay="false"
             app:lottie_loop="true"
-            app:lottie_rawRes="@raw/loading" />
+            app:lottie_rawRes="@raw/anim_yellow_processing_circle" />
 
         <TextView
             android:id="@+id/Login_title"
@@ -107,16 +108,26 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ti_password"
-            app:layout_constraintVertical_bias="0.186" />
+            app:layout_constraintVertical_bias="0.22" />
 
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/bt_google_sign_in"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.85" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bt_login"
-            app:layout_constraintVertical_bias="0.575">
+            app:layout_constraintTop_toBottomOf="@+id/bt_google_sign_in"
+            app:layout_constraintVertical_bias="0.0"
+            tools:layout_editor_absoluteX="0dp">
 
             <TextView
                 android:id="@+id/no_account_yet_text"

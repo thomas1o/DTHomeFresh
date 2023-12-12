@@ -1,5 +1,5 @@
 <resources>
-      <dimen name="fab_margin">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
     <dimen name="seller_navigation_font_size">12sp</dimen>
     <dimen name="seller_navigation_padding_vertical">12dp</dimen>
     <dimen name="seller_navigation_padding_horizontal">5dp</dimen>

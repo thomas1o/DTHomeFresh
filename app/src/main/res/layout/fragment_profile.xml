@@ -3,12 +3,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.dthomefresh.viewmodel.ProfileViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/categories_page_bg"
+        android:background="@drawable/bg_categories_page"
         tools:context=".ui.ProfileFragment">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/anim_sign_out"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="false"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/anim_yellow_processing_circle" />
 
         <TextView
             android:id="@+id/heading_please_fill_the_details"
@@ -47,6 +66,7 @@
             android:fontFamily="@font/londrina_solid_thin"
             android:textColor="@color/white"
             android:textSize="21dp"
+            android:text="@{viewModel.email}"
             app:flow_horizontalBias="0.0"
             app:layout_constraintBottom_toBottomOf="@+id/sign_out_button"
             app:layout_constraintEnd_toEndOf="parent"

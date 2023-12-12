@@ -6,11 +6,9 @@ import android.os.Vibrator
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import com.example.dthomefresh.R
 import com.example.dthomefresh.databinding.FragmentOnboardingBinding
 
@@ -28,7 +26,8 @@ class OnboardingFragment : Fragment() {
 
         binding.getStartedButton.setOnClickListener {
             vibrator.vibrate(100)
-            Navigation.findNavController(it).navigate(R.id.action_onboardingFragment_to_categoriesFragment)
+            Navigation.findNavController(it)
+                .navigate(R.id.action_onboardingFragment_to_categoriesFragment)
         }
 
         return binding.root

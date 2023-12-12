@@ -14,10 +14,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.Locale
 import kotlin.coroutines.resume
-import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
-class SellerListViewModel(optionSelected : Int) : ViewModel() {
+class SellerListViewModel(optionSelected: Int) : ViewModel() {
 
     private val _options = MutableLiveData<MutableMap<Int, Boolean>>()
     val options: LiveData<MutableMap<Int, Boolean>>
@@ -39,8 +38,12 @@ class SellerListViewModel(optionSelected : Int) : ViewModel() {
     val sellersList: LiveData<List<Seller>>
         get() = _sellersList
 
+    private val _errorToast = MutableLiveData<String>()
+    val errorToast: LiveData<String>
+        get() = _errorToast
+
     init {
-        when(optionSelected) {
+        when (optionSelected) {
             0 -> onFood()
             1 -> onClothes()
             2 -> onHomemadeItems()
@@ -56,37 +59,47 @@ class SellerListViewModel(optionSelected : Int) : ViewModel() {
         _options.value = currentOptions
         _setUpRecyclerView.value = false
     }
-    private fun setTrue(elNum : Int) {
+
+    private fun setTrue(elNum: Int) {
         val currentOptions = _options.value
         currentOptions?.set(elNum, true)
         _options.value = currentOptions!!
     }
 
-    private suspend fun fetchSellersFromFirebase() : List<Seller> {
+    private suspend fun fetchSellersFromFirebase(): List<Seller> {
+        startLoadingAnimation()
         return withContext(Dispatchers.IO) {
-            suspendCoroutine {continuation ->
+            try {
+                suspendCoroutine { continuation ->
+                    val database = FirebaseDatabase.getInstance()
+                    database.reference.child("Sellers").addListenerForSingleValueEvent(object :
+                        ValueEventListener {
+                        override fun onDataChange(dataSnapshot: DataSnapshot) {
+                            val sellersList = mutableListOf<Seller>()
 
-                val database = FirebaseDatabase.getInstance()
-                database.reference.child("Sellers").addListenerForSingleValueEvent(object :
-                    ValueEventListener {
-                    override fun onDataChange(dataSnapshot: DataSnapshot) {
-                        val sellersList = mutableListOf<Seller>()
+                            for (sellerSnapshot in dataSnapshot.children) {
+                                val seller = sellerSnapshot.getValue(Seller::class.java)
+                                seller?.let { sellersList.add(it) }
+                            }
 
-                        for (sellerSnapshot in dataSnapshot.children) {
-                            val seller = sellerSnapshot.getValue(Seller::class.java)
-                            seller?.let { sellersList.add(it) }
+                            continuation.resume(sellersList)  //returns the seller list
+                            stopLoadingAnimation()
                         }
 
-                        continuation.resume(sellersList)  //returns the seller list
-
-                    }
-
-                    override fun onCancelled(databaseError: DatabaseError) {
-                        // TODO- Handle error
-                        continuation.resumeWithException(databaseError.toException())
-                    }
-                })
-
+                        override fun onCancelled(databaseError: DatabaseError) {
+                            val errorMessage = "Database Error: ${databaseError.message}"
+                            _errorToast.postValue(errorMessage) // Post error message to LiveData
+                            stopLoadingAnimation()
+                            continuation.resume(emptyList())
+                        }
+                    })
+                }
+            } catch (e: Exception) {
+                stopLoadingAnimation()
+                val errorMessage = "An error occurred: ${e.message}"
+                _errorToast.postValue(errorMessage)
+                _errorToast.postValue("")
+                emptyList() // or any default value
             }
         }
     }
@@ -97,8 +110,10 @@ class SellerListViewModel(optionSelected : Int) : ViewModel() {
             val originalSellers = _sellersList.value.orEmpty()
             val filteredSellers = if (!searchText.isNullOrBlank()) {
                 originalSellers.filter { seller ->
-                    seller.name?.lowercase(Locale.ROOT)?.contains(searchText.lowercase(Locale.ROOT)) == true ||
-                            seller.address?.lowercase(Locale.ROOT)?.contains(searchText.lowercase(Locale.ROOT)) == true
+                    seller.name?.lowercase(Locale.ROOT)
+                        ?.contains(searchText.lowercase(Locale.ROOT)) == true ||
+                            seller.address?.lowercase(Locale.ROOT)
+                                ?.contains(searchText.lowercase(Locale.ROOT)) == true
                 }
             } else {
                 originalSellers
@@ -122,20 +137,25 @@ class SellerListViewModel(optionSelected : Int) : ViewModel() {
         setAllFalse()
         setTrue(0)
     }
+
     fun onClothes() {
         setAllFalse()
         setTrue(1)
     }
+
     fun onHomemadeItems() {
         setAllFalse()
         setTrue(2)
     }
+
     private fun startLoadingAnimation() {
         _loadingAnimation.value = true
     }
+
     private fun stopLoadingAnimation() {
         _loadingAnimation.value = false
     }
+
     private fun stopRefreshingAnimation() {
         _refreshingAnimation.value = false
     }

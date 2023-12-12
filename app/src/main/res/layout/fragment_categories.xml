@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="fragmentHandler"
             type="com.example.dthomefresh.utils.FragmentHandler" />
@@ -11,7 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/categories_page_bg">
+        android:background="@drawable/bg_categories_page">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/linearLayout_1"
@@ -33,10 +34,10 @@
                 android:foreground="?selectableItemBackground"
                 android:padding="5dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/menu_icon"
+                android:src="@drawable/icon_menu"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:onClick="@{() -> fragmentHandler.openDrawer()}"/>
+                android:onClick="@{() -> fragmentHandler.openDrawer()}" />
 
             <ImageButton
                 android:id="@+id/profile_button"
@@ -50,7 +51,7 @@
                 android:foreground="?selectableItemBackground"
                 android:padding="5dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/profile_icon"
+                android:src="@drawable/icon_profile"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -97,7 +98,7 @@
                             android:id="@+id/food_icon"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/food_icon"
+                            android:src="@drawable/icon_food"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -151,7 +152,7 @@
                             android:id="@+id/clothes_icon"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/clothes_icon"
+                            android:src="@drawable/icon_clothes"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -205,7 +206,7 @@
                             android:id="@+id/homemade_items_icon"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/home_icon"
+                            android:src="@drawable/icon_home"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
