@@ -17,6 +17,7 @@ import androidx.navigation.fragment.findNavController
 import com.airbnb.lottie.LottieAnimationView
 import com.example.dthomefresh.R
 import com.example.dthomefresh.databinding.FragmentSignUpBinding
+import com.example.dthomefresh.utils.Validator
 import com.example.dthomefresh.viewmodel.SignUpViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -69,6 +70,7 @@ class SignUpFragment : Fragment() {
         var email: String
         var password: String
         var rePassword: String
+        val validator = Validator()
 
         //NOTE: For styling the Skip for now button
 //        val skipForNowButton = binding.btSkipForNow
@@ -81,25 +83,11 @@ class SignUpFragment : Fragment() {
             password = editTextPassword.text.toString()
             rePassword = editTextRePassword.text.toString()
 
-            if (isEmpty(email) && isEmpty(password)) {
-                textInputLayoutEmail.error = "Email cannot be empty"
-                textInputLayoutPassword.error = "Password cannot be empty"
-            } else if (isEmpty(email)) {
-                textInputLayoutPassword.error = null
-                textInputLayoutEmail.error = "Email cannot be empty"
-            } else if (!isValidPassword(password)) {
-                textInputLayoutEmail.error = null
-                textInputLayoutPassword.error = "Cannot be less than 6 character"
-            } else if (!isValidEmail(email)) {
-                textInputLayoutEmail.error = "Invalid email address"
-            } else if (password != rePassword) {
-                textInputLayoutEmail.error = null
-                textInputLayoutPassword.error = null
-                textInputLayoutRePassword.error = "Passwords do not match"
-            } else {
-                textInputLayoutEmail.error = null
-                textInputLayoutPassword.error = null
-                textInputLayoutRePassword.error = null
+            textInputLayoutEmail.error = validator.emailValidator(email)
+            textInputLayoutPassword.error = validator.passwordValidator(password)
+            textInputLayoutRePassword.error = validator.rePasswordValidator(password, rePassword)
+
+            if(textInputLayoutEmail.error == null && textInputLayoutPassword.error == null && textInputLayoutRePassword.error == null) {
                 viewModel.setEmail(email)
                 viewModel.setPassword(password)
                 viewModel.startSignUp()
@@ -206,15 +194,4 @@ class SignUpFragment : Fragment() {
         }
     }
 
-    private fun isEmpty(string: String): Boolean {
-        return TextUtils.isEmpty(string)
-    }
-
-    private fun isValidPassword(password: String): Boolean {
-        return password.length >= 6
-    }
-
-    private fun isValidEmail(email: String): Boolean {
-        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
-    }
 }

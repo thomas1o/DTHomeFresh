@@ -17,8 +17,8 @@ import androidx.navigation.Navigation
 import com.airbnb.lottie.LottieAnimationView
 import com.example.dthomefresh.R
 import com.example.dthomefresh.databinding.FragmentLoginBinding
-import com.example.dthomefresh.utils.ExceptionHandler.handleException
 import com.example.dthomefresh.utils.KeyboardUtils
+import com.example.dthomefresh.utils.Validator
 import com.example.dthomefresh.viewmodel.LoginViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -66,26 +66,17 @@ class LoginFragment : Fragment() {
 
         var email: String
         var password: String
+        val validator = Validator()
 
         binding.btLogin.setOnClickListener {
             KeyboardUtils.hideKeyboard(requireActivity())
             email = editTextEmail.text.toString()
             password = editTextPassword.text.toString()
 
-            if (isEmpty(email) && isEmpty(password)) {
-                textInputLayoutEmail.error = "Email cannot be empty"
-                textInputLayoutPassword.error = "Password cannot be empty"
-            } else if (isEmpty(email)) {
-                textInputLayoutPassword.error = null
-                textInputLayoutEmail.error = "Email cannot be empty"
-            } else if (isEmpty(password)) {
-                textInputLayoutEmail.error = null
-                textInputLayoutPassword.error = "Password cannot be empty"
-            } else if (!isValidEmail(email)) {
-                textInputLayoutEmail.error = "Invalid email address"
-            } else {
-                textInputLayoutEmail.error = null
-                textInputLayoutPassword.error = null
+            textInputLayoutEmail.error = validator.emailValidator(email)
+            textInputLayoutPassword.error = validator.passwordValidator(password)
+
+            if (validator.emailValidator(email) == null && validator.passwordValidator(password) == null) {
                 viewModel.setEmail(email)
                 viewModel.setPassword(password)
                 viewModel.startSignIn()
@@ -188,12 +179,12 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private fun isEmpty(string: String): Boolean {
-        return TextUtils.isEmpty(string)
-    }
-
-    private fun isValidEmail(email: String): Boolean {
-        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
-    }
+//    private fun isEmpty(string: String): Boolean {
+//        return TextUtils.isEmpty(string)
+//    }
+//
+//    private fun isValidEmail(email: String): Boolean {
+//        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
+//    }
 
 }
