@@ -12,19 +12,17 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import com.example.dthomefresh.R
-import com.example.dthomefresh.adapter.SellersListAdapter
 import com.example.dthomefresh.data.Seller
+import com.example.dthomefresh.data.adapter.SellersListAdapter
 import com.example.dthomefresh.databinding.FragmentSellerListBinding
 import com.example.dthomefresh.utils.loggedInCheck
 import com.example.dthomefresh.viewmodel.SellerListViewModel
 import com.example.dthomefresh.viewmodelfactory.SellerListViewModelFactory
-import com.google.firebase.Firebase
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.auth
 
 class SellerListFragment : Fragment() {
 
@@ -44,7 +42,8 @@ class SellerListFragment : Fragment() {
             inflater, R.layout.fragment_seller_list, container, false
         )
 
-        viewModelFactory = SellerListViewModelFactory(SellerListFragmentArgs.fromBundle(requireArguments()).optionSelected)
+        viewModelFactory =
+            SellerListViewModelFactory(SellerListFragmentArgs.fromBundle(requireArguments()).optionSelected)
         viewModel = ViewModelProvider(this, viewModelFactory)[SellerListViewModel::class.java]
         binding.sellerListViewModel = viewModel
 
@@ -53,28 +52,30 @@ class SellerListFragment : Fragment() {
         val animationView: LottieAnimationView = binding.animLoading
         val searchBar: SearchView = binding.searchBar
 
-        binding.btUp.setOnClickListener{
-            Navigation.findNavController(it).navigate(R.id.action_sellerListFragment_to_categoriesFragment)
+        binding.btUp.setOnClickListener {
+            findNavController().popBackStack()
         }
 
-        binding.profileButton.setOnClickListener{
-            if(loggedInCheck())
-                Navigation.findNavController(it).navigate(R.id.action_sellerListFragment_to_profileFragment)
+        binding.btProfile.setOnClickListener {
+            if (loggedInCheck())
+                Navigation.findNavController(it)
+                    .navigate(R.id.action_sellerListFragment_to_profileFragment)
             else
-                Navigation.findNavController(it).navigate(R.id.action_sellerListFragment_to_loginFragment)
+                Navigation.findNavController(it)
+                    .navigate(R.id.action_sellerListFragment_to_loginFragment)
         }
 
         binding.swipeRefreshLayout.setOnRefreshListener {
             binding.swipeRefreshLayout.isRefreshing = true
             viewModel.readAllSellers()
             viewModel.refreshingAnimation.observe(viewLifecycleOwner, Observer { refreshAnimate ->
-                if(!refreshAnimate)
+                if (!refreshAnimate)
                     binding.swipeRefreshLayout.isRefreshing = false
             })
         }
 
         //FIXME(Bug)- it doesn't update when we click backspace
-        searchBar.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+        searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
             }
@@ -93,20 +94,48 @@ class SellerListFragment : Fragment() {
         //TODO- navigate to sellerDetailsFragment
 
         viewModel.options.observe(viewLifecycleOwner, Observer { newOptions ->
-            if(newOptions[0] == true) {
+            if (newOptions[0] == true) {
                 setDefaultColor()
-                binding.navigationText1.setTextColor(ContextCompat.getColor(requireContext(), R.color.yellow_2))
-                binding.cardNavigation1.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.green_2))
-            }
-            else if(newOptions[1] == true) {
+                binding.navigationText1.setTextColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.yellow_2
+                    )
+                )
+                binding.cardNavigation1.setBackgroundColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.green_2
+                    )
+                )
+            } else if (newOptions[1] == true) {
                 setDefaultColor()
-                binding.navigationText2.setTextColor(ContextCompat.getColor(requireContext(), R.color.yellow_2))
-                binding.cardNavigation2.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.green_2))
-            }
-            else if(newOptions[2] == true) {
+                binding.navigationText2.setTextColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.yellow_2
+                    )
+                )
+                binding.cardNavigation2.setBackgroundColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.green_2
+                    )
+                )
+            } else if (newOptions[2] == true) {
                 setDefaultColor()
-                binding.navigationText3.setTextColor(ContextCompat.getColor(requireContext(), R.color.yellow_2))
-                binding.cardNavigation3.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.green_2))
+                binding.navigationText3.setTextColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.yellow_2
+                    )
+                )
+                binding.cardNavigation3.setBackgroundColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.green_2
+                    )
+                )
             }
         })
 
@@ -142,19 +171,50 @@ class SellerListFragment : Fragment() {
     }
 
     private fun setDefaultColor() {
-        binding.navigationText1.setTextColor(ContextCompat.getColor(requireContext(), R.color.green_1))
-        binding.cardNavigation1.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.green_5))
-        binding.navigationText2.setTextColor(ContextCompat.getColor(requireContext(), R.color.green_1))
-        binding.cardNavigation2.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.green_5))
-        binding.navigationText3.setTextColor(ContextCompat.getColor(requireContext(), R.color.green_1))
-        binding.cardNavigation3.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.green_5))
+        binding.navigationText1.setTextColor(
+            ContextCompat.getColor(
+                requireContext(),
+                R.color.green_1
+            )
+        )
+        binding.cardNavigation1.setBackgroundColor(
+            ContextCompat.getColor(
+                requireContext(),
+                R.color.green_5
+            )
+        )
+        binding.navigationText2.setTextColor(
+            ContextCompat.getColor(
+                requireContext(),
+                R.color.green_1
+            )
+        )
+        binding.cardNavigation2.setBackgroundColor(
+            ContextCompat.getColor(
+                requireContext(),
+                R.color.green_5
+            )
+        )
+        binding.navigationText3.setTextColor(
+            ContextCompat.getColor(
+                requireContext(),
+                R.color.green_1
+            )
+        )
+        binding.cardNavigation3.setBackgroundColor(
+            ContextCompat.getColor(
+                requireContext(),
+                R.color.green_5
+            )
+        )
     }
 
     private fun setupRecyclerView(sellersList: List<Seller>) {
         recyclerView = binding.sellersList
         adapter = SellersListAdapter(sellersList) { seller ->
             Toast.makeText(context, "Pressed ${seller.name}", Toast.LENGTH_SHORT).show()
-            Navigation.findNavController(requireView()).navigate(R.id.action_sellerListFragment_to_sellerDetailsFragment)
+            Navigation.findNavController(requireView())
+                .navigate(R.id.action_sellerListFragment_to_sellerDetailsFragment)
         }
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
         recyclerView.adapter = adapter

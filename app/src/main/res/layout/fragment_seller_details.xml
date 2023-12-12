@@ -3,113 +3,170 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_categories_page">
+        android:background="@drawable/bg_sellers_page">
 
-        <TextView
-            android:id="@+id/heading_details"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_1"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/londrina_solid_regular"
-            android:text="Details"
-            android:textColor="@color/white"
-            android:textSize="35sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_margin="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageButton
+                android:id="@+id/bt_up"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="5dp"
+                android:background="@android:color/transparent"
+                android:clickable="true"
+                android:contentDescription="@string/up_button_string"
+                android:focusable="true"
+                android:foreground="?selectableItemBackground"
+                android:padding="5dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/icon_arrow"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="10dp"
+            android:background="@drawable/bg_search_bar"
+            android:drawableStart="@drawable/icon_search"
+            app:iconifiedByDefault="false"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.038" />
-
-        <TextView
-            android:id="@+id/text_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="25dp"
-            android:fontFamily="@font/londrina_solid_regular"
-            android:text="Name:"
-            android:textColor="@color/white"
-            android:textSize="25dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.17" />
+            app:layout_constraintTop_toBottomOf="@+id/layout_1"
+            app:queryBackground="@android:color/transparent"
+            app:queryHint="Search items..." />
 
         <TextView
             android:id="@+id/seller_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="5dp"
-            android:fontFamily="@font/londrina_solid_thin"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="10dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/londrina_solid_regular"
+            android:maxLines="1"
             android:text="NULL"
             android:textColor="@color/white"
-            android:textSize="21dp"
+            android:textSize="25dp"
             app:flow_horizontalBias="0.0"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.107"
-            app:layout_constraintStart_toEndOf="@id/text_name"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.175" />
-
-        <TextView
-            android:id="@+id/text_contact"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="25dp"
-            android:layout_marginStart="24dp"
-            android:fontFamily="@font/londrina_solid_regular"
-            android:text="Contact:"
-            android:textColor="@color/white"
-            android:textSize="25dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.236" />
+            app:layout_constraintTop_toBottomOf="@+id/search_bar"
+            app:layout_constraintVertical_bias="0.045" />
 
         <TextView
-            android:id="@+id/seller_phone"
+            android:id="@+id/seller_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="5dp"
-            android:fontFamily="@font/londrina_solid_thin"
+            android:layout_marginVertical="5dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="10dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/londrina_solid_light"
+            android:maxLines="1"
             android:text="NULL"
             android:textColor="@color/white"
-            android:textSize="21dp"
+            android:textSize="13dp"
             app:flow_horizontalBias="0.0"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.124"
-            app:layout_constraintStart_toEndOf="@id/text_name"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.24" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/seller_name" />
 
         <ImageButton
-            android:id="@id/bt_call"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@android:drawable/sym_action_call"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.175"
-            app:layout_constraintStart_toEndOf="@+id/seller_phone"
-            app:layout_constraintTop_toBottomOf="@+id/seller_name"
-            app:layout_constraintVertical_bias="0.018" />
+            android:id="@+id/bt_whatsapp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginVertical="15dp"
+            android:layout_marginStart="20dp"
+            android:backgroundTint="@android:color/transparent"
+            android:focusable="true"
+            android:foreground="?selectableItemBackground"
+            android:src="@drawable/icon_whatsapp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/seller_address" />
 
         <ImageButton
-            android:id="@id/bt_whatsapp"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/whatsapp_logo"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.156"
+            android:id="@+id/bt_call"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginVertical="15dp"
+            android:backgroundTint="@android:color/transparent"
+            android:focusable="true"
+            android:foreground="?selectableItemBackground"
+            android:src="@drawable/icon_call"
+            app:layout_constraintStart_toEndOf="@+id/bt_whatsapp"
+            app:layout_constraintTop_toBottomOf="@+id/seller_address" />
+
+        <ImageButton
+            android:id="@+id/bt_map"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginVertical="15dp"
+            android:backgroundTint="@android:color/transparent"
+            android:focusable="true"
+            android:foreground="?selectableItemBackground"
+            android:src="@drawable/icon_map"
             app:layout_constraintStart_toEndOf="@+id/bt_call"
-            app:layout_constraintTop_toBottomOf="@+id/seller_name"
-            app:layout_constraintVertical_bias="0.019" />
+            app:layout_constraintTop_toBottomOf="@+id/seller_address" />
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh_layout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bt_whatsapp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/purchase_item_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="15dp"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="parent">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+            </LinearLayout>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/anim_loading"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="false"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/anim_yellow_processing_circle" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

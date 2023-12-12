@@ -24,7 +24,8 @@ class ContactUsFragment : Fragment() {
         )
 
         binding.btUp.setOnClickListener {
-            Navigation.findNavController(requireView()).navigate(R.id.action_contactUsFragment_to_categoriesFragment)
+            Navigation.findNavController(requireView())
+                .navigate(R.id.action_contactUsFragment_to_categoriesFragment)
         }
 
         binding.btWhatsapp.setOnClickListener {
@@ -45,11 +46,11 @@ class ContactUsFragment : Fragment() {
     }
 
     private fun onWhatsAppButtonClicked(view: View) {
-        openWhatsapp(requireContext(),"+919961539011")
+        openWhatsapp(requireContext(), "+919961539011")
     }
 
     private fun onMailButtonClicked(view: View) {
-        openMail(requireContext(),"thomasbiju43210@gmail.com")
+        openMail(requireContext(), "thomasbiju43210@gmail.com")
     }
 
     private fun onCallButtonClicked(view: View) {

@@ -176,7 +176,7 @@
                         android:fontFamily="@font/londrina_solid_regular"
                         android:text="Sign Out"
                         android:textColor="@color/white"
-                        android:textSize="35sp"/>
+                        android:textSize="35sp" />
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>

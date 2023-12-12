@@ -1,4 +1,4 @@
-package com.example.dthomefresh.adapter
+package com.example.dthomefresh.data.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -12,8 +12,10 @@ import com.example.dthomefresh.data.Seller
 import com.example.dthomefresh.databinding.SellerItemBinding
 
 
-class SellersListAdapter(private val sellersList: List<Seller>,
-    private val clickListener: (Seller)-> Unit) : RecyclerView.Adapter<SellersListAdapter.ViewHolder>() {
+class SellersListAdapter(
+    private val sellersList: List<Seller>,
+    private val clickListener: (Seller) -> Unit
+) : RecyclerView.Adapter<SellersListAdapter.ViewHolder>() {
 
     private lateinit var binding: SellerItemBinding
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -40,7 +42,7 @@ class SellersListAdapter(private val sellersList: List<Seller>,
     }
 
     inner class ViewHolder(binding: SellerItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        val imageView: ImageView = itemView.findViewById(R.id.mars_image)
+        val imageView: ImageView = itemView.findViewById(R.id.seller_image)
         fun bind(seller: Seller) {
             binding.seller = seller
             binding.executePendingBindings()

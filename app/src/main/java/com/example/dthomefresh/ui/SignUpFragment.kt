@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.airbnb.lottie.LottieAnimationView
 import com.example.dthomefresh.R
 import com.example.dthomefresh.databinding.FragmentSignUpBinding
@@ -38,9 +39,10 @@ class SignUpFragment : Fragment() {
     private lateinit var textInputLayoutPassword: TextInputLayout
     private lateinit var textInputLayoutRePassword: TextInputLayout
 
-    lateinit var googleSignInClient: GoogleSignInClient
+    private lateinit var googleSignInClient: GoogleSignInClient
     private val REQ_ONE_TAP = 2
     private val TAG = "SignUpFragment"
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -53,6 +55,7 @@ class SignUpFragment : Fragment() {
         viewModel = ViewModelProvider(this)[SignUpViewModel::class.java]
 
         binding.lifecycleOwner = this
+        binding.viewModel = viewModel
 
         val animationView: LottieAnimationView = binding.animSignUp
 
@@ -78,27 +81,22 @@ class SignUpFragment : Fragment() {
             password = editTextPassword.text.toString()
             rePassword = editTextRePassword.text.toString()
 
-            if(isEmpty(email) && isEmpty(password)) {
+            if (isEmpty(email) && isEmpty(password)) {
                 textInputLayoutEmail.error = "Email cannot be empty"
                 textInputLayoutPassword.error = "Password cannot be empty"
-            }
-            else if(isEmpty(email)) {
+            } else if (isEmpty(email)) {
                 textInputLayoutPassword.error = null
                 textInputLayoutEmail.error = "Email cannot be empty"
-            }
-            else if(!isValidPassword(password)) {
+            } else if (!isValidPassword(password)) {
                 textInputLayoutEmail.error = null
                 textInputLayoutPassword.error = "Cannot be less than 6 character"
-            }
-            else if(!isValidEmail(email)) {
+            } else if (!isValidEmail(email)) {
                 textInputLayoutEmail.error = "Invalid email address"
-            }
-            else if(password != rePassword) {
+            } else if (password != rePassword) {
                 textInputLayoutEmail.error = null
                 textInputLayoutPassword.error = null
                 textInputLayoutRePassword.error = "Passwords do not match"
-            }
-            else {
+            } else {
                 textInputLayoutEmail.error = null
                 textInputLayoutPassword.error = null
                 textInputLayoutRePassword.error = null
@@ -114,13 +112,20 @@ class SignUpFragment : Fragment() {
             signInWithGoogle()
         }
 
+        binding.loginButton.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
         viewModel.signUpSuccess.observe(viewLifecycleOwner, Observer { newSignUpSuccess ->
-            if(newSignUpSuccess == true) {
-                Snackbar.make(binding.root, "Sign up successful, please continue to login", Snackbar.LENGTH_SHORT).show()
+            if (newSignUpSuccess == true) {
+                Snackbar.make(
+                    binding.root,
+                    "Sign up successful, please continue to login",
+                    Snackbar.LENGTH_SHORT
+                ).show()
                 viewModel.stopLoginAnimation()
-                Navigation.findNavController(requireView()).navigate(R.id.action_signUpFragment_to_loginFragment)
-            }
-            else {
+                findNavController().popBackStack()
+            } else {
                 viewModel.stopLoginAnimation()
             }
         })
@@ -142,14 +147,6 @@ class SignUpFragment : Fragment() {
             }
         })
 
-//        binding.btSkipForNow.setOnClickListener {
-//            Navigation.findNavController(it).navigate(R.id.action_signUpFragment_to_categoriesFragment)
-//        }
-
-        binding.loginButton.setOnClickListener {
-            Navigation.findNavController(it).navigate(R.id.action_signUpFragment_to_loginFragment)
-        }
-
         return binding.root
     }
 
@@ -169,21 +166,28 @@ class SignUpFragment : Fragment() {
                             if (signInTask.isSuccessful) {
                                 // Firebase authentication successful, user is signed in
                                 val firebaseUser = FirebaseAuth.getInstance().currentUser
-                                Snackbar.make(binding.root, "Logged in with ${firebaseUser?.email}", Snackbar.LENGTH_SHORT).show()
-                                Navigation.findNavController(requireView()).navigate(R.id.action_signUpFragment_to_categoriesFragment)
+                                Snackbar.make(
+                                    binding.root,
+                                    "Logged in with ${firebaseUser?.email}",
+                                    Snackbar.LENGTH_SHORT
+                                ).show()
+                                Navigation.findNavController(requireView())
+                                    .navigate(R.id.action_signUpFragment_to_categoriesFragment)
                                 viewModel.stopLoginAnimation()
                             } else {
-                                // Firebase authentication failed, handle the error
-                                Log.w(TAG, "signInWithCredential:failure", signInTask.exception)
+                                val e = signInTask.exception
+                                Log.w(TAG, "signInWithCredential:failure", e)
+                                viewModel.displayError(e)
                                 viewModel.stopLoginAnimation()
                             }
                         }
                 } else {
                     Log.e(TAG, "ID token is null")
+                    Snackbar.make(binding.root, "Something went wrong. Please try again later.", Snackbar.LENGTH_SHORT).show()
                 }
             } catch (e: ApiException) {
                 Log.w(TAG, "Google sign-in failed: ${e.statusCode}")
-                viewModel.handleException(e)
+                viewModel.displayError(e)
                 viewModel.stopLoginAnimation()
             }
         }
@@ -207,7 +211,7 @@ class SignUpFragment : Fragment() {
     }
 
     private fun isValidPassword(password: String): Boolean {
-        return password.length >=6
+        return password.length >= 6
     }
 
     private fun isValidEmail(email: String): Boolean {

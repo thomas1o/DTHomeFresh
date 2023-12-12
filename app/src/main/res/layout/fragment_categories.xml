@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="fragmentHandler"
             type="com.example.dthomefresh.utils.FragmentHandler" />
@@ -36,7 +37,7 @@
                 android:src="@drawable/icon_menu"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:onClick="@{() -> fragmentHandler.openDrawer()}"/>
+                android:onClick="@{() -> fragmentHandler.openDrawer()}" />
 
             <ImageButton
                 android:id="@+id/profile_button"

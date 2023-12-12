@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.example.dthomefresh.viewmodel.SignUpViewModel" />
@@ -130,20 +131,20 @@
             app:layout_constraintTop_toBottomOf="@+id/ti_re_password"
             app:layout_constraintVertical_bias="0.0" />
 
-<!--        <Button-->
-<!--            android:id="@+id/bt_skip_for_now"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="40dp"-->
-<!--            android:backgroundTint="@android:color/transparent"-->
-<!--            android:fontFamily="@font/londrina_solid_regular"-->
-<!--            android:text="@string/skip_for_now_string"-->
-<!--            android:textColor="@color/yellow_2"-->
-<!--            android:textSize="18sp"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/bt_sign_up"-->
-<!--            app:layout_constraintVertical_bias="0" />-->
+        <!--        <Button-->
+        <!--            android:id="@+id/bt_skip_for_now"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="40dp"-->
+        <!--            android:backgroundTint="@android:color/transparent"-->
+        <!--            android:fontFamily="@font/londrina_solid_regular"-->
+        <!--            android:text="@string/skip_for_now_string"-->
+        <!--            android:textColor="@color/yellow_2"-->
+        <!--            android:textSize="18sp"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/bt_sign_up"-->
+        <!--            app:layout_constraintVertical_bias="0" />-->
 
 
         <!--        <Switch-->
@@ -205,7 +206,7 @@
         <!--        </androidx.cardview.widget.CardView>-->
 
         <!--            android:onClickListener="@{()-> viewModel.onGoogleSignInClick()}"-->
-<!--            />-->
+        <!--            />-->
 
         <com.google.android.gms.common.SignInButton
             android:id="@+id/bt_google_sign_in"

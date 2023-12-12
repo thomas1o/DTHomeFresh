@@ -14,9 +14,6 @@ import com.example.dthomefresh.R
 import com.example.dthomefresh.databinding.FragmentCategoriesBinding
 import com.example.dthomefresh.utils.FragmentHandler
 import com.example.dthomefresh.utils.loggedInCheck
-import com.google.firebase.Firebase
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.auth
 
 class CategoriesFragment : Fragment() {
 
@@ -38,30 +35,45 @@ class CategoriesFragment : Fragment() {
         binding.cardView1.setOnClickListener {
             assignOptionValue(0)
             vibrator.vibrate(100)
-            Navigation.findNavController(it).navigate(CategoriesFragmentDirections.actionCategoriesFragmentToSellerListFragment(optionSelected))
+            Navigation.findNavController(it).navigate(
+                CategoriesFragmentDirections.actionCategoriesFragmentToSellerListFragment(
+                    optionSelected
+                )
+            )
         }
 
         binding.cardView2.setOnClickListener {
             assignOptionValue(1)
             vibrator.vibrate(100)
-            Navigation.findNavController(it).navigate(CategoriesFragmentDirections.actionCategoriesFragmentToSellerListFragment(optionSelected))
+            Navigation.findNavController(it).navigate(
+                CategoriesFragmentDirections.actionCategoriesFragmentToSellerListFragment(
+                    optionSelected
+                )
+            )
         }
 
         binding.cardView3.setOnClickListener {
             assignOptionValue(2)
             vibrator.vibrate(100)
-            Navigation.findNavController(it).navigate(CategoriesFragmentDirections.actionCategoriesFragmentToSellerListFragment(optionSelected))
+            Navigation.findNavController(it).navigate(
+                CategoriesFragmentDirections.actionCategoriesFragmentToSellerListFragment(
+                    optionSelected
+                )
+            )
         }
 
         binding.profileButton.setOnClickListener {
-            if(loggedInCheck())
-                Navigation.findNavController(requireView()).navigate(R.id.action_categoriesFragment_to_profileFragment)
+            if (loggedInCheck())
+                Navigation.findNavController(requireView())
+                    .navigate(R.id.action_categoriesFragment_to_profileFragment)
             else
-                Navigation.findNavController(requireView()).navigate(R.id.action_categoriesFragment_to_loginFragment)
+                Navigation.findNavController(requireView())
+                    .navigate(R.id.action_categoriesFragment_to_loginFragment)
         }
 
         return binding.root
     }
+
     private fun assignOptionValue(number: Int) {
         optionSelected = number
     }

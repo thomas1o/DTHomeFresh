@@ -17,6 +17,7 @@ import androidx.navigation.Navigation
 import com.airbnb.lottie.LottieAnimationView
 import com.example.dthomefresh.R
 import com.example.dthomefresh.databinding.FragmentLoginBinding
+import com.example.dthomefresh.utils.ExceptionHandler.handleException
 import com.example.dthomefresh.utils.KeyboardUtils
 import com.example.dthomefresh.viewmodel.LoginViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -54,6 +55,7 @@ class LoginFragment : Fragment() {
         viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
 
         binding.lifecycleOwner = this
+        binding.viewModel = viewModel
 
         val animationView: LottieAnimationView = binding.animLogin
 
@@ -70,22 +72,18 @@ class LoginFragment : Fragment() {
             email = editTextEmail.text.toString()
             password = editTextPassword.text.toString()
 
-            if(isEmpty(email) && isEmpty(password)) {
+            if (isEmpty(email) && isEmpty(password)) {
                 textInputLayoutEmail.error = "Email cannot be empty"
                 textInputLayoutPassword.error = "Password cannot be empty"
-            }
-            else if(isEmpty(email)) {
+            } else if (isEmpty(email)) {
                 textInputLayoutPassword.error = null
                 textInputLayoutEmail.error = "Email cannot be empty"
-            }
-            else if(isEmpty(password)) {
+            } else if (isEmpty(password)) {
                 textInputLayoutEmail.error = null
                 textInputLayoutPassword.error = "Password cannot be empty"
-            }
-            else if(!isValidEmail(email)) {
+            } else if (!isValidEmail(email)) {
                 textInputLayoutEmail.error = "Invalid email address"
-            }
-            else{
+            } else {
                 textInputLayoutEmail.error = null
                 textInputLayoutPassword.error = null
                 viewModel.setEmail(email)
@@ -96,12 +94,12 @@ class LoginFragment : Fragment() {
         }
 
         viewModel.signInSuccess.observe(viewLifecycleOwner, Observer { newSignInSuccess ->
-            if(newSignInSuccess == true) {
-                Toast.makeText(requireContext(),"Login Successful", Toast.LENGTH_SHORT).show()
+            if (newSignInSuccess == true) {
+                Toast.makeText(requireContext(), "Login Successful", Toast.LENGTH_SHORT).show()
                 viewModel.stopLoginAnimation()
-                Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_categoriesFragment)
-            }
-            else {
+                Navigation.findNavController(requireView())
+                    .navigate(R.id.action_loginFragment_to_categoriesFragment)
+            } else {
                 viewModel.stopLoginAnimation()
             }
         })
@@ -149,23 +147,29 @@ class LoginFragment : Fragment() {
                     FirebaseAuth.getInstance().signInWithCredential(credential)
                         .addOnCompleteListener { signInTask ->
                             if (signInTask.isSuccessful) {
-                                // Firebase authentication successful, user is signed in
                                 val firebaseUser = FirebaseAuth.getInstance().currentUser
-                                Snackbar.make(binding.root, "Logged in with ${firebaseUser?.email}", Snackbar.LENGTH_SHORT).show()
-                                Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_categoriesFragment)
+                                Snackbar.make(
+                                    binding.root,
+                                    "Logged in with ${firebaseUser?.email}",
+                                    Snackbar.LENGTH_SHORT
+                                ).show()
+                                Navigation.findNavController(requireView())
+                                    .navigate(R.id.action_loginFragment_to_categoriesFragment)
                                 viewModel.stopLoginAnimation()
                             } else {
-                                // Firebase authentication failed, handle the error
-                                Log.w(TAG, "signInWithCredential:failure", signInTask.exception)
+                                val e = signInTask.exception
+                                Log.w(TAG, "signInWithCredential:failure", e)
+                                viewModel.displayError(e)
                                 viewModel.stopLoginAnimation()
                             }
                         }
                 } else {
                     Log.e(TAG, "ID token is null")
+                    Snackbar.make(binding.root, "Something went wrong. Please try again later.", Snackbar.LENGTH_SHORT).show()
                 }
-            } catch (e: ApiException) {
-                Log.w(TAG, "Google sign-in failed: ${e.statusCode}")
-                viewModel.handleException(e)
+            } catch (e: Exception) {
+                Log.w(TAG, "Google sign-in failed: $e")
+                viewModel.displayError(e)
                 viewModel.stopLoginAnimation()
             }
         }

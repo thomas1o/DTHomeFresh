@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.dthomefresh.viewmodel.ProfileViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
@@ -60,6 +66,7 @@
             android:fontFamily="@font/londrina_solid_thin"
             android:textColor="@color/white"
             android:textSize="21dp"
+            android:text="@{viewModel.email}"
             app:flow_horizontalBias="0.0"
             app:layout_constraintBottom_toBottomOf="@+id/sign_out_button"
             app:layout_constraintEnd_toEndOf="parent"

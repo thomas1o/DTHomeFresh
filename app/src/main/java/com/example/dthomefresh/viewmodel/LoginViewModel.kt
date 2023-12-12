@@ -1,15 +1,12 @@
 package com.example.dthomefresh.viewmodel
 
-import android.accounts.NetworkErrorException
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.dthomefresh.utils.ExceptionHandler.handleException
 import com.google.firebase.Firebase
-import com.google.firebase.FirebaseException
-import com.google.firebase.FirebaseNetworkException
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.auth
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -17,9 +14,8 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.util.concurrent.TimeoutException
 
-class LoginViewModel: ViewModel() {
+class LoginViewModel : ViewModel() {
 
     private var auth: FirebaseAuth = Firebase.auth
     private var viewModelJob = Job()
@@ -63,45 +59,41 @@ class LoginViewModel: ViewModel() {
                                     Log.i("LoginViewModel", "Login successful")
                                 } else {
                                     _signInSuccess.value = false
-                                    val exception = task.exception
-                                    handleException(exception)
+                                    val e = task.exception
+                                    _signInSuccess.value = false
+                                    displayError(e)
                                 }
                             }
                     } catch (e: Exception) {
-                        handleException(e)
+                        displayError(e)
                     }
                 }
             }
         }
     }
 
-    fun handleException(exception: Exception?) {
-        val errorMessage = when (exception) {
-            is FirebaseAuthException -> "Oops! There was an issue with your authentication."
-            is FirebaseNetworkException -> "Please check your network."
-            is NetworkErrorException -> "Please check your network."
-            is TimeoutException -> "Taking too long to load. Please try again later."
-            else -> "Something went wrong. Please try again."
-        }
-        _errorMessage.value = errorMessage
-        Log.e("LoginViewModel", errorMessage)
-        _signInSuccess.value = false
-    }
-
     fun startLoginAnimation() {
         _loginAnimation.value = true
     }
+
     fun stopLoginAnimation() {
         _loginAnimation.value = false
     }
+
     fun setEmail(emailInput: String?) {
         email.value = emailInput
     }
+
     fun setPassword(passwordInput: String?) {
         password.value = passwordInput
     }
+
     fun startSignIn() {
         signIn(email.value ?: "", password.value ?: "")
+    }
+
+    fun displayError(e: Exception?) {
+        _errorMessage.value = handleException(e)
     }
 
     override fun onCleared() {

@@ -26,31 +26,32 @@ class MainActivity : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        val navController = supportFragmentManager.findFragmentById(R.id.navHostFragment)?.findNavController()
+        val navController =
+            supportFragmentManager.findFragmentById(R.id.navHostFragment)?.findNavController()
         drawerLayout = binding.drawerLayout
 
         auth = Firebase.auth
 
+        binding.signOutItem.setOnClickListener {
+            closeDrawer()
+            if (loggedInCheck()) {
+                Firebase.auth.signOut()
+                Snackbar.make(binding.root, "Signed out successfully", Snackbar.LENGTH_SHORT).show()
+            } else
+                Snackbar.make(binding.root, "Not logged in", Snackbar.LENGTH_SHORT).show()
+        }
+
         binding.profileItem.setOnClickListener {
             closeDrawer()
-
-//            TODO- navigate to profile if logged in
-            navController?.navigate(R.id.action_categoriesFragment_to_loginFragment)
+            if(loggedInCheck())
+                navController?.navigate(R.id.action_categoriesFragment_to_profileFragment)
+            else
+                navController?.navigate(R.id.action_categoriesFragment_to_loginFragment)
         }
 
         binding.contactUsItem.setOnClickListener {
             closeDrawer()
             navController?.navigate(R.id.action_categoriesFragment_to_contactUsFragment)
-        }
-
-        binding.signOutItem.setOnClickListener {
-            closeDrawer()
-            if(loggedInCheck()) {
-                Firebase.auth.signOut()
-                Snackbar.make(binding.root, "Signed out successfully", Snackbar.LENGTH_SHORT).show()
-            }
-            else
-                Snackbar.make(binding.root, "Not logged in", Snackbar.LENGTH_SHORT).show()
         }
 
     }
@@ -60,7 +61,8 @@ class MainActivity : AppCompatActivity() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START)
         } else {
-            val navController = supportFragmentManager.findFragmentById(R.id.navHostFragment)?.findNavController()
+            val navController =
+                supportFragmentManager.findFragmentById(R.id.navHostFragment)?.findNavController()
 
             // Check if the current destination is CategoriesFragment
             if (navController?.currentDestination?.id == R.id.categoriesFragment) {
@@ -71,7 +73,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-//    OPTIMISE- make a custom dialogue box
+    //    OPTIMISE- make a custom dialogue box
     private fun showExitConfirmationDialog() {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Exit Confirmation")

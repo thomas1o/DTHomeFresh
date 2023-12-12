@@ -5,12 +5,12 @@
     android:id="@+id/main_navigation"
     app:startDestination="@id/onboardingFragment">
 
-<!--    TODO- fix a bug navigation from the home page and pop behavior-->
+    <!--    TODO- fix a bug navigation from the home page and pop behavior-->
 
     <fragment
         android:id="@+id/onboardingFragment"
         android:name="com.example.dthomefresh.ui.OnboardingFragment"
-        android:label="OnboardingFragment" >
+        android:label="OnboardingFragment">
         <action
             android:id="@+id/action_onboardingFragment_to_categoriesFragment"
             app:destination="@id/categoriesFragment"
@@ -22,7 +22,7 @@
     <fragment
         android:id="@+id/categoriesFragment"
         android:name="com.example.dthomefresh.ui.CategoriesFragment"
-        android:label="CategoriesFragment" >
+        android:label="CategoriesFragment">
         <action
             android:id="@+id/action_categoriesFragment_to_sellerListFragment"
             app:destination="@id/sellerListFragment"
@@ -59,14 +59,6 @@
         android:id="@+id/sellerListFragment"
         android:name="com.example.dthomefresh.ui.SellerListFragment"
         android:label="SellerListFragment">
-        <action
-            android:id="@+id/action_sellerListFragment_to_categoriesFragment"
-            app:destination="@id/categoriesFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/slide_out_right"
-            app:launchSingleTop="false"
-            app:popUpTo="@id/categoriesFragment"
-            app:popUpToInclusive="true" />
         <argument
             android:name="optionSelected"
             android:defaultValue="0"
@@ -91,14 +83,7 @@
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.example.dthomefresh.ui.SignUpFragment"
-        android:label="SignUpFragment" >
-        <action
-            android:id="@+id/action_signUpFragment_to_loginFragment"
-            app:destination="@id/loginFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@anim/slide_out_right"
-            app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="true" />
+        android:label="SignUpFragment">
         <action
             android:id="@+id/action_signUpFragment_to_categoriesFragment"
             app:destination="@id/categoriesFragment"
@@ -110,7 +95,7 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.dthomefresh.ui.LoginFragment"
-        android:label="LoginFragment" >
+        android:label="LoginFragment">
         <action
             android:id="@+id/action_loginFragment_to_signUpFragment"
             app:destination="@id/signUpFragment"
@@ -130,7 +115,7 @@
         android:id="@+id/profileFragment"
         android:name="com.example.dthomefresh.ui.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" >
+        tools:layout="@layout/fragment_profile">
         <action
             android:id="@+id/action_profileFragment_to_categoriesFragment"
             app:destination="@id/categoriesFragment"
@@ -142,7 +127,7 @@
     <fragment
         android:id="@+id/contactUsFragment"
         android:name="com.example.dthomefresh.ui.ContactUsFragment"
-        android:label="ContactUsFragment" >
+        android:label="ContactUsFragment">
         <action
             android:id="@+id/action_contactUsFragment_to_categoriesFragment"
             app:destination="@id/categoriesFragment"
@@ -154,5 +139,13 @@
     <fragment
         android:id="@+id/sellerDetailsFragment"
         android:name="com.example.dthomefresh.ui.SellerDetailsFragment"
-        android:label="SellerDetailsFragment" />
+        android:label="SellerDetailsFragment">
+        <action
+            android:id="@+id/action_sellerDetailsFragment_to_sellerListFragment"
+            app:destination="@id/sellerListFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popUpTo="@id/sellerListFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

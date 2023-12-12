@@ -26,7 +26,8 @@ class OnboardingFragment : Fragment() {
 
         binding.getStartedButton.setOnClickListener {
             vibrator.vibrate(100)
-            Navigation.findNavController(it).navigate(R.id.action_onboardingFragment_to_categoriesFragment)
+            Navigation.findNavController(it)
+                .navigate(R.id.action_onboardingFragment_to_categoriesFragment)
         }
 
         return binding.root

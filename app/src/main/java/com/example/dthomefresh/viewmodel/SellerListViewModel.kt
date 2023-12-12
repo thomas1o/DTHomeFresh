@@ -16,7 +16,7 @@ import java.util.Locale
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
-class SellerListViewModel(optionSelected : Int) : ViewModel() {
+class SellerListViewModel(optionSelected: Int) : ViewModel() {
 
     private val _options = MutableLiveData<MutableMap<Int, Boolean>>()
     val options: LiveData<MutableMap<Int, Boolean>>
@@ -43,7 +43,7 @@ class SellerListViewModel(optionSelected : Int) : ViewModel() {
         get() = _errorToast
 
     init {
-        when(optionSelected) {
+        when (optionSelected) {
             0 -> onFood()
             1 -> onClothes()
             2 -> onHomemadeItems()
@@ -59,13 +59,14 @@ class SellerListViewModel(optionSelected : Int) : ViewModel() {
         _options.value = currentOptions
         _setUpRecyclerView.value = false
     }
-    private fun setTrue(elNum : Int) {
+
+    private fun setTrue(elNum: Int) {
         val currentOptions = _options.value
         currentOptions?.set(elNum, true)
         _options.value = currentOptions!!
     }
 
-    private suspend fun fetchSellersFromFirebase() : List<Seller> {
+    private suspend fun fetchSellersFromFirebase(): List<Seller> {
         startLoadingAnimation()
         return withContext(Dispatchers.IO) {
             try {
@@ -109,8 +110,10 @@ class SellerListViewModel(optionSelected : Int) : ViewModel() {
             val originalSellers = _sellersList.value.orEmpty()
             val filteredSellers = if (!searchText.isNullOrBlank()) {
                 originalSellers.filter { seller ->
-                    seller.name?.lowercase(Locale.ROOT)?.contains(searchText.lowercase(Locale.ROOT)) == true ||
-                            seller.address?.lowercase(Locale.ROOT)?.contains(searchText.lowercase(Locale.ROOT)) == true
+                    seller.name?.lowercase(Locale.ROOT)
+                        ?.contains(searchText.lowercase(Locale.ROOT)) == true ||
+                            seller.address?.lowercase(Locale.ROOT)
+                                ?.contains(searchText.lowercase(Locale.ROOT)) == true
                 }
             } else {
                 originalSellers
@@ -134,20 +137,25 @@ class SellerListViewModel(optionSelected : Int) : ViewModel() {
         setAllFalse()
         setTrue(0)
     }
+
     fun onClothes() {
         setAllFalse()
         setTrue(1)
     }
+
     fun onHomemadeItems() {
         setAllFalse()
         setTrue(2)
     }
+
     private fun startLoadingAnimation() {
         _loadingAnimation.value = true
     }
+
     private fun stopLoadingAnimation() {
         _loadingAnimation.value = false
     }
+
     private fun stopRefreshingAnimation() {
         _refreshingAnimation.value = false
     }
