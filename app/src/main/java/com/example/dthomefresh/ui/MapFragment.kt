@@ -2,11 +2,10 @@ package com.example.dthomefresh.ui
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.content.IntentSender
 import android.content.pm.PackageManager
-import android.location.LocationManager
+import android.location.Geocoder
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,8 +14,10 @@ import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.dthomefresh.R
-import com.example.dthomefresh.databinding.FragmentMapsBinding
+import com.example.dthomefresh.databinding.FragmentMapBinding
+import com.example.dthomefresh.viewmodel.MapViewModel
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -24,15 +25,20 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import java.io.IOException
+import java.util.Locale
 
-class MapsFragment : Fragment() {
+class MapFragment : Fragment() {
 
-    private lateinit var binding: FragmentMapsBinding
+    private lateinit var binding: FragmentMapBinding
+    private lateinit var viewModel: MapViewModel
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var currentLocation: LatLng
     private var isLocationEnabled = false
     private lateinit var googleMap: GoogleMap
+    private lateinit var centerMarker: Marker
 
     @SuppressLint("MissingPermission")
     private val callback = OnMapReadyCallback { map ->
@@ -43,14 +49,10 @@ class MapsFragment : Fragment() {
             googleMap.uiSettings.isMyLocationButtonEnabled = false
             fetchLocation()
 
-            // Fetch and add the current location marker
-//            fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
-//                if (location != null) {
-//                    currentLocation = LatLng(location.latitude, location.longitude)
-//                    googleMap.addMarker(MarkerOptions().position(currentLocation).title("Current Location"))
-//                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 15f))
-//                }
-//            }
+            googleMap.setOnCameraMoveListener {
+                updateCenterMarkerPosition(googleMap.cameraPosition.target)
+                displayPlaceInformation(googleMap.cameraPosition.target)
+            }
         }
     }
 
@@ -59,7 +61,12 @@ class MapsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_maps, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_map, container, false)
+
+        viewModel = ViewModelProvider(this)[MapViewModel::class.java]
+
+//        binding.lifecycleOwner = this
+//        binding.viewModel = viewModel
 
         binding.btCurrentLocation.setOnClickListener {
             checkLocationSettings()
@@ -75,6 +82,31 @@ class MapsFragment : Fragment() {
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         checkLocationSettings()
+    }
+
+    private fun updateCenterMarkerPosition(latLng: LatLng) {
+        if (::centerMarker.isInitialized) {
+            centerMarker.position = latLng
+        } else {
+            centerMarker = googleMap.addMarker(MarkerOptions().position(latLng))!!
+        }
+    }
+
+    private fun displayPlaceInformation(latLng: LatLng) {
+        val geocoder = Geocoder(requireContext(), Locale.getDefault())
+        try {
+            val addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1)
+            if (addresses != null) {
+                if (addresses.isNotEmpty()) {
+                    val address = addresses[0]
+                    // Get the name of the place or address and display it
+                    val placeName = address.getAddressLine(0)
+//                    binding.placeName.text = placeName
+                }
+            }
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
     }
 
     private fun checkLocationSettings() {
@@ -116,7 +148,7 @@ class MapsFragment : Fragment() {
     }
 
     private fun fetchLocation() {
-        Log.i("MapsFragment", "fetchLocation called")
+        Log.i("MapFragment", "fetchLocation called")
 
         if (ActivityCompat.checkSelfPermission(
                 requireContext(),

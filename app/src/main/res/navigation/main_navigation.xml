@@ -157,6 +157,6 @@
     </fragment>
     <fragment
         android:id="@+id/mapsFragment"
-        android:name="com.example.dthomefresh.ui.MapsFragment"
+        android:name="com.example.dthomefresh.ui.MapFragment"
         android:label="MapsFragment" />
 </navigation>

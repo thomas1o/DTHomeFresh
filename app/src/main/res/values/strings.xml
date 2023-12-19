@@ -37,8 +37,8 @@
     <string name="have_an_account_string">Have an account?</string>
     <string name="skip_for_now_string">Skip for now</string>
     <string name="seller_image_string">Seller Image</string>
-    <string name="full_name_string">Full Name</string>
-    <string name="phone_number_string">Phone Number</string>
+    <string name="full_name_string">Full Name*</string>
+    <string name="phone_number_string">Phone Number*</string>
     <string name="address_string">Address</string>
     <string name="save_string">Save</string>
     <string name="sign_out_string">Sign Out</string>
