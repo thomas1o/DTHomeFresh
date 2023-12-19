@@ -4,7 +4,8 @@
 
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -17,8 +18,12 @@
         android:theme="@style/Theme.DTHomeFresh"
         tools:targetApi="31">
 
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBTvVYUi_SwI-3s--gsg56dJsbdcCAGQDk" />
+
         <activity
-            android:name="MainActivity"
+            android:name=".MainActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.DTHomeFresh">
@@ -27,7 +32,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

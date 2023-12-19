@@ -2,9 +2,7 @@ package com.example.dthomefresh.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.TextUtils
 import android.util.Log
-import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -87,7 +85,7 @@ class SignUpFragment : Fragment() {
             textInputLayoutPassword.error = validator.passwordValidator(password)
             textInputLayoutRePassword.error = validator.rePasswordValidator(password, rePassword)
 
-            if(textInputLayoutEmail.error == null && textInputLayoutPassword.error == null && textInputLayoutRePassword.error == null) {
+            if (textInputLayoutEmail.error == null && textInputLayoutPassword.error == null && textInputLayoutRePassword.error == null) {
                 viewModel.setEmail(email)
                 viewModel.setPassword(password)
                 viewModel.startSignUp()
@@ -171,7 +169,11 @@ class SignUpFragment : Fragment() {
                         }
                 } else {
                     Log.e(TAG, "ID token is null")
-                    Snackbar.make(binding.root, "Something went wrong. Please try again later.", Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(
+                        binding.root,
+                        "Something went wrong. Please try again later.",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
                 }
             } catch (e: ApiException) {
                 Log.w(TAG, "Google sign-in failed: ${e.statusCode}")

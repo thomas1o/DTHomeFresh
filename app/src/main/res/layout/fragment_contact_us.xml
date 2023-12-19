@@ -75,7 +75,7 @@
             android:layout_height="50dp"
             android:background="@drawable/bg_contact_us_item"
             android:backgroundTint="@android:color/transparent"
-            android:drawableLeft="@drawable/icon_call"
+            android:drawableLeft="@drawable/icon_call_green"
             android:fontFamily="@font/londrina_solid_regular"
             android:text="Call Us"
             android:textColor="@color/green_4"

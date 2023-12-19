@@ -3,7 +3,6 @@ package com.example.dthomefresh.data.adapter
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -36,7 +35,8 @@ class PurchaseItemListAdapter(
         return purchaseItemList.size
     }
 
-    inner class ViewHolder(binding: PurchaseGridItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(binding: PurchaseGridItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         val imageView: ImageView = itemView.findViewById(R.id.purchase_item_image)
         fun bind(purchaseItem: Item) {
             binding.purchaseItem = purchaseItem

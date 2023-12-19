@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="mainActivity"
             type="com.example.dthomefresh.MainActivity" />
@@ -93,7 +94,7 @@
                         android:layout_height="50dp"
                         android:layout_marginHorizontal="10dp"
                         android:layout_marginVertical="10dp"
-                        android:src="@drawable/icon_contact_us" />
+                        android:src="@drawable/icon_call_yellow" />
 
                     <TextView
                         android:layout_width="wrap_content"

@@ -42,7 +42,6 @@ class ProfileViewModel : ViewModel() {
 
         currentUser?.let { firebaseUser ->
             val uid = firebaseUser.uid
-
             // Note: Write user data to the Firebase Realtime Database with the UID as the key
             database.reference.child("Sellers").child(uid).setValue(seller)
         }

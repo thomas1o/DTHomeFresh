@@ -6,7 +6,7 @@ import java.util.regex.Pattern
 class Validator {
 
     fun emailValidator(email: String): String? {
-        if(email.isEmpty())
+        if (email.isEmpty())
             return "Email cannot be empty"
         else if (!isValidEmail(email))
             return "Not a valid email"
@@ -15,7 +15,7 @@ class Validator {
     }
 
     fun passwordValidator(password: String): String? {
-        if(password.isEmpty())
+        if (password.isEmpty())
             return "Password cannot be empty"
         else if (password.length < 6)
             return "Should have at least 6 characters"
@@ -33,7 +33,7 @@ class Validator {
     }
 
     fun rePasswordValidator(password: String, rePassword: String): String? {
-        if(rePassword.isEmpty())
+        if (rePassword.isEmpty())
             return "Password cannot be empty"
         else if (password != rePassword)
             return "Does not match with the above"
@@ -46,6 +46,7 @@ class Validator {
         val matcherCap = pattern.matcher(password)
         return matcherCap.find()
     }
+
     private fun isValidEmail(email: String): Boolean {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }

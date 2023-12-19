@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="purchase_item"
             type="com.example.dthomefresh.data.Item" />

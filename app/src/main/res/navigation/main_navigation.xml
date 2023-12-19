@@ -123,6 +123,13 @@
             app:exitAnim="@anim/slide_out_top"
             app:popUpTo="@id/categoriesFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_profileFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/contactUsFragment"
@@ -148,4 +155,8 @@
             app:popUpTo="@id/sellerListFragment"
             app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.example.dthomefresh.ui.MapsFragment"
+        android:label="MapsFragment" />
 </navigation>

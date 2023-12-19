@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.profileItem.setOnClickListener {
             closeDrawer()
-            if(loggedInCheck())
+            if (loggedInCheck())
                 navController?.navigate(R.id.action_categoriesFragment_to_profileFragment)
             else
                 navController?.navigate(R.id.action_categoriesFragment_to_loginFragment)

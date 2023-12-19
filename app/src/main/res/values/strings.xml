@@ -44,5 +44,7 @@
     <string name="sign_out_string">Sign Out</string>
     <string name="please_fill_the_details_string">Please fill the details</string>
     <string name="web_client_id">1002985949261-m1ehg56of2bdaep29aokbiaen33663be.apps.googleusercontent.com</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
