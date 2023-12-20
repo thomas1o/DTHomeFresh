@@ -15,8 +15,10 @@ import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.dthomefresh.R
 import com.example.dthomefresh.databinding.FragmentMapBinding
+import com.example.dthomefresh.viewmodel.MapAndBottomSheetViewModel
 import com.example.dthomefresh.viewmodel.MapViewModel
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
@@ -27,6 +29,9 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.IOException
 import java.util.Locale
 
@@ -34,15 +39,17 @@ class MapFragment : Fragment() {
 
     private lateinit var binding: FragmentMapBinding
     private lateinit var viewModel: MapViewModel
+    private lateinit var sharedViewModel: MapAndBottomSheetViewModel
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var currentLocation: LatLng
     private var isLocationEnabled = false
     private lateinit var googleMap: GoogleMap
     private lateinit var centerMarker: Marker
+    private lateinit var currentLocationMarker: Marker
 
     @SuppressLint("MissingPermission")
     private val callback = OnMapReadyCallback { map ->
-        googleMap = map // Initialize the GoogleMap instance
+        googleMap = map
 
         if (isLocationEnabled) {
             googleMap.isMyLocationEnabled = true
@@ -53,6 +60,13 @@ class MapFragment : Fragment() {
                 updateCenterMarkerPosition(googleMap.cameraPosition.target)
                 displayPlaceInformation(googleMap.cameraPosition.target)
             }
+
+            val mapCenter = googleMap.projection.visibleRegion.latLngBounds.center
+            centerMarker = googleMap.addMarker(
+                MarkerOptions()
+                    .position(mapCenter)
+                    .title("Center Marker")
+            )!!
         }
     }
 
@@ -64,9 +78,7 @@ class MapFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_map, container, false)
 
         viewModel = ViewModelProvider(this)[MapViewModel::class.java]
-
-//        binding.lifecycleOwner = this
-//        binding.viewModel = viewModel
+        sharedViewModel = ViewModelProvider(requireActivity())[MapAndBottomSheetViewModel::class.java]
 
         binding.btCurrentLocation.setOnClickListener {
             checkLocationSettings()
@@ -80,32 +92,50 @@ class MapFragment : Fragment() {
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
 
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+        fusedLocationProviderClient =
+            LocationServices.getFusedLocationProviderClient(requireActivity())
         checkLocationSettings()
     }
+
+    private fun displayPlaceInformation(latLng: LatLng) {
+        val geocoder = Geocoder(requireContext(), Locale.getDefault())
+
+        lifecycleScope.launch(Dispatchers.IO) {
+            try {
+                val addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1)
+                if (addresses?.isNotEmpty() == true) {
+                    val address = addresses[0]
+                    val addressText = address.getAddressLine(0)
+
+                    val currentTime = System.currentTimeMillis()
+                    if (currentTime - lastLocationUpdateTimestamp > MIN_UPDATE_INTERVAL) {
+                        withContext(Dispatchers.Main) {
+                            sharedViewModel.startAnimation()
+                            centerMarker.title = "Marker"
+                            sharedViewModel.setAddress(addressText)
+                            sharedViewModel.setAddressCoordinates(latLng)
+                        }
+                        lastLocationUpdateTimestamp = currentTime
+                    }
+                } else {
+                    Log.d("MapFragment", "No address found for the provided location.")
+                }
+            } catch (e: IOException) {
+                Log.e("MapFragment", "Error getting address: ${e.message}")
+            }
+        }
+    }
+
 
     private fun updateCenterMarkerPosition(latLng: LatLng) {
         if (::centerMarker.isInitialized) {
             centerMarker.position = latLng
         } else {
-            centerMarker = googleMap.addMarker(MarkerOptions().position(latLng))!!
-        }
-    }
-
-    private fun displayPlaceInformation(latLng: LatLng) {
-        val geocoder = Geocoder(requireContext(), Locale.getDefault())
-        try {
-            val addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1)
-            if (addresses != null) {
-                if (addresses.isNotEmpty()) {
-                    val address = addresses[0]
-                    // Get the name of the place or address and display it
-                    val placeName = address.getAddressLine(0)
-//                    binding.placeName.text = placeName
-                }
-            }
-        } catch (e: IOException) {
-            e.printStackTrace()
+            centerMarker = googleMap.addMarker(
+                MarkerOptions()
+                    .position(latLng)
+                    .title("Center Marker")
+            )!!
         }
     }
 
@@ -124,7 +154,8 @@ class MapFragment : Fragment() {
         task.addOnSuccessListener {
             // Location settings meet the requirements
             isLocationEnabled = true
-            fetchLocation()
+            initializeMap()
+            updateCenterMarker()
         }
 
         task.addOnFailureListener { exception ->
@@ -146,6 +177,22 @@ class MapFragment : Fragment() {
             }
         }
     }
+
+    private fun updateCenterMarker() {
+        if (::googleMap.isInitialized) {
+            val mapCenter = googleMap.projection.visibleRegion.latLngBounds.center
+            if (!::centerMarker.isInitialized || !centerMarker.isVisible) {
+                centerMarker = googleMap.addMarker(
+                    MarkerOptions()
+                        .position(mapCenter)
+                        .title("Center Marker")
+                )!!
+            } else {
+                centerMarker.position = mapCenter
+            }
+        }
+    }
+
 
     private fun fetchLocation() {
         Log.i("MapFragment", "fetchLocation called")
@@ -174,8 +221,9 @@ class MapFragment : Fragment() {
             if (location != null) {
                 currentLocation = LatLng(location.latitude, location.longitude)
                 if (isAdded && ::googleMap.isInitialized) {
-                    googleMap.clear() // Clear previous markers
-                    googleMap.addMarker(MarkerOptions().position(currentLocation).title("Current Location"))
+                    googleMap.addMarker(
+                        MarkerOptions().position(currentLocation).title("Current Location")
+                    )
                     googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 14f))
                 }
             }
@@ -188,6 +236,7 @@ class MapFragment : Fragment() {
             if (resultCode == Activity.RESULT_OK) {
                 isLocationEnabled = true
                 initializeMap()
+                updateCenterMarker()
             }
         }
     }
@@ -200,5 +249,7 @@ class MapFragment : Fragment() {
     companion object {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1001
         private const val REQUEST_CHECK_SETTINGS = 123
+        private val MIN_UPDATE_INTERVAL = 2000L
+        private var lastLocationUpdateTimestamp: Long = 0
     }
 }

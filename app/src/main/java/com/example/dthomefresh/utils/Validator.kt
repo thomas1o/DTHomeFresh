@@ -32,6 +32,31 @@ class Validator {
 //                !hasNum(password) || !hasSpecial(password))
     }
 
+    fun nameValidator(name: String): String? {
+        if (name.isEmpty())
+            return "Name cannot be empty"
+        else if (name.length > 50)
+            return "Name is too long"
+        else return null
+    }
+
+    fun phoneNumberValidator(phoneNumber: String): String? {
+        if (phoneNumber.isEmpty())
+            return "Phone number cannot be empty"
+        else if (phoneNumber.length != 10)
+            return "Phone number should contain 10 digits"
+        else return null
+    }
+
+    fun addressValidator(address: String): String? {
+        if (address.isEmpty())
+            return "Address cannot be empty"
+        else if (address.length >= 100)
+            return "Address is too long"
+        else return null
+    }
+
+
     fun rePasswordValidator(password: String, rePassword: String): String? {
         if (rePassword.isEmpty())
             return "Password cannot be empty"

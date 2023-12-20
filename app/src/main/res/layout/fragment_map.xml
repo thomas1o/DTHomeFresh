@@ -11,6 +11,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
+
         <androidx.cardview.widget.CardView
             android:id="@+id/bt_current_location"
             android:layout_width="180dp"
@@ -53,77 +54,7 @@
             android:name="com.example.dthomefresh.ui.MapBottomSheet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/map" />
-
-<!--        <androidx.cardview.widget.CardView-->
-<!--            android:id="@+id/bt_enter_address"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="50dp"-->
-<!--            android:layout_marginHorizontal="30dp"-->
-<!--            android:backgroundTint="@color/green_3"-->
-<!--            android:elevation="12dp"-->
-<!--            android:focusable="true"-->
-<!--            android:foreground="?selectableItemBackground"-->
-<!--            app:cardCornerRadius="10dp"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:layout_constraintVertical_bias="0.98">-->
-
-<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent">-->
-
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:fontFamily="@font/londrina_solid_regular"-->
-<!--                    android:text="Enter address"-->
-<!--                    android:textColor="@color/black"-->
-<!--                    android:textSize="30sp"-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-<!--        </androidx.cardview.widget.CardView>-->
-
-<!--        <androidx.cardview.widget.CardView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="50dp"-->
-<!--            android:layout_marginHorizontal="30dp"-->
-<!--            android:backgroundTint="@color/white"-->
-<!--            android:elevation="12dp"-->
-<!--            app:cardCornerRadius="10dp"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:layout_constraintVertical_bias="0.8">-->
-
-<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent">-->
-
-<!--                <TextView-->
-<!--                    android:id="@+id/place_name"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:fontFamily="@font/londrina_solid_light"-->
-<!--                    android:text="Place Name"-->
-<!--                    android:textColor="@color/black"-->
-<!--                    android:textSize="18sp"-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-<!--        </androidx.cardview.widget.CardView>-->
+            app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

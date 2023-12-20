@@ -38,27 +38,6 @@ class ProfileFragment : Fragment() {
 
         val signOutAnimation = binding.animSignOut
 
-        var name: String
-        var phoneNumber: String
-        var address: String
-
-        binding.btSave.setOnClickListener {
-            Snackbar.make(binding.root, "Saved successfully", Snackbar.LENGTH_SHORT).show()
-
-//            name = binding.etName.text.toString()
-//            phoneNumber = binding.etPhoneNumber.text.toString()
-//            address = binding.etAddress.text.toString()
-            address = null.toString()
-
-//            viewModel.writeNewUser(name, phoneNumber, address)
-
-            // Note: Clear EditText fields after saving
-//            binding.etName.text?.clear()
-//            binding.etPhoneNumber.text?.clear()
-//            binding.etAddress.text?.clear()
-
-        }
-
         val firebaseAuth = FirebaseAuth.getInstance()
         val currentUser = firebaseAuth.currentUser
         val userEmail = currentUser?.email
@@ -77,8 +56,6 @@ class ProfileFragment : Fragment() {
         }
 
         binding.btFindAddress.setOnClickListener {
-            Log.i(TAG, "Find location pressed")
-            binding.userLocation.text = "Searching for location..."
             Navigation.findNavController(it).navigate(R.id.action_profileFragment_to_mapsFragment)
         }
 

@@ -14,7 +14,6 @@ class ProfileViewModel : ViewModel() {
 
     private val firebaseAuth = FirebaseAuth.getInstance()
     private val currentUser = firebaseAuth.currentUser
-    private val database = FirebaseDatabase.getInstance()
 
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
@@ -35,15 +34,4 @@ class ProfileViewModel : ViewModel() {
         _email.value = currentUser?.email
     }
 
-    fun writeNewUser(name: String, phoneNumber: String, address: String) {
-        val seller = Seller(name, phoneNumber, address)
-        val firebaseAuth = FirebaseAuth.getInstance()
-        val currentUser = firebaseAuth.currentUser
-
-        currentUser?.let { firebaseUser ->
-            val uid = firebaseUser.uid
-            // Note: Write user data to the Firebase Realtime Database with the UID as the key
-            database.reference.child("Sellers").child(uid).setValue(seller)
-        }
-    }
 }
