@@ -76,36 +76,6 @@
             app:layout_constraintVertical_bias="0.176" />
 
         <TextView
-            android:id="@+id/text_address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="25dp"
-            android:fontFamily="@font/londrina_solid_regular"
-            android:text="Address:"
-            android:textColor="@color/white"
-            android:textSize="25dp"
-            app:layout_constraintBottom_toBottomOf="@+id/bt_sign_out"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.27" />
-
-        <TextView
-            android:id="@+id/user_address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="5dp"
-            android:fontFamily="@font/londrina_solid_thin"
-            android:text="null"
-            android:textColor="@color/white"
-            android:textSize="16dp"
-            app:layout_constraintBottom_toBottomOf="@+id/bt_sign_out"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.081"
-            app:layout_constraintStart_toEndOf="@id/text_address"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.281" />
-
-        <TextView
             android:id="@+id/text_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -135,6 +105,36 @@
             app:layout_constraintStart_toEndOf="@id/text_name"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.226" />
+
+        <TextView
+            android:id="@+id/text_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="25dp"
+            android:fontFamily="@font/londrina_solid_regular"
+            android:text="Address:"
+            android:textColor="@color/white"
+            android:textSize="25dp"
+            app:layout_constraintBottom_toBottomOf="@+id/bt_sign_out"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.27" />
+
+        <TextView
+            android:id="@+id/user_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:fontFamily="@font/londrina_solid_thin"
+            android:text="null"
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/bt_sign_out"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.081"
+            app:layout_constraintStart_toEndOf="@id/text_address"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.281" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/bt_find_address"
@@ -169,7 +169,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/londrina_solid_regular"
-                    android:text="Add address"
+                    android:text="Add / edit address"
                     android:textColor="@color/black"
                     android:textSize="28sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -193,7 +193,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.95">
+            app:layout_constraintVertical_bias="0.98">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

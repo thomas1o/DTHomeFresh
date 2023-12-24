@@ -3,6 +3,7 @@ package com.example.dthomefresh.ui
 import android.content.Context
 import android.os.Bundle
 import android.os.Vibrator
+import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,7 +25,7 @@ class OnboardingFragment : Fragment() {
 
         val vibrator = activity?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
 
-        binding.getStartedButton.setOnClickListener {
+        binding.btGetStarted.setOnClickListener {
             vibrator.vibrate(100)
             Navigation.findNavController(it)
                 .navigate(R.id.action_onboardingFragment_to_categoriesFragment)
@@ -32,5 +33,6 @@ class OnboardingFragment : Fragment() {
 
         return binding.root
     }
+
 
 }

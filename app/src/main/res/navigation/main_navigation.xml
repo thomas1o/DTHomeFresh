@@ -5,8 +5,6 @@
     android:id="@+id/main_navigation"
     app:startDestination="@id/onboardingFragment">
 
-    <!--    TODO- fix a bug navigation from the home page and pop behavior-->
-
     <fragment
         android:id="@+id/onboardingFragment"
         android:name="com.example.dthomefresh.ui.OnboardingFragment"
@@ -126,10 +124,10 @@
         <action
             android:id="@+id/action_profileFragment_to_mapsFragment"
             app:destination="@id/mapsFragment"
-            app:enterAnim="@android:anim/fade_in"
+            app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
-            app:popExitAnim="@android:anim/fade_out" />
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/contactUsFragment"

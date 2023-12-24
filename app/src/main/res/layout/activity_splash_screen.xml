@@ -2,10 +2,14 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/splashScreenMotionLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_onboarding_page">
+        android:background="@drawable/gradient_splash_screen"
+        app:layoutDescription="@xml/activity_splash_screen_scene"
+        tools:context=".SplashScreenActivity">
 
         <ImageView
             android:id="@+id/app_icon"
@@ -16,8 +20,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.435"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/string_app_icon"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/app_name"
@@ -28,29 +31,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/app_icon"
             app:layout_constraintVertical_bias="0.0"
-            android:text="@string/app_name"
+            android:text="DT Home Fresh"
             android:textColor="@color/white"
             android:fontFamily="@font/londrina_solid_regular"
             android:textSize="20sp"/>
 
-        <Button
-            android:id="@+id/bt_get_started"
-            android:layout_width="170dp"
-            android:layout_height="55dp"
-            android:layout_gravity="bottom"
-            android:backgroundTint="@color/yellow_1"
-            android:drawableEnd="@drawable/icon_next"
-            android:fontFamily="@font/londrina_solid_black"
-            android:text="@string/get_started_string"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.97" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 
 </layout>
+
