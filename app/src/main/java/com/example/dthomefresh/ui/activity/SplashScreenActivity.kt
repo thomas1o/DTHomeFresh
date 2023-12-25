@@ -1,12 +1,17 @@
-package com.example.dthomefresh
+package com.example.dthomefresh.ui.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
+import com.example.dthomefresh.R
 import com.example.dthomefresh.databinding.ActivityMainBinding
 import com.example.dthomefresh.databinding.ActivitySplashScreenBinding
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class SplashScreenActivity : AppCompatActivity() {
 
@@ -34,8 +39,12 @@ class SplashScreenActivity : AppCompatActivity() {
             }
 
             override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
-                startActivity(Intent(this@SplashScreenActivity, MainActivity::class.java))
-                finish()
+                lifecycleScope.launch {
+                    binding.progressBar.visibility = View.VISIBLE
+                    delay(2000)
+                    startActivity(Intent(this@SplashScreenActivity, MainActivity::class.java))
+                    finish()
+                }
             }
 
             override fun onTransitionTrigger(

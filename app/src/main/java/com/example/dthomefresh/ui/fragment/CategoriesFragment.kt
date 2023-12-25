@@ -1,4 +1,4 @@
-package com.example.dthomefresh.ui
+package com.example.dthomefresh.ui.fragment
 
 import android.content.Context
 import android.os.Bundle
@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-import com.example.dthomefresh.MainActivity
+import com.example.dthomefresh.ui.activity.MainActivity
 import com.example.dthomefresh.R
 import com.example.dthomefresh.databinding.FragmentCategoriesBinding
 import com.example.dthomefresh.utils.FragmentHandler

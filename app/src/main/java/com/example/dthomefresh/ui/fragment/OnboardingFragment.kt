@@ -1,4 +1,4 @@
-package com.example.dthomefresh.ui
+package com.example.dthomefresh.ui.fragment
 
 import android.content.Context
 import android.os.Bundle

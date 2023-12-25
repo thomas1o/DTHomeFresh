@@ -7,23 +7,39 @@
         motion:constraintSetEnd="@+id/end"
         motion:constraintSetStart="@id/start"
         motion:autoTransition="animateToEnd"
-        motion:duration="3000">
+        motion:duration="2000">
        <KeyFrameSet>
            <KeyAttribute
                motion:motionTarget="@+id/app_icon"
-               motion:framePosition="20"
+               motion:framePosition="0"
                android:alpha="0" />
            <KeyAttribute
                motion:motionTarget="@+id/app_icon"
-               motion:framePosition="50"
+               motion:framePosition="40"
                android:alpha="1" />
            <KeyAttribute
                motion:motionTarget="@+id/app_name"
-               motion:framePosition="50"
+               motion:framePosition="70"
                android:alpha="0" />
            <KeyAttribute
                motion:motionTarget="@+id/app_name"
-               motion:framePosition="80"
+               motion:framePosition="90"
+               android:alpha="1" />
+           <KeyAttribute
+               motion:motionTarget="@+id/app_icon"
+               motion:framePosition="40"
+               android:translationY="0dp" />
+           <KeyAttribute
+               motion:motionTarget="@+id/app_icon"
+               motion:framePosition="60"
+               android:translationY="-30dp" />
+           <KeyAttribute
+               motion:motionTarget="@+id/progressBar"
+               motion:framePosition="99"
+               android:alpha="0" />
+           <KeyAttribute
+               motion:motionTarget="@+id/progressBar"
+               motion:framePosition="100"
                android:alpha="1" />
        </KeyFrameSet>
     </Transition>
@@ -38,7 +54,8 @@
             motion:layout_constraintHorizontal_bias="0.435"
             motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            android:alpha="0" />
+            android:alpha="0"
+            android:translationY="30dp"/>
         <Constraint
             android:id="@+id/app_name"
             motion:layout_constraintEnd_toEndOf="parent"
@@ -47,6 +64,22 @@
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintVertical_bias="0.0"
             motion:layout_constraintTop_toBottomOf="@+id/app_icon"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:alpha="0" />
+        <Constraint
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/progress_bar"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/progressBar"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintVertical_bias="0.93"
+            android:visibility="visible"
+            motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
             android:alpha="0" />
     </ConstraintSet>
@@ -70,6 +103,17 @@
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintVertical_bias="0.0"
             motion:layout_constraintTop_toBottomOf="@+id/app_icon"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:alpha="1" />
+        <Constraint
+            android:id="@+id/progressBar"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintVertical_bias="0.93"
+            android:visibility="visible"
+            motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
             android:alpha="1" />
     </ConstraintSet>

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/onboardingFragment"
-        android:name="com.example.dthomefresh.ui.OnboardingFragment"
+        android:name="com.example.dthomefresh.ui.fragment.OnboardingFragment"
         android:label="OnboardingFragment">
         <action
             android:id="@+id/action_onboardingFragment_to_categoriesFragment"
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/categoriesFragment"
-        android:name="com.example.dthomefresh.ui.CategoriesFragment"
+        android:name="com.example.dthomefresh.ui.fragment.CategoriesFragment"
         android:label="CategoriesFragment">
         <action
             android:id="@+id/action_categoriesFragment_to_sellerListFragment"
@@ -55,7 +55,7 @@
     </fragment>
     <fragment
         android:id="@+id/sellerListFragment"
-        android:name="com.example.dthomefresh.ui.SellerListFragment"
+        android:name="com.example.dthomefresh.ui.fragment.SellerListFragment"
         android:label="SellerListFragment">
         <argument
             android:name="optionSelected"
@@ -80,7 +80,7 @@
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.example.dthomefresh.ui.SignUpFragment"
+        android:name="com.example.dthomefresh.ui.fragment.SignUpFragment"
         android:label="SignUpFragment">
         <action
             android:id="@+id/action_signUpFragment_to_categoriesFragment"
@@ -92,7 +92,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.dthomefresh.ui.LoginFragment"
+        android:name="com.example.dthomefresh.ui.fragment.LoginFragment"
         android:label="LoginFragment">
         <action
             android:id="@+id/action_loginFragment_to_signUpFragment"
@@ -111,7 +111,7 @@
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.dthomefresh.ui.ProfileFragment"
+        android:name="com.example.dthomefresh.ui.fragment.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile">
         <action
@@ -131,7 +131,7 @@
     </fragment>
     <fragment
         android:id="@+id/contactUsFragment"
-        android:name="com.example.dthomefresh.ui.ContactUsFragment"
+        android:name="com.example.dthomefresh.ui.fragment.ContactUsFragment"
         android:label="ContactUsFragment">
         <action
             android:id="@+id/action_contactUsFragment_to_categoriesFragment"
@@ -143,7 +143,7 @@
     </fragment>
     <fragment
         android:id="@+id/sellerDetailsFragment"
-        android:name="com.example.dthomefresh.ui.SellerDetailsFragment"
+        android:name="com.example.dthomefresh.ui.fragment.SellerDetailsFragment"
         android:label="SellerDetailsFragment">
         <action
             android:id="@+id/action_sellerDetailsFragment_to_sellerListFragment"
@@ -155,6 +155,6 @@
     </fragment>
     <fragment
         android:id="@+id/mapsFragment"
-        android:name="com.example.dthomefresh.ui.MapFragment"
+        android:name="com.example.dthomefresh.ui.fragment.MapFragment"
         android:label="MapsFragment" />
 </navigation>

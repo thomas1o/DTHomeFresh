@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/bg_categories_page"
-        tools:context=".ui.ProfileFragment">
+        tools:context=".ui.fragment.ProfileFragment">
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/anim_sign_out"

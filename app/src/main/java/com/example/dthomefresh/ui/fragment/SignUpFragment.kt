@@ -1,4 +1,4 @@
-package com.example.dthomefresh.ui
+package com.example.dthomefresh.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,18 +6,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.airbnb.lottie.LottieAnimationView
 import com.example.dthomefresh.R
-import com.example.dthomefresh.databinding.FragmentLoginBinding
-import com.example.dthomefresh.utils.KeyboardUtils
+import com.example.dthomefresh.databinding.FragmentSignUpBinding
 import com.example.dthomefresh.utils.Validator
-import com.example.dthomefresh.viewmodel.LoginViewModel
+import com.example.dthomefresh.viewmodel.SignUpViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -28,18 +27,20 @@ import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 
-class LoginFragment : Fragment() {
+class SignUpFragment : Fragment() {
 
-    private lateinit var binding: FragmentLoginBinding
-    private lateinit var viewModel: LoginViewModel
+    private lateinit var binding: FragmentSignUpBinding
+    private lateinit var viewModel: SignUpViewModel
     private lateinit var editTextEmail: TextInputEditText
     private lateinit var editTextPassword: TextInputEditText
+    private lateinit var editTextRePassword: TextInputEditText
     private lateinit var textInputLayoutEmail: TextInputLayout
     private lateinit var textInputLayoutPassword: TextInputLayout
+    private lateinit var textInputLayoutRePassword: TextInputLayout
 
-    lateinit var googleSignInClient: GoogleSignInClient
+    private lateinit var googleSignInClient: GoogleSignInClient
     private val REQ_ONE_TAP = 2
-    private val TAG = "LoginFragment"
+    private val TAG = "SignUpFragment"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,54 +48,77 @@ class LoginFragment : Fragment() {
     ): View {
 
         binding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_login, container, false
+            inflater, R.layout.fragment_sign_up, container, false
         )
 
-        viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
+        viewModel = ViewModelProvider(this)[SignUpViewModel::class.java]
 
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        val animationView: LottieAnimationView = binding.animLogin
+        val animationView: LottieAnimationView = binding.animSignUp
 
         editTextEmail = binding.etUsername
         editTextPassword = binding.etPassword
+        editTextRePassword = binding.etRePassword
         textInputLayoutEmail = binding.tiUsername
         textInputLayoutPassword = binding.tiPassword
+        textInputLayoutRePassword = binding.tiRePassword
 
         var email: String
         var password: String
+        var rePassword: String
         val validator = Validator()
 
-        binding.btLogin.setOnClickListener {
-            KeyboardUtils.hideKeyboard(requireActivity())
+        //NOTE: For styling the Skip for now button
+//        val skipForNowButton = binding.btSkipForNow
+//        val content = SpannableString("Skip for now")
+//        content.setSpan(UnderlineSpan(), 0, content.length, 0)
+//        skipForNowButton.text = content
+
+        binding.btSignUp.setOnClickListener {
             email = editTextEmail.text.toString()
             password = editTextPassword.text.toString()
+            rePassword = editTextRePassword.text.toString()
 
             textInputLayoutEmail.error = validator.emailValidator(email)
             textInputLayoutPassword.error = validator.passwordValidator(password)
+            textInputLayoutRePassword.error = validator.rePasswordValidator(password, rePassword)
 
-            if (validator.emailValidator(email) == null && validator.passwordValidator(password) == null) {
+            if (textInputLayoutEmail.error == null && textInputLayoutPassword.error == null && textInputLayoutRePassword.error == null) {
                 viewModel.setEmail(email)
                 viewModel.setPassword(password)
-                viewModel.startSignIn()
+                viewModel.startSignUp()
                 viewModel.startLoginAnimation()
             }
         }
 
-        viewModel.signInSuccess.observe(viewLifecycleOwner, Observer { newSignInSuccess ->
-            if (newSignInSuccess == true) {
-                Toast.makeText(requireContext(), "Login Successful", Toast.LENGTH_SHORT).show()
+        binding.btGoogleSignIn.setOnClickListener {
+            viewModel.startLoginAnimation()
+            signInWithGoogle()
+        }
+
+        binding.loginButton.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
+        viewModel.signUpSuccess.observe(viewLifecycleOwner, Observer { newSignUpSuccess ->
+            if (newSignUpSuccess == true) {
+                Snackbar.make(
+                    binding.root,
+                    "Sign up successful, please continue to login",
+                    Snackbar.LENGTH_SHORT
+                ).show()
                 viewModel.stopLoginAnimation()
-                Navigation.findNavController(requireView())
-                    .navigate(R.id.action_loginFragment_to_categoriesFragment)
+                findNavController().popBackStack()
             } else {
                 viewModel.stopLoginAnimation()
             }
         })
 
-        viewModel.loginAnimation.observe(viewLifecycleOwner, Observer { shouldAnimate ->
+        viewModel.signUpAnimation.observe(viewLifecycleOwner, Observer { shouldAnimate ->
             if (shouldAnimate) {
+                animationView.setAnimation(R.raw.anim_yellow_processing_circle)
                 animationView.playAnimation()
                 animationView.visibility = View.VISIBLE
             } else {
@@ -109,15 +133,6 @@ class LoginFragment : Fragment() {
             }
         })
 
-        binding.btSignUp.setOnClickListener {
-            Navigation.findNavController(it).navigate(R.id.action_loginFragment_to_signUpFragment)
-        }
-
-        binding.btGoogleSignIn.setOnClickListener {
-            viewModel.startLoginAnimation()
-            signInWithGoogle()
-        }
-
         return binding.root
     }
 
@@ -131,11 +146,11 @@ class LoginFragment : Fragment() {
                 val idToken = account?.idToken
 
                 if (idToken != null) {
-                    // Sign in to Firebase with Google credentials
                     val credential = GoogleAuthProvider.getCredential(idToken, null)
                     FirebaseAuth.getInstance().signInWithCredential(credential)
                         .addOnCompleteListener { signInTask ->
                             if (signInTask.isSuccessful) {
+                                // Firebase authentication successful, user is signed in
                                 val firebaseUser = FirebaseAuth.getInstance().currentUser
                                 Snackbar.make(
                                     binding.root,
@@ -143,7 +158,7 @@ class LoginFragment : Fragment() {
                                     Snackbar.LENGTH_SHORT
                                 ).show()
                                 Navigation.findNavController(requireView())
-                                    .navigate(R.id.action_loginFragment_to_categoriesFragment)
+                                    .navigate(R.id.action_signUpFragment_to_categoriesFragment)
                                 viewModel.stopLoginAnimation()
                             } else {
                                 val e = signInTask.exception
@@ -160,8 +175,8 @@ class LoginFragment : Fragment() {
                         Snackbar.LENGTH_SHORT
                     ).show()
                 }
-            } catch (e: Exception) {
-                Log.w(TAG, "Google sign-in failed: $e")
+            } catch (e: ApiException) {
+                Log.w(TAG, "Google sign-in failed: ${e.statusCode}")
                 viewModel.displayError(e)
                 viewModel.stopLoginAnimation()
             }
@@ -180,13 +195,5 @@ class LoginFragment : Fragment() {
             startActivityForResult(signInIntent, REQ_ONE_TAP)
         }
     }
-
-//    private fun isEmpty(string: String): Boolean {
-//        return TextUtils.isEmpty(string)
-//    }
-//
-//    private fun isValidEmail(email: String): Boolean {
-//        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
-//    }
 
 }

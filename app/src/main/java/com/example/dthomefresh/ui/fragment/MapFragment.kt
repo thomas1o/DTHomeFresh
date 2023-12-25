@@ -1,5 +1,6 @@
-package com.example.dthomefresh.ui
+package com.example.dthomefresh.ui.fragment
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
@@ -51,14 +52,33 @@ class MapFragment : Fragment() {
     private val callback = OnMapReadyCallback { map ->
         googleMap = map
 
-        if (isLocationEnabled) {
-            googleMap.isMyLocationEnabled = true
-            googleMap.uiSettings.isMyLocationButtonEnabled = false
-            fetchLocation()
+        if (ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            requestLocationPermission()
+            return@OnMapReadyCallback
+        }
 
+        if (isLocationEnabled) {
+            try {
+                googleMap.isMyLocationEnabled = true
+                googleMap.uiSettings.isMyLocationButtonEnabled = false
+                fetchLocation()
+            }catch (e: Exception) {
+                Log.e("MapFragment", "${e.message}")
+            }
             googleMap.setOnCameraMoveListener {
-                updateCenterMarkerPosition(googleMap.cameraPosition.target)
-                displayPlaceInformation(googleMap.cameraPosition.target)
+                try {
+                    updateCenterMarkerPosition(googleMap.cameraPosition.target)
+                    displayPlaceInformation(googleMap.cameraPosition.target)
+                }catch (e: Exception) {
+                    Log.e("MapFragment", "${e.message}")
+                }
             }
 
             val mapCenter = googleMap.projection.visibleRegion.latLngBounds.center
@@ -67,6 +87,9 @@ class MapFragment : Fragment() {
                     .position(mapCenter)
                     .title("Center Marker")
             )!!
+        }
+        else {
+            requestLocationPermission()
         }
     }
 
@@ -95,6 +118,17 @@ class MapFragment : Fragment() {
         fusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(requireActivity())
         checkLocationSettings()
+    }
+
+    private fun requestLocationPermission() {
+        ActivityCompat.requestPermissions(
+            requireActivity(),
+            arrayOf(
+                android.Manifest.permission.ACCESS_FINE_LOCATION,
+                android.Manifest.permission.ACCESS_COARSE_LOCATION
+            ),
+            LOCATION_PERMISSION_REQUEST_CODE
+        )
     }
 
     private fun displayPlaceInformation(latLng: LatLng) {

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="button_border_gray">#bcbcbc</color>
@@ -11,6 +12,8 @@
     <color name="green_3">#4EC67C</color>
     <color name="green_4">#67C15E</color>
     <color name="green_5">#A2CE86</color>
+    <color name="green_6">#0F4B00</color>
     <color name="orange_1">#E56C1E</color>
+    <color name="grey_shimmer">#DDDDDD</color>
 
 </resources>

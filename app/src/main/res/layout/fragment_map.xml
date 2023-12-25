@@ -51,7 +51,7 @@
 
         <fragment
             android:id="@+id/map_bottom_sheet"
-            android:name="com.example.dthomefresh.ui.MapBottomSheet"
+            android:name="com.example.dthomefresh.ui.fragment.MapBottomSheet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent" />

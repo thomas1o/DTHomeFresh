@@ -9,7 +9,7 @@
         android:background="@drawable/bg_categories_page"
         android:gravity="center_vertical"
         android:orientation="vertical"
-        tools:context=".ui.ContactUsFragment">
+        tools:context=".ui.fragment.ContactUsFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/linearLayout_1"

@@ -1,4 +1,4 @@
-package com.example.dthomefresh.ui
+package com.example.dthomefresh.ui.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -54,14 +54,14 @@ class MapBottomSheet : Fragment() {
     }
 
     private fun setDetailsVisibleAndStopAnim() {
-        binding.animLoading.cancelAnimation()
-        binding.animLoading.visibility = View.INVISIBLE
+        binding.shimmerMapBottomSheet.stopShimmer()
+        binding.shimmerMapBottomSheet.visibility = View.GONE
         binding.placeDetails.visibility = View.VISIBLE
         binding.btEnterAddress.visibility = View.VISIBLE
     }
     private fun setDetailsInvisibleAndStartAnim() {
-        binding.animLoading.visibility = View.VISIBLE
-        binding.animLoading.playAnimation()
+        binding.shimmerMapBottomSheet.startShimmer()
+        binding.shimmerMapBottomSheet.visibility = View.VISIBLE
         binding.placeDetails.visibility = View.INVISIBLE
         binding.btEnterAddress.visibility = View.INVISIBLE
     }
