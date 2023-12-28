@@ -24,8 +24,8 @@ their work.
 
 - **Language**: Kotlin
 - **Architecture**: Model View ViewModel (MVVM)
-- **Libraries**: LiveData, ViewModel, Navigation Components, Data Binding, Lottie Animation,
-  Firebase
+- **Libraries**: Firebase, Google Maps API, LiveData, ViewModel, Navigation Components, Data Binding, Lottie Animation
+  
 
 ## Maintainer
 

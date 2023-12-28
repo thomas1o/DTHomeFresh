@@ -2,9 +2,11 @@ package com.example.dthomefresh.data
 
 data class Seller(
 
-    var name: String? = null,
-    var contact: String? = null,
-    var address: String? = null,
-    var itemNames: List<String?>? = null
+    var uid: String = "",
+    var name: String = "",
+    var contact: String = "",
+    var address: String = "",
+    var nearbyLandmark: String = "",
+    var items: List<Item>? = null
 
 )

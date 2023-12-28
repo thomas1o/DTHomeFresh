@@ -1,6 +1,6 @@
 <resources>
 
-    <string name="app_name">DT Home Fresh</string>
+    <string name="app_name">Dt Home Fresh</string>
     <string name="title_activity_categories">CategoriesActivity</string>
 
     <!-- Strings used for fragments for navigation -->
@@ -37,12 +37,15 @@
     <string name="have_an_account_string">Have an account?</string>
     <string name="skip_for_now_string">Skip for now</string>
     <string name="seller_image_string">Seller Image</string>
-    <string name="full_name_string">Full Name</string>
-    <string name="phone_number_string">Phone Number</string>
+    <string name="full_name_string">Full Name*</string>
+    <string name="phone_number_string">Phone Number*</string>
     <string name="address_string">Address</string>
     <string name="save_string">Save</string>
     <string name="sign_out_string">Sign Out</string>
-    <string name="please_fill_the_details_string">Please fill the details</string>
+    <string name="details_string">Details</string>
     <string name="web_client_id">1002985949261-m1ehg56of2bdaep29aokbiaen33663be.apps.googleusercontent.com</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="string_app_icon">App icon</string>
 
 </resources>

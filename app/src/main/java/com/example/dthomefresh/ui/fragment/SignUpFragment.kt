@@ -1,10 +1,8 @@
-package com.example.dthomefresh.ui
+package com.example.dthomefresh.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.TextUtils
 import android.util.Log
-import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import com.airbnb.lottie.LottieAnimationView
 import com.example.dthomefresh.R
 import com.example.dthomefresh.databinding.FragmentSignUpBinding
+import com.example.dthomefresh.utils.Validator
 import com.example.dthomefresh.viewmodel.SignUpViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -69,6 +68,7 @@ class SignUpFragment : Fragment() {
         var email: String
         var password: String
         var rePassword: String
+        val validator = Validator()
 
         //NOTE: For styling the Skip for now button
 //        val skipForNowButton = binding.btSkipForNow
@@ -81,25 +81,11 @@ class SignUpFragment : Fragment() {
             password = editTextPassword.text.toString()
             rePassword = editTextRePassword.text.toString()
 
-            if (isEmpty(email) && isEmpty(password)) {
-                textInputLayoutEmail.error = "Email cannot be empty"
-                textInputLayoutPassword.error = "Password cannot be empty"
-            } else if (isEmpty(email)) {
-                textInputLayoutPassword.error = null
-                textInputLayoutEmail.error = "Email cannot be empty"
-            } else if (!isValidPassword(password)) {
-                textInputLayoutEmail.error = null
-                textInputLayoutPassword.error = "Cannot be less than 6 character"
-            } else if (!isValidEmail(email)) {
-                textInputLayoutEmail.error = "Invalid email address"
-            } else if (password != rePassword) {
-                textInputLayoutEmail.error = null
-                textInputLayoutPassword.error = null
-                textInputLayoutRePassword.error = "Passwords do not match"
-            } else {
-                textInputLayoutEmail.error = null
-                textInputLayoutPassword.error = null
-                textInputLayoutRePassword.error = null
+            textInputLayoutEmail.error = validator.emailValidator(email)
+            textInputLayoutPassword.error = validator.passwordValidator(password)
+            textInputLayoutRePassword.error = validator.rePasswordValidator(password, rePassword)
+
+            if (textInputLayoutEmail.error == null && textInputLayoutPassword.error == null && textInputLayoutRePassword.error == null) {
                 viewModel.setEmail(email)
                 viewModel.setPassword(password)
                 viewModel.startSignUp()
@@ -183,7 +169,11 @@ class SignUpFragment : Fragment() {
                         }
                 } else {
                     Log.e(TAG, "ID token is null")
-                    Snackbar.make(binding.root, "Something went wrong. Please try again later.", Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(
+                        binding.root,
+                        "Something went wrong. Please try again later.",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
                 }
             } catch (e: ApiException) {
                 Log.w(TAG, "Google sign-in failed: ${e.statusCode}")
@@ -206,15 +196,4 @@ class SignUpFragment : Fragment() {
         }
     }
 
-    private fun isEmpty(string: String): Boolean {
-        return TextUtils.isEmpty(string)
-    }
-
-    private fun isValidPassword(password: String): Boolean {
-        return password.length >= 6
-    }
-
-    private fun isValidEmail(email: String): Boolean {
-        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
-    }
 }

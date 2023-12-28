@@ -1,4 +1,4 @@
-package com.example.dthomefresh
+package com.example.dthomefresh.ui.activity
 
 import android.content.DialogInterface
 import android.os.Bundle
@@ -8,6 +8,7 @@ import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.fragment.findNavController
+import com.example.dthomefresh.R
 import com.example.dthomefresh.databinding.ActivityMainBinding
 import com.example.dthomefresh.utils.loggedInCheck
 import com.google.android.material.snackbar.Snackbar
@@ -43,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.profileItem.setOnClickListener {
             closeDrawer()
-            if(loggedInCheck())
+            if (loggedInCheck())
                 navController?.navigate(R.id.action_categoriesFragment_to_profileFragment)
             else
                 navController?.navigate(R.id.action_categoriesFragment_to_loginFragment)

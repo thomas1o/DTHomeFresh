@@ -2,8 +2,16 @@
 
     <style name="Theme.DTHomeFresh" parent="AppTheme">
         <!-- Transparent system bars for edge-to-edge. -->
-        <item name="android:navigationBarColor">@android:color/transparent</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@color/green_2</item>
+        <item name="android:statusBarColor">@color/green_2</item>
         <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
     </style>
+
+    <style name="Theme.DTHomeFreshSplashScreen" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Transparent system bars for edge-to-edge. -->
+        <item name="android:navigationBarColor">@color/green_6</item>
+        <item name="android:statusBarColor">@color/green_6</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
 </resources>

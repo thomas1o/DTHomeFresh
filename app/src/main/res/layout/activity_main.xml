@@ -5,14 +5,14 @@
     <data>
         <variable
             name="mainActivity"
-            type="com.example.dthomefresh.MainActivity" />
+            type="com.example.dthomefresh.ui.activity.MainActivity" />
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        tools:context=".ui.activity.MainActivity">
 
         <FrameLayout
             android:id="@+id/main_content"
@@ -93,7 +93,7 @@
                         android:layout_height="50dp"
                         android:layout_marginHorizontal="10dp"
                         android:layout_marginVertical="10dp"
-                        android:src="@drawable/icon_contact_us" />
+                        android:src="@drawable/icon_call_yellow" />
 
                     <TextView
                         android:layout_width="wrap_content"

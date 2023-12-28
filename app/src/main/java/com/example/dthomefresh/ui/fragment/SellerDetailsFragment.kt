@@ -1,16 +1,13 @@
-package com.example.dthomefresh.ui
+package com.example.dthomefresh.ui.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-import androidx.recyclerview.widget.GridLayoutManager
 import com.example.dthomefresh.R
-import com.example.dthomefresh.data.Seller
 import com.example.dthomefresh.data.adapter.SellersListAdapter
 import com.example.dthomefresh.databinding.FragmentSellerDetailsBinding
 

@@ -107,7 +107,7 @@
             android:backgroundTint="@android:color/transparent"
             android:focusable="true"
             android:foreground="?selectableItemBackground"
-            android:src="@drawable/icon_call"
+            android:src="@drawable/icon_call_green"
             app:layout_constraintStart_toEndOf="@+id/bt_whatsapp"
             app:layout_constraintTop_toBottomOf="@+id/seller_address" />
 

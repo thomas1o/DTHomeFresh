@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/bg_categories_page"
-        tools:context=".ui.ProfileFragment">
+        tools:context=".ui.fragment.ProfileFragment">
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/anim_sign_out"
@@ -30,14 +30,14 @@
             app:lottie_rawRes="@raw/anim_yellow_processing_circle" />
 
         <TextView
-            android:id="@+id/heading_please_fill_the_details"
+            android:id="@+id/heading_details"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/londrina_solid_regular"
-            android:text="@string/please_fill_the_details_string"
+            android:text="@string/details_string"
             android:textColor="@color/white"
             android:textSize="35dp"
-            app:layout_constraintBottom_toBottomOf="@+id/sign_out_button"
+            app:layout_constraintBottom_toBottomOf="@+id/bt_sign_out"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
@@ -53,7 +53,7 @@
             android:text="Email:"
             android:textColor="@color/white"
             android:textSize="25dp"
-            app:layout_constraintBottom_toBottomOf="@+id/sign_out_button"
+            app:layout_constraintBottom_toBottomOf="@+id/bt_sign_out"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.17" />
@@ -64,135 +64,156 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="5dp"
             android:fontFamily="@font/londrina_solid_thin"
+            android:text="@{viewModel.email}"
             android:textColor="@color/white"
             android:textSize="21dp"
-            android:text="@{viewModel.email}"
             app:flow_horizontalBias="0.0"
-            app:layout_constraintBottom_toBottomOf="@+id/sign_out_button"
+            app:layout_constraintBottom_toBottomOf="@+id/bt_sign_out"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.073"
             app:layout_constraintStart_toEndOf="@id/text_email"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.176" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/ti_name"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/text_name"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="25dp"
+            android:fontFamily="@font/londrina_solid_regular"
+            android:text="Name:"
+            android:textColor="@color/white"
+            android:textSize="25dp"
+            app:layout_constraintBottom_toBottomOf="@+id/bt_sign_out"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.22" />
+
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:fontFamily="@font/londrina_solid_thin"
+            android:text="null"
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            app:flow_horizontalBias="0.0"
+            app:layout_constraintBottom_toBottomOf="@+id/bt_sign_out"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.073"
+            app:layout_constraintStart_toEndOf="@id/text_name"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.226" />
+
+        <TextView
+            android:id="@+id/text_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="25dp"
+            android:fontFamily="@font/londrina_solid_regular"
+            android:text="Address:"
+            android:textColor="@color/white"
+            android:textSize="25dp"
+            app:layout_constraintBottom_toBottomOf="@+id/bt_sign_out"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.27" />
+
+        <TextView
+            android:id="@+id/user_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:fontFamily="@font/londrina_solid_thin"
+            android:text="null"
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/bt_sign_out"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.081"
+            app:layout_constraintStart_toEndOf="@id/text_address"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.281" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/bt_find_address"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:layout_marginHorizontal="30dp"
-            android:hint="@string/full_name_string"
-            app:boxStrokeColor="@color/yellow_2"
-            app:errorEnabled="true"
-            app:hintTextColor="@color/yellow_2"
+            android:backgroundTint="@color/yellow_2"
+            android:elevation="10dp"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_address"
+            app:layout_constraintVertical_bias="0.02">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/icon_add"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView"
+                    app:layout_constraintEnd_toStartOf="@+id/textView"
+                    app:layout_constraintHorizontal_bias="0.895"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/londrina_solid_regular"
+                    android:text="Add / edit address"
+                    android:textColor="@color/black"
+                    android:textSize="28sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/bt_sign_out"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="30dp"
+            android:backgroundTint="@android:color/holo_red_light"
+            android:elevation="10dp"
+            app:cardCornerRadius="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.4">
+            app:layout_constraintVertical_bias="0.98">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_name"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="text"
-                android:maxLines="1"
-                android:textSize="20sp" />
+                android:layout_height="match_parent">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/londrina_solid_regular"
+                    android:text="Sign Out"
+                    android:textColor="@color/black"
+                    android:textSize="28sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/ti_phone_number"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="30dp"
-            android:hint="@string/phone_number_string"
-            app:boxStrokeColor="@color/yellow_2"
-            app:errorEnabled="true"
-            app:hintTextColor="@color/yellow_2"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ti_name"
-            app:layout_constraintVertical_bias="0.0">
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_phone_number"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="number"
-                android:maxLines="1"
-                android:textSize="20sp" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/ti_address"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="30dp"
-            android:hint="@string/address_string"
-            app:boxStrokeColor="@color/yellow_2"
-            app:errorEnabled="true"
-            app:hintTextColor="@color/yellow_2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ti_phone_number">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_address"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="text"
-                android:maxLines="1"
-                android:textSize="20sp"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="-104dp" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Button
-            android:id="@+id/save_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/yellow_2"
-            android:fontFamily="@font/londrina_solid_regular"
-            android:text="@string/save_string"
-            android:textColor="@color/black"
-            android:textSize="28sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ti_phone_number" />
-
-        <!--        <Button-->
-        <!--            android:id="@+id/bt_image_upload"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:backgroundTint="@color/yellow_2"-->
-        <!--            android:fontFamily="@font/londrina_solid_regular"-->
-        <!--            android:text="Upload"-->
-        <!--            android:textColor="@color/black"-->
-        <!--            android:textSize="28sp"-->
-        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintHorizontal_bias="0.887"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toBottomOf="@+id/ti_phone_number" />-->
-
-        <Button
-            android:id="@+id/sign_out_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@android:color/holo_red_light"
-            android:fontFamily="@font/londrina_solid_regular"
-            android:text="@string/sign_out_string"
-            android:textColor="@color/black"
-            android:textSize="28sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/save_button"
-            app:layout_constraintVertical_bias="0.542" />
+        </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
