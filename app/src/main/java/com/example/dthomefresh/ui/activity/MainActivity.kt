@@ -4,74 +4,57 @@ import android.content.DialogInterface
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.GravityCompat
-import androidx.databinding.DataBindingUtil
-import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.dthomefresh.R
 import com.example.dthomefresh.databinding.ActivityMainBinding
+import com.example.dthomefresh.ui.fragment.CategoriesFragment
+import com.example.dthomefresh.ui.fragment.LoginFragment
+import com.example.dthomefresh.ui.fragment.ProfileFragment
 import com.example.dthomefresh.utils.loggedInCheck
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.Firebase
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.auth
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var auth: FirebaseAuth
     private lateinit var binding: ActivityMainBinding
-    private lateinit var drawerLayout: DrawerLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val navController =
-            supportFragmentManager.findFragmentById(R.id.navHostFragment)?.findNavController()
-        drawerLayout = binding.drawerLayout
+        val navController = supportFragmentManager.findFragmentById(R.id.navHostFragment)?.findNavController()
 
-        auth = Firebase.auth
-
-        binding.signOutItem.setOnClickListener {
-            closeDrawer()
-            if (loggedInCheck()) {
-                Firebase.auth.signOut()
-                Snackbar.make(binding.root, "Signed out successfully", Snackbar.LENGTH_SHORT).show()
-            } else
-                Snackbar.make(binding.root, "Not logged in", Snackbar.LENGTH_SHORT).show()
-        }
-
-        binding.profileItem.setOnClickListener {
-            closeDrawer()
-            if (loggedInCheck())
-                navController?.navigate(R.id.action_categoriesFragment_to_profileFragment)
-            else
-                navController?.navigate(R.id.action_categoriesFragment_to_loginFragment)
-        }
-
-        binding.contactUsItem.setOnClickListener {
-            closeDrawer()
-            navController?.navigate(R.id.action_categoriesFragment_to_contactUsFragment)
-        }
-
-    }
-
-    @Deprecated("Deprecated in Java")
-    override fun onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START)
-        } else {
-            val navController =
-                supportFragmentManager.findFragmentById(R.id.navHostFragment)?.findNavController()
-
-            // Check if the current destination is CategoriesFragment
-            if (navController?.currentDestination?.id == R.id.categoriesFragment) {
-                showExitConfirmationDialog()
-            } else {
-                super.onBackPressed()
+        binding.bottomNavigationView.setOnItemSelectedListener {  menuItem ->
+            when (menuItem.itemId) {
+                R.id.bottom_home -> {
+                    navController?.navigate(R.id.categoriesFragment)
+                    true
+                }
+                R.id.bottom_profile -> {
+                    if (loggedInCheck())
+                        navController?.navigate(R.id.profileFragment)
+                    else
+                        navController?.navigate(R.id.loginFragment)
+                    true
+                }
+                R.id.bottom_all_vendors -> {
+//                    replaceFragment(SellerListFragment())
+                    Snackbar.make(binding.root, "Seller list pressed", Snackbar.LENGTH_SHORT).show()
+                    true
+                }
+                R.id.bottom_menu -> {
+                    Snackbar.make(binding.root, "Bottom Menu pressed", Snackbar.LENGTH_SHORT).show()
+//                    replaceFragment()
+                    true
+                }
+                else -> false
             }
         }
+
+        replaceFragment(CategoriesFragment())
+
     }
 
     //    OPTIMISE- make a custom dialogue box
@@ -88,11 +71,7 @@ class MainActivity : AppCompatActivity() {
             .show()
     }
 
-    fun openDrawer() {
-        drawerLayout.openDrawer(GravityCompat.START)
-    }
-
-    fun closeDrawer() {
-        drawerLayout.closeDrawer(GravityCompat.START)
+    private fun replaceFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction().replace(R.id.main_content, fragment).commit()
     }
 }

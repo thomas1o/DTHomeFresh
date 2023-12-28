@@ -42,7 +42,7 @@ class SplashScreenActivity : AppCompatActivity() {
                 lifecycleScope.launch {
                     binding.progressBar.visibility = View.VISIBLE
                     delay(2000)
-                    startActivity(Intent(this@SplashScreenActivity, MainActivity::class.java))
+                    startActivity(Intent(this@SplashScreenActivity, OnboardingActivity::class.java))
                     finish()
                 }
             }

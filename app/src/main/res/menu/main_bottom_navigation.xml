@@ -14,11 +14,11 @@
     <item
         android:id="@+id/bottom_all_vendors"
         android:title="All vendors"
-        android:icon="@drawable/icon_home"/>
+        android:icon="@drawable/icon_search"/>
 
     <item
         android:id="@+id/bottom_menu"
         android:title="Menu"
-        android:icon="@drawable/icon_home"/>
+        android:icon="@drawable/icon_menu"/>
 
 </menu>
