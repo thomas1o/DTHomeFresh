@@ -56,15 +56,6 @@ class SellerListFragment : Fragment() {
             findNavController().popBackStack()
         }
 
-        binding.btProfile.setOnClickListener {
-            if (loggedInCheck())
-                Navigation.findNavController(it)
-                    .navigate(R.id.action_sellerListFragment_to_profileFragment)
-            else
-                Navigation.findNavController(it)
-                    .navigate(R.id.action_sellerListFragment_to_loginFragment)
-        }
-
         binding.swipeRefreshLayout.setOnRefreshListener {
             binding.swipeRefreshLayout.isRefreshing = true
             viewModel.readAllSellers()
@@ -136,6 +127,9 @@ class SellerListFragment : Fragment() {
                         R.color.green_2
                     )
                 )
+            }
+            else {
+                setDefaultColor()
             }
         })
 
@@ -212,7 +206,6 @@ class SellerListFragment : Fragment() {
     private fun setupRecyclerView(sellersList: List<Seller>) {
         recyclerView = binding.sellersList
         adapter = SellersListAdapter(sellersList) { seller ->
-            Toast.makeText(context, "Pressed ${seller.name}", Toast.LENGTH_SHORT).show()
             Navigation.findNavController(requireView())
                 .navigate(R.id.action_sellerListFragment_to_sellerDetailsFragment)
         }

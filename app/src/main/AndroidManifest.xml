@@ -21,7 +21,8 @@
             android:name=".ui.activity.OnboardingActivity"
             android:exported="false"
             android:label="@string/title_activity_onboarding"
-            android:theme="@style/Theme.DTHomeFresh" />
+            android:theme="@style/Theme.DTHomeFresh"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.activity.SplashScreenActivity"
             android:exported="true"

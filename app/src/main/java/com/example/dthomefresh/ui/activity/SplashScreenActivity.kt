@@ -41,7 +41,7 @@ class SplashScreenActivity : AppCompatActivity() {
             override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
                 lifecycleScope.launch {
                     binding.progressBar.visibility = View.VISIBLE
-                    delay(2000)
+                    delay(1000)
                     startActivity(Intent(this@SplashScreenActivity, OnboardingActivity::class.java))
                     finish()
                 }

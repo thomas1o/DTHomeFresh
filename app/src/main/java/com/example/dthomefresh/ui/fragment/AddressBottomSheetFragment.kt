@@ -34,8 +34,10 @@ class AddressBottomSheetFragment : BottomSheetDialogFragment() {
 
         viewModel = ViewModelProvider(this)[AddressBottomSheetViewModel::class.java]
 
-        var name: String
+        var ownerName: String
+        var brandName: String
         var phoneNumber: String
+        var whatsappNumber: String
         var address: String
         var nearbyLandmark: String
 
@@ -50,18 +52,23 @@ class AddressBottomSheetFragment : BottomSheetDialogFragment() {
         })
 
         binding.btSave.setOnClickListener {
-            name = binding.etName.text.toString()
+            ownerName = binding.etOwnerName.text.toString()
+            brandName = binding.etBrandName.text.toString()
             phoneNumber = binding.etPhoneNumber.text.toString()
+            whatsappNumber = binding.etWhatsappNumber.text.toString()
             address = binding.etAddress.text.toString()
             nearbyLandmark = binding.etNearbyLandmark.text.toString()
 
-            binding.tiName.error = validator.nameValidator(name)
+            binding.tiOwnerName.error = validator.nameValidator(ownerName)
+            binding.tiBrandName.error = validator.nameValidator(brandName)
             binding.tiPhoneNumber.error = validator.phoneNumberValidator(phoneNumber)
+            binding.tiWhatsappNumber.error = validator.phoneNumberValidator(whatsappNumber)
             binding.tiAddress.error = validator.addressValidator(address)
 
-            if (binding.tiName.error == null && binding.tiPhoneNumber.error == null && binding.tiAddress.error == null) {
+            if (binding.tiOwnerName.error == null && binding.tiBrandName.error == null && binding.tiPhoneNumber.error == null
+                && binding.tiWhatsappNumber.error == null && binding.tiAddress.error == null) {
                 viewModel.onLoading()
-                viewModel.writeNewUser(name, phoneNumber, address, nearbyLandmark)
+                viewModel.writeNewUser(ownerName, brandName, phoneNumber, whatsappNumber, address, nearbyLandmark)
                 viewModel.onLoadingDone()
                 dismiss()
                 findNavController().popBackStack()

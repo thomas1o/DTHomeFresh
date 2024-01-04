@@ -63,7 +63,7 @@
                 android:ellipsize="end"
                 android:fontFamily="@font/londrina_solid_regular"
                 android:maxLines="1"
-                android:text="@{seller.name}"
+                android:text="@{seller.brandName}"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"

@@ -37,8 +37,10 @@
     <string name="have_an_account_string">Have an account?</string>
     <string name="skip_for_now_string">Skip for now</string>
     <string name="seller_image_string">Seller Image</string>
-    <string name="full_name_string">Full Name*</string>
-    <string name="phone_number_string">Phone Number*</string>
+    <string name="owner_name_string">Owner name*</string>
+    <string name="brand_name_string">Brand name*</string>
+    <string name="phone_number_string">Phone number*</string>
+    <string name="whatsapp_number_if_different_string">Whatsapp number (if different)</string>
     <string name="address_string">Address</string>
     <string name="save_string">Save</string>
     <string name="sign_out_string">Sign Out</string>
@@ -90,5 +92,7 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="partner_with_us_string">Partner with us</string>
+    <string name="contact_us_string">Contact us</string>
 
 </resources>

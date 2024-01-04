@@ -23,10 +23,10 @@ class ContactUsFragment : Fragment() {
             inflater, R.layout.fragment_contact_us, container, false
         )
 
-        binding.btUp.setOnClickListener {
-            Navigation.findNavController(requireView())
-                .navigate(R.id.action_contactUsFragment_to_categoriesFragment)
-        }
+//        binding.btUp.setOnClickListener {
+//            Navigation.findNavController(requireView())
+//                .navigate(R.id.action_contactUsFragment_to_categoriesFragment)
+//        }
 
         binding.btWhatsapp.setOnClickListener {
             onWhatsAppButtonClicked(requireView())
