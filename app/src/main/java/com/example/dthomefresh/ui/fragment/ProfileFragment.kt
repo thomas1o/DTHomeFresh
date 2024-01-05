@@ -48,14 +48,10 @@ class ProfileFragment : Fragment() {
             Firebase.auth.signOut()
             Handler(Looper.getMainLooper()).postDelayed({
                 Navigation.findNavController(requireView())
-                    .navigate(R.id.action_profileFragment_to_categoriesFragment)
+                    .navigate(R.id.action_profileFragment_to_loginFragment)
                 signOutAnimation.cancelAnimation()
                 Snackbar.make(binding.root, "Signed out successfully", Snackbar.LENGTH_SHORT).show()
             }, 1000)
-        }
-
-        binding.btFindAddress.setOnClickListener {
-            Navigation.findNavController(it).navigate(R.id.action_profileFragment_to_mapsFragment)
         }
 
         return binding.root

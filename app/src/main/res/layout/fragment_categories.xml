@@ -2,12 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
+<!--    <data>-->
 
-        <variable
-            name="fragmentHandler"
-            type="com.example.dthomefresh.utils.FragmentHandler" />
-    </data>
+<!--        <variable-->
+<!--            name="fragmentHandler"-->
+<!--            type="com.example.dthomefresh.utils.FragmentHandler" />-->
+<!--    </data>-->
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,56 +15,13 @@
         android:background="@drawable/bg_categories_page">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/linearLayout_1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageButton
-                android:id="@+id/menu_button"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginEnd="5dp"
-                android:background="@android:color/transparent"
-                android:clickable="true"
-                android:contentDescription="@string/menu_button_string"
-                android:focusable="true"
-                android:foreground="?selectableItemBackground"
-                android:padding="5dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/icon_menu"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:onClick="@{() -> fragmentHandler.openDrawer()}" />
-
-            <ImageButton
-                android:id="@+id/profile_button"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginEnd="5dp"
-                android:background="@android:color/transparent"
-                android:clickable="true"
-                android:contentDescription="@string/profile_button"
-                android:focusable="true"
-                android:foreground="?selectableItemBackground"
-                android:padding="5dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/icon_profile"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/linearLayout_1"
-            app:layout_constraintVertical_bias="0.445">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView_1"

@@ -27,9 +27,6 @@ class CategoriesFragment : Fragment() {
             inflater, R.layout.fragment_categories, container, false
         )
 
-        val fragmentHandler = FragmentHandler(requireActivity() as MainActivity)
-        binding.fragmentHandler = fragmentHandler
-
         val vibrator = activity?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
 
         binding.cardView1.setOnClickListener {
@@ -60,15 +57,6 @@ class CategoriesFragment : Fragment() {
                     optionSelected
                 )
             )
-        }
-
-        binding.profileButton.setOnClickListener {
-            if (loggedInCheck())
-                Navigation.findNavController(requireView())
-                    .navigate(R.id.action_categoriesFragment_to_profileFragment)
-            else
-                Navigation.findNavController(requireView())
-                    .navigate(R.id.action_categoriesFragment_to_loginFragment)
         }
 
         return binding.root

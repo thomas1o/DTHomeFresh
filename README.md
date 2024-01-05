@@ -16,9 +16,9 @@ their work.
 |--------------------------------------------------------------|--------------------------------------------------------------|----------------------------------------------------------|
 | <img src="images/onboarding.png" width="250" height="500" /> | <img src="images/categories.png" width="250" height="500" /> | <img src="images/signup.png" width="250" height="500" /> |
 
-| Login Screen                                            | Seller List Screen                                            |
-|---------------------------------------------------------|---------------------------------------------------------------|
-| <img src="images/login.png" width="250" height="500" /> | <img src="images/seller_list.png" width="250" height="500" /> |
+| Login Screen                                            | Seller List Screen                                            | Seller Location Screen                                            |
+|---------------------------------------------------------|---------------------------------------------------------------|-------------------------------------------------------------------|
+| <img src="images/login.png" width="250" height="500" /> | <img src="images/seller_list.png" width="250" height="500" /> | <img src="images/seller_location.png" width="250" height="500" /> |
 
 ## Documentation
 

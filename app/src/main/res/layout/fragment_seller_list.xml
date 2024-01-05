@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
             name="sellerListViewModel"
             type="com.example.dthomefresh.viewmodel.SellerListViewModel" />
@@ -22,34 +21,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <!--            <androidx.cardview.widget.CardView-->
-            <!--                android:id="@+id/bt_up"-->
-            <!--                android:layout_width="48dp"-->
-            <!--                android:layout_height="48dp"-->
-            <!--                android:backgroundTint="@android:color/transparent"-->
-            <!--                android:elevation="10dp"-->
-            <!--                android:foreground="?selectableItemBackground"-->
-            <!--                android:shadowColor="@android:color/transparent"-->
-            <!--                app:cardCornerRadius="10dp"-->
-            <!--                app:layout_constraintStart_toStartOf="parent"-->
-            <!--                app:layout_constraintTop_toTopOf="parent">-->
-
-            <!--                <com.airbnb.lottie.LottieAnimationView-->
-            <!--                    android:id="@+id/anim_back_button"-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="match_parent"-->
-            <!--                    android:visibility="visible"-->
-            <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--                    app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                    app:layout_constraintStart_toStartOf="parent"-->
-            <!--                    app:layout_constraintTop_toTopOf="parent"-->
-            <!--                    app:lottie_autoPlay="true"-->
-            <!--                    app:lottie_loop="true"-->
-            <!--                    app:lottie_rawRes="@raw/back_button"-->
-            <!--                    />-->
-
-            <!--            </androidx.cardview.widget.CardView>-->
-
             <ImageButton
                 android:id="@+id/bt_up"
                 android:layout_width="48dp"
@@ -65,23 +36,6 @@
                 android:src="@drawable/icon_arrow"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageButton
-                android:id="@+id/bt_profile"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginEnd="5dp"
-                android:background="@android:color/transparent"
-                android:clickable="true"
-                android:contentDescription="@string/profile_button"
-                android:focusable="true"
-                android:foreground="?selectableItemBackground"
-                android:padding="5dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/icon_profile"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

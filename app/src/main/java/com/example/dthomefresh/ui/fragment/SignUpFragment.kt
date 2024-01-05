@@ -158,7 +158,7 @@ class SignUpFragment : Fragment() {
                                     Snackbar.LENGTH_SHORT
                                 ).show()
                                 Navigation.findNavController(requireView())
-                                    .navigate(R.id.action_signUpFragment_to_categoriesFragment)
+                                    .navigate(R.id.action_signUpFragment_to_profileFragment)
                                 viewModel.stopLoginAnimation()
                             } else {
                                 val e = signInTask.exception

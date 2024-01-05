@@ -27,11 +27,12 @@ class AddressBottomSheetViewModel: ViewModel() {
         _loadingDone.value = false
     }
 
-    fun writeNewUser(name: String, phoneNumber: String, address: String, nearbyLandmark: String) {
+    fun writeNewUser(ownerName: String, brandName: String, phoneNumber: String, whatsappNumber: String,
+                     address: String, nearbyLandmark: String) {
         val firebaseAuth = FirebaseAuth.getInstance()
         val currentUser = firebaseAuth.currentUser
         val uid = currentUser?.uid
-        val seller = uid?.let { Seller(it, name, phoneNumber, address, nearbyLandmark) }
+        val seller = uid?.let { Seller(it, ownerName, brandName, phoneNumber, whatsappNumber, address, nearbyLandmark) }
 
         currentUser?.let {
             // Note: Write user data to the Firebase Realtime Database with the UID as the key

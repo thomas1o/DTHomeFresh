@@ -50,7 +50,7 @@
             app:queryHint="Search items..." />
 
         <TextView
-            android:id="@+id/seller_name"
+            android:id="@+id/brand_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="5dp"
@@ -59,7 +59,7 @@
             android:ellipsize="end"
             android:fontFamily="@font/londrina_solid_regular"
             android:maxLines="1"
-            android:text="NULL"
+            android:text="---"
             android:textColor="@color/white"
             android:textSize="25dp"
             app:flow_horizontalBias="0.0"
@@ -79,12 +79,12 @@
             android:ellipsize="end"
             android:fontFamily="@font/londrina_solid_light"
             android:maxLines="1"
-            android:text="NULL"
+            android:text="---"
             android:textColor="@color/white"
             android:textSize="13dp"
             app:flow_horizontalBias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/seller_name" />
+            app:layout_constraintTop_toBottomOf="@+id/brand_name" />
 
         <ImageButton
             android:id="@+id/bt_whatsapp"
