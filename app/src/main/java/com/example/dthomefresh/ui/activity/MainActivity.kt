@@ -1,5 +1,6 @@
 package com.example.dthomefresh.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
@@ -26,8 +27,8 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigationView.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.bottom_home -> {
-                    fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                    navController.navigate(R.id.categoriesFragment)
+                    startActivity(Intent(this@MainActivity, MainActivity::class.java))
+                    finish()
                     true
                 }
 
@@ -42,7 +43,6 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.bottom_all_vendors -> {
                     navController.navigate(R.id.sellerListFragment)
-//                    Snackbar.make(binding.root, "Seller list pressed", Snackbar.LENGTH_SHORT).show()
                     true
                 }
 
@@ -54,9 +54,7 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
-
         navController.navigate(R.id.categoriesFragment)
-
     }
 
 //    //    OPTIMISE- make a custom dialogue box

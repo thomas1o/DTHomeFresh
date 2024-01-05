@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.example.dthomefresh.R
 import com.example.dthomefresh.databinding.FragmentMenuBinding
+import com.example.dthomefresh.utils.loggedInCheck
+import com.google.android.material.snackbar.Snackbar
 
 class MenuFragment : Fragment() {
 
@@ -23,8 +25,12 @@ class MenuFragment : Fragment() {
         )
 
         binding.btPartnerWithUs.setOnClickListener {
-            Navigation.findNavController(requireView())
-                .navigate(R.id.action_menuFragment_to_mapsFragment)
+            if(loggedInCheck()) {
+                Navigation.findNavController(requireView())
+                    .navigate(R.id.action_menuFragment_to_mapsFragment)
+            }
+            else
+                Snackbar.make(binding.root, "Please login first", Snackbar.LENGTH_SHORT).show()
         }
 
         binding.btContactUs.setOnClickListener {

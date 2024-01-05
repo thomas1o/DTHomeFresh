@@ -38,7 +38,8 @@
             android:name=".ui.activity.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.DTHomeFresh" >
+            android:theme="@style/Theme.DTHomeFresh"
+            android:windowSoftInputMode="adjustPan">
         </activity>
 
         <!-- Google map -->
