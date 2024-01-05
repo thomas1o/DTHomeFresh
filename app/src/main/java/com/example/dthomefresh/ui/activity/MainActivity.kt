@@ -1,18 +1,12 @@
 package com.example.dthomefresh.ui.activity
 
-import android.content.DialogInterface
 import android.os.Bundle
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.dthomefresh.R
 import com.example.dthomefresh.databinding.ActivityMainBinding
-import com.example.dthomefresh.ui.fragment.CategoriesFragment
-import com.example.dthomefresh.ui.fragment.LoginFragment
-import com.example.dthomefresh.ui.fragment.ProfileFragment
 import com.example.dthomefresh.utils.loggedInCheck
 import com.google.android.material.snackbar.Snackbar
 
@@ -29,33 +23,39 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.navHostFragment)
         NavigationUI.setupWithNavController(binding.bottomNavigationView, navController)
 
-        binding.bottomNavigationView.setOnItemSelectedListener {  menuItem ->
+        binding.bottomNavigationView.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.bottom_home -> {
-                    navController?.navigate(R.id.categoriesFragment)
+                    fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    navController.navigate(R.id.categoriesFragment)
                     true
                 }
+
                 R.id.bottom_profile -> {
-                    if (loggedInCheck())
-                        navController?.navigate(R.id.profileFragment)
-                    else
-                        navController?.navigate(R.id.loginFragment)
+                    if (loggedInCheck()) {
+                        navController.navigate(R.id.profileFragment)
+                    } else {
+                        navController.navigate(R.id.loginFragment)
+                    }
                     true
                 }
+
                 R.id.bottom_all_vendors -> {
-//                    replaceFragment(SellerListFragment())
-                    Snackbar.make(binding.root, "Seller list pressed", Snackbar.LENGTH_SHORT).show()
+                    navController.navigate(R.id.sellerListFragment)
+//                    Snackbar.make(binding.root, "Seller list pressed", Snackbar.LENGTH_SHORT).show()
                     true
                 }
+
                 R.id.bottom_menu -> {
-                    navController?.navigate(R.id.menuFragment)
+                    navController.navigate(R.id.menuFragment)
                     true
                 }
+
                 else -> false
             }
         }
 
-        navController?.navigate(R.id.categoriesFragment)
+        navController.navigate(R.id.categoriesFragment)
 
     }
 

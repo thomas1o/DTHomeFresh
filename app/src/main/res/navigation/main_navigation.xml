@@ -93,7 +93,13 @@
     <fragment
         android:id="@+id/contactUsFragment"
         android:name="com.example.dthomefresh.ui.fragment.ContactUsFragment"
-        android:label="ContactUsFragment"/>
+        android:label="ContactUsFragment">
+        <action
+            android:id="@+id/action_contactUsFragment_to_menuFragment"
+            app:destination="@id/menuFragment"
+            app:popUpTo="@id/menuFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/sellerDetailsFragment"
         android:name="com.example.dthomefresh.ui.fragment.SellerDetailsFragment"

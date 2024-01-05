@@ -24,12 +24,12 @@ class MenuFragment : Fragment() {
 
         binding.btPartnerWithUs.setOnClickListener {
             Navigation.findNavController(requireView())
-                .navigate(R.id.action_menuFragment_to_contactUsFragment)
+                .navigate(R.id.action_menuFragment_to_mapsFragment)
         }
 
-        binding.btPartnerWithUs.setOnClickListener {
+        binding.btContactUs.setOnClickListener {
             Navigation.findNavController(requireView())
-                .navigate(R.id.action_menuFragment_to_mapsFragment)
+                .navigate(R.id.action_menuFragment_to_contactUsFragment)
         }
 
         return binding.root
