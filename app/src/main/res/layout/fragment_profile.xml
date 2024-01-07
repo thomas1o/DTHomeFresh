@@ -17,25 +17,12 @@
         android:background="@drawable/bg_categories_page"
         tools:context=".ui.fragment.ProfileFragment">
 
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/anim_sign_out"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:lottie_autoPlay="false"
-            app:lottie_loop="true"
-            app:lottie_rawRes="@raw/anim_yellow_processing_circle" />
-
         <TextView
-            android:id="@+id/heading_details"
+            android:id="@+id/heading_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/londrina_solid_regular"
-            android:text="@string/details_string"
+            android:text="@string/profile_string"
             android:textColor="@color/white"
             android:textSize="35dp"
             app:layout_constraintBottom_toBottomOf="@+id/bt_sign_out"
@@ -54,7 +41,7 @@
             android:src="@drawable/icon_profile"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/heading_details" />
+            app:layout_constraintTop_toBottomOf="@+id/heading_profile" />
 
         <TextView
             android:id="@+id/text_email"
@@ -223,6 +210,19 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/anim_sign_out"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="false"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/anim_yellow_processing_circle" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

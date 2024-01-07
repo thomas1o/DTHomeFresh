@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.example.dthomefresh.R
 import com.example.dthomefresh.databinding.FragmentProfileBinding
+import com.example.dthomefresh.utils.loggedInCheck
 import com.example.dthomefresh.viewmodel.ProfileViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.Firebase
@@ -57,6 +58,12 @@ class ProfileFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
+        if(!loggedInCheck()) {
+            Navigation.findNavController(requireView()).navigate(R.id.action_profileFragment_to_loginFragment)
+        }
+    }
 
 }

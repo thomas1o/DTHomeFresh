@@ -78,7 +78,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/seller_navigation_padding_horizontal"
-                        android:fontFamily="@font/inter_bold"
                         android:text="@string/food_string"
                         android:textColor="@color/green_1"
                         android:textSize="@dimen/seller_navigation_font_size" />

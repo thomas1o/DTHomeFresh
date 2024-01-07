@@ -44,7 +44,6 @@
     <string name="address_string">Address</string>
     <string name="save_string">Save</string>
     <string name="sign_out_string">Sign Out</string>
-    <string name="details_string">Details</string>
     <string name="web_client_id">1002985949261-m1ehg56of2bdaep29aokbiaen33663be.apps.googleusercontent.com</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -95,5 +94,8 @@
     <string name="partner_with_us_string">Partner with us</string>
     <string name="contact_us_string">Contact us</string>
     <string name="menu_string">Menu</string>
+    <string name="home_string">Home</string>
+    <string name="profile_string">Profile</string>
+    <string name="all_vendors_string">All vendors</string>
 
 </resources>

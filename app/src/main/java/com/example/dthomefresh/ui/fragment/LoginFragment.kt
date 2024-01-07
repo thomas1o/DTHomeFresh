@@ -12,11 +12,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.airbnb.lottie.LottieAnimationView
 import com.example.dthomefresh.R
 import com.example.dthomefresh.databinding.FragmentLoginBinding
 import com.example.dthomefresh.utils.KeyboardUtils
 import com.example.dthomefresh.utils.Validator
+import com.example.dthomefresh.utils.loggedInCheck
 import com.example.dthomefresh.viewmodel.LoginViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -117,6 +119,14 @@ class LoginFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        if(loggedInCheck()) {
+            Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_profileFragment)
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

@@ -68,7 +68,6 @@ class SellerDetailsFragment : Fragment() {
                 Snackbar.make(requireView(), "Whatsapp is not available for this seller", Snackbar.LENGTH_SHORT).show()
         }
 
-
         return binding.root
     }
 

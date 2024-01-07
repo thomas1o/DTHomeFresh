@@ -110,7 +110,7 @@ class SellerListViewModel(optionSelected: Int) : ViewModel() {
             val originalSellers = _sellersList.value.orEmpty()
             val filteredSellers = if (!searchText.isNullOrBlank()) {
                 originalSellers.filter { seller ->
-                    seller.ownerName?.lowercase(Locale.ROOT)
+                    seller.brandName?.lowercase(Locale.ROOT)
                         ?.contains(searchText.lowercase(Locale.ROOT)) == true ||
                             seller.address?.lowercase(Locale.ROOT)
                                 ?.contains(searchText.lowercase(Locale.ROOT)) == true
